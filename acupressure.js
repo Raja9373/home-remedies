@@ -1224,9 +1224,9 @@ window.buildAcupressureSvg = function (keyOrBodyPart, pointName) {
   }
 
   const raw = String(keyOrBodyPart || "he-gu").trim().toLowerCase().replace(/_/g, "-");
-  const skin = "#F5C9A0";
-  const shade = "#E5B58C";
-  const nail = "#FCE2C8";
+  const skin = "#F2C39B";
+  const shade = "#E2B086";
+  const nail = "#FADCC2";
   const ink = "#111111";
   const hair = "#262930";
   const cloth = "#E8EFEA";
@@ -1339,11 +1339,12 @@ window.buildAcupressureSvg = function (keyOrBodyPart, pointName) {
       '<path d="M137 104 Q147 102 156 105 M165 92 Q176 90 187 93 M196 104 Q207 102 216 105 M223 124 Q232 123 240 126 M150 162 C154 192 158 220 160 248 M174 156 C176 188 176 218 174 246" fill="none" stroke="' + ink + '" stroke-width="1.1" stroke-linecap="round" opacity="0.65"/>';
   } else if (t === "forearm_back") {
     shapeSvg =
-      '<path d="M126 308 L128 150 C116 126 112 86 116 54 C122 48 134 52 138 80 C142 46 154 40 162 42 C172 40 184 46 188 80 C192 52 204 48 210 54 C214 86 210 126 196 150 L196 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M128 152 Q162 158 196 152 M148 164 L145 296 M174 164 L177 296" fill="none" stroke="' + ink + '" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>';
+      '<path d="M128 308 L128 150 C118 136 106 122 94 106 C88 98 98 88 108 96 L124 114 L124 58 C124 46 140 46 141 58 L143 108 L148 42 C149 30 167 30 168 42 L169 108 L176 48 C177 36 194 38 193 50 L190 112 L198 68 C201 56 216 60 213 72 L198 150 L198 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M128 152 Q162 158 198 152 M148 164 L145 296 M176 164 L179 296" fill="none" stroke="' + ink + '" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>';
   } else if (t === "hand_edge") {
     shapeSvg =
       '<path d="M124 308 L124 248 C108 230 98 202 100 174 L106 86 C108 72 126 72 128 86 L130 144 L138 56 C140 42 158 42 160 56 L160 142 L170 50 C172 36 190 38 190 52 L188 144 L198 78 C200 66 216 68 216 82 L214 162 C222 182 222 214 202 248 L202 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M122 238 C102 218 86 192 78 168 C74 156 88 148 98 158 C108 168 118 186 124 202" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
       '<path d="M192 168 L214 166 M126 248 Q162 258 198 248 M112 188 Q154 182 192 196" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>';
   } else if (t === "hand_palm") {
     shapeSvg =
@@ -1361,7 +1362,7 @@ window.buildAcupressureSvg = function (keyOrBodyPart, pointName) {
       '<path d="M96 158 Q106 154 114 158 M138 178 C150 198 154 224 152 248" fill="none" stroke="' + ink + '" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>';
   } else if (t === "wrist") {
     shapeSvg =
-      '<path d="M124 308 L124 148 C110 120 106 78 108 46 C116 40 128 48 132 78 C136 44 150 38 158 42 C168 38 182 44 186 78 C190 48 202 40 210 46 C214 78 210 120 196 148 L196 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M124 308 L124 148 C114 134 106 108 108 66 C109 54 123 54 125 66 L128 112 L134 44 C135 32 152 32 153 44 L154 108 L161 36 C162 24 179 24 180 36 L179 110 L187 52 C189 40 205 42 204 54 L198 118 C208 104 220 92 228 84 C236 78 246 88 238 100 C226 118 210 134 196 148 L196 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
       '<path d="M124 148 Q160 158 196 148 M126 158 Q160 168 194 158 M150 166 L147 298 M170 166 L173 298" fill="none" stroke="' + ink + '" stroke-width="1.1" stroke-linecap="round" opacity="0.72"/>';
   } else if (t === "elbow" || t === "elbow_in") {
     shapeSvg =

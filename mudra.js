@@ -904,17 +904,13 @@ window.buildMudraSvg = function (mudraKey, mudraName) {
   const seq = (window.__mudraSvgSeq = (window.__mudraSvgSeq || 0) + 1);
   const uid = (raw.replace(/[^a-z0-9]/gi, "") || "mudra") + "_" + seq;
 
-  const paper = "#FBF8F1";
-  const ink = "#23201D";
-  const sketch = "#4F4941";
-  const fine = "#70685D";
-  const nail = "#FCF9F2";
+  const blob = "#FFD9A0";
+  const skin = "#F2C39B";
+  const shade = "#E2B086";
+  const nail = "#FADCC2";
+  const ink = "#111111";
+  const hair = "#262930";
   const accent = "#1A7A4C";
-
-  const gSkin = "url(#gSkin_" + uid + ")";
-  const gShade = "url(#gShade_" + uid + ")";
-  const pHatch = "url(#pHatch_" + uid + ")";
-  const gPaper = "url(#gPaper_" + uid + ")";
 
   function esc(s) {
     return String(s || "")
@@ -924,358 +920,497 @@ window.buildMudraSvg = function (mudraKey, mudraName) {
       .replace(/"/g, "&quot;");
   }
 
-  const defs =
-    '<defs>' +
-      '<radialGradient id="gPaper_' + uid + '" cx="50%" cy="48%" r="54%">' +
-        '<stop offset="0%" stop-color="#FCF9F2"/>' +
-        '<stop offset="72%" stop-color="#F5EFE3"/>' +
-        '<stop offset="100%" stop-color="#ECE3D2" stop-opacity="0.35"/>' +
-      '</radialGradient>' +
-      '<linearGradient id="gSkin_' + uid + '" x1="15%" y1="8%" x2="88%" y2="92%">' +
-        '<stop offset="0%" stop-color="#FBF8F1"/>' +
-        '<stop offset="52%" stop-color="#EFE7D9"/>' +
-        '<stop offset="100%" stop-color="#DDD2C0"/>' +
-      '</linearGradient>' +
-      '<linearGradient id="gShade_' + uid + '" x1="0%" y1="0%" x2="100%" y2="100%">' +
-        '<stop offset="0%" stop-color="#E5DCCB"/>' +
-        '<stop offset="100%" stop-color="#C8BDB0"/>' +
-      '</linearGradient>' +
-      '<pattern id="pHatch_' + uid + '" width="5.5" height="5.5" patternUnits="userSpaceOnUse" patternTransform="rotate(34)">' +
-        '<line x1="0" y1="0" x2="0" y2="5.5" stroke="#534C43" stroke-width="0.55" opacity="0.28"/>' +
-      '</pattern>' +
-    '</defs>';
+  // Organic soft peach blob behind drawing (#FFD9A0)
+  const peachBlob =
+    '<path d="M48 158 C38 94 86 42 158 36 C226 32 278 80 282 152 C286 224 234 280 160 284 C90 288 58 220 48 158 Z" fill="' + blob + '" opacity="0.62"/>';
 
-  const paperWash =
-    '<path d="M46 158 C40 94 86 38 158 34 C228 30 278 82 280 156 C282 228 232 282 158 284 C88 286 52 224 46 158 Z" fill="' + gPaper + '"/>' +
-    '<path d="M56 152 C54 98 96 50 158 46 C222 42 268 88 268 154" fill="none" stroke="' + fine + '" stroke-width="0.45" stroke-dasharray="4 6" opacity="0.45"/>';
-
-  // Realistic anatomical palm + forearm wrist (tapered, wrist tendons, palm lifelines, graphite hatching)
+  // Pencil sketch forearm/palm base (open palm facing viewer) with anatomical tendons & palm creases
   const wristAndPalm =
-    '<path d="M126 312 L127 254 C111 236 99 212 97 184 C95 164 99 150 105 144 L212 146 C224 162 227 188 221 214 C215 234 203 248 194 258 L193 312 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '<path d="M127 254 C112 238 102 216 99 190 L118 194 C122 222 130 242 142 254 Z" fill="' + pHatch + '" opacity="0.7"/>' +
-    '<path d="M127 255 Q160 264 193 255 M130 262 Q160 269 190 262" fill="none" stroke="' + sketch + '" stroke-width="0.8" stroke-linecap="round"/>' +
-    '<path d="M149 269 Q148 292 146 310 M162 271 Q161 294 160 310 M172 269 Q173 292 174 310" fill="none" stroke="' + fine + '" stroke-width="0.65" stroke-linecap="round"/>' +
-    '<path d="M107 177 Q144 182 178 164 M116 200 Q152 204 180 222 M176 244 C156 222 156 190 176 172" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>' +
-    '<path d="M109 180 Q142 184 174 168 M174 242 C158 222 158 194 174 176" fill="none" stroke="' + fine + '" stroke-width="0.45" stroke-linecap="round" opacity="0.6"/>';
+    '<path d="M126 308 L127 252 C110 234 99 210 97 182 C95 162 100 148 106 144 L212 146 C224 162 227 188 221 214 C215 234 203 248 194 258 L193 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M128 253 Q160 262 192 253 M108 176 Q144 182 178 164 M116 200 Q152 204 180 222 M176 244 C156 222 156 190 176 172 M148 264 L148 298 M168 264 L168 298 M129 244 L136 241 M131 236 L138 234" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.58"/>';
 
-  // Anatomically tapered straight fingers with natural joint swells, delicate creases, and almond pad lines
+  // 4 distinct anatomical straight fingers (little, ring, middle, index) with knuckle creases & nails
   const fingerSpecs = {
     little:
-      '<path d="M97 156 L92 114 L90 82 C89 71 104 70 106 81 L113 114 L121 150" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M93 117 Q102 115 112 118 M91 96 Q98 94 105 96 M95 79 C97 75 101 75 103 79" fill="none" stroke="' + sketch + '" stroke-width="0.7" stroke-linecap="round"/>',
+      '<path d="M97 156 L92 114 L90 82 C89 71 104 70 106 81 L113 114 L121 150" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M94 117 Q102 115 111 118 M92 96 Q98 94 105 96 M95 79 C97 75 101 75 103 79" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>',
     ring:
-      '<path d="M121 150 L121 98 L122 52 C122 40 139 40 140 52 L143 98 L148 146" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M123 111 Q132 109 142 112 M123 79 Q132 77 140 79 M126 49 C129 45 134 45 137 49" fill="none" stroke="' + sketch + '" stroke-width="0.7" stroke-linecap="round"/>',
+      '<path d="M121 150 L121 98 L122 52 C122 40 139 40 140 52 L143 98 L148 146" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M123 111 Q132 109 142 112 M123 79 Q132 77 140 79 M126 49 C129 45 134 45 137 49" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>',
     middle:
-      '<path d="M148 146 L150 92 L152 38 C153 25 172 25 172 38 L174 92 L177 146" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M151 107 Q162 105 173 107 M152 72 Q162 70 172 72 M157 35 C160 31 165 31 168 35" fill="none" stroke="' + sketch + '" stroke-width="0.7" stroke-linecap="round"/>',
+      '<path d="M148 146 L150 92 L152 38 C153 25 172 25 172 38 L174 92 L177 146" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M151 107 Q162 105 173 107 M152 72 Q162 70 172 72 M157 35 C160 31 165 31 168 35" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>',
     index:
-      '<path d="M177 146 L184 96 L189 56 C191 44 209 46 208 58 L206 98 L205 150" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M183 113 Q194 111 204 114 M188 80 Q197 79 206 81 M194 53 C197 49 202 50 204 54" fill="none" stroke="' + sketch + '" stroke-width="0.7" stroke-linecap="round"/>'
+      '<path d="M177 146 L184 96 L189 56 C191 44 209 46 208 58 L206 98 L205 150" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M183 113 Q194 111 204 114 M188 80 Q197 79 206 81 M194 53 C197 49 202 50 204 54" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>'
   };
 
   const straightWebs =
-    '<path d="M114 152 Q120 156 127 150 M142 147 Q148 151 154 147 M171 147 Q177 151 183 148" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>';
+    '<path d="M114 152 Q120 156 127 150 M142 147 Q148 151 154 147 M171 147 Q177 151 183 148" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>';
 
-  // Foreshortened anatomically curled finger (replaces blocky cartoon capsules)
+  // Anatomical bent/folded finger (tapered knuckle, joint crease, realistic fingernail)
   function curledFinger(cx, topY, botY) {
-    const w = 11.5;
+    const w = 10.5;
     const tipY = botY - 8;
     return (
-      '<path d="M' + (cx - w) + ' ' + (topY + 4) +
-      ' C' + (cx - w) + ' ' + (topY - 9) + ' ' + (cx + w) + ' ' + (topY - 9) + ' ' + (cx + w) + ' ' + (topY + 4) +
-      ' L' + (cx + w - 1) + ' ' + (botY - 12) +
-      ' C' + (cx + w - 1) + ' ' + (botY + 3) + ' ' + (cx - w + 1) + ' ' + (botY + 3) + ' ' + (cx - w + 1) + ' ' + (botY - 12) + ' Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M' + (cx - w + 2) + ' ' + (topY + 14) + ' Q' + cx + ' ' + (topY + 18) + ' ' + (cx + w - 2) + ' ' + (topY + 14) + ' L' + (cx + w - 2) + ' ' + (botY - 6) + ' Q' + cx + ' ' + (botY + 2) + ' ' + (cx - w + 2) + ' ' + (botY - 6) + ' Z" fill="' + pHatch + '" opacity="0.65"/>' +
-      '<path d="M' + (cx - w + 3) + ' ' + (topY + 12) + ' Q' + cx + ' ' + (topY + 16) + ' ' + (cx + w - 3) + ' ' + (topY + 12) + '" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>' +
-      '<path d="M' + (cx - 5.5) + ' ' + tipY + ' C' + (cx - 5.5) + ' ' + (tipY - 4) + ' ' + (cx + 5.5) + ' ' + (tipY - 4) + ' ' + (cx + 5.5) + ' ' + tipY + ' L' + (cx + 5) + ' ' + (tipY + 7) + ' C' + (cx + 2.5) + ' ' + (tipY + 9.5) + ' ' + (cx - 2.5) + ' ' + (tipY + 9.5) + ' ' + (cx - 5) + ' ' + (tipY + 7) + ' Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.85" stroke-linejoin="round"/>'
+      '<path d="M' + (cx - w) + ' ' + (topY + 6) +
+      ' C' + (cx - w + 1) + ' ' + (topY - 8) + ' ' + (cx + w - 1) + ' ' + (topY - 8) + ' ' + (cx + w) + ' ' + (topY + 6) +
+      ' L' + (cx + w - 1.5) + ' ' + (botY - 12) +
+      ' C' + (cx + w - 1.5) + ' ' + (botY + 3) + ' ' + (cx - w + 1.5) + ' ' + (botY + 3) + ' ' + (cx - w + 1.5) + ' ' + (botY - 12) + ' Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M' + (cx - w + 3) + ' ' + (topY + 12) + ' Q' + cx + ' ' + (topY + 16) + ' ' + (cx + w - 3) + ' ' + (topY + 12) +
+      ' M' + (cx - w + 3.5) + ' ' + (topY + 24) + ' Q' + cx + ' ' + (topY + 27) + ' ' + (cx + w - 3.5) + ' ' + (topY + 24) + '" fill="none" stroke="' + ink + '" stroke-width="0.9" stroke-linecap="round" opacity="0.62"/>' +
+      '<path d="M' + (cx - 5) + ' ' + tipY + ' C' + (cx - 5) + ' ' + (tipY - 4) + ' ' + (cx + 5) + ' ' + (tipY - 4) + ' ' + (cx + 5) + ' ' + tipY + ' L' + (cx + 4.5) + ' ' + (tipY + 7) + ' C' + (cx + 2) + ' ' + (tipY + 9.5) + ' ' + (cx - 2) + ' ' + (tipY + 9.5) + ' ' + (cx - 4.5) + ' ' + (tipY + 7) + ' Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0" stroke-linejoin="round"/>'
     );
   }
 
-  // Classic Gyan Mudra pencil sketch (index finger clearly bent down from knuckle to meet thumb tip with open circle)
-  const gyanPose =
+  // Upright Gyan pose (kept for Dharma Chakra two-hand circle)
+  const uprightGyanPose =
     wristAndPalm +
     fingerSpecs.little +
     fingerSpecs.ring +
     fingerSpecs.middle +
     straightWebs +
-    '<path d="M177 146 L181 112 C182 95 202 94 204 110 L203 148 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '<path d="M181 108 C181 94 203 94 203 110 C203 122 195 138 184 142 C174 146 167 137 172 127 C176 118 181 114 181 108 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '<path d="M181 110 Q192 115 201 110 L198 134 Q186 142 174 136 Z" fill="' + pHatch + '" opacity="0.6"/>' +
-    '<path d="M182 111 Q192 116 201 111" fill="none" stroke="' + sketch + '" stroke-width="0.8" stroke-linecap="round"/>' +
-    '<path d="M171 131 C174 125 181 125 184 131 C182 138 175 139 171 131 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
-    '<path d="M194 252 C228 232 238 194 226 158 C216 132 198 122 182 124 C172 125 168 134 176 141 C186 148 202 152 208 172 C212 194 202 216 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '<path d="M175 132 C178 126 186 126 189 132 C187 139 180 139 175 132 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
-    '<path d="M196 150 Q208 142 216 146 M186 184 C194 198 192 216 182 230" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>' +
-    '<path d="M202 162 C210 182 210 208 194 230 L214 236 C224 212 226 180 214 158 Z" fill="' + pHatch + '" opacity="0.5"/>';
+    '<path d="M177 146 L181 112 C182 95 202 94 204 110 L203 148 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M181 108 C181 94 203 94 203 110 C203 122 195 138 184 142 C174 146 167 137 172 127 C176 118 181 114 181 108 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M171 131 C174 125 181 125 184 131 C182 138 175 139 171 131 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+    '<path d="M194 252 C228 232 238 194 226 158 C216 132 198 122 182 124 C172 125 168 134 176 141 C186 148 202 152 208 172 C212 194 202 216 184 228" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M175 132 C178 126 186 126 189 132 C187 139 180 139 175 132 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
+
+  // 01_Gyan_Mudra.jpg: Diagonal resting hand, Thumb + Index tip-to-tip oval on top, Middle + Ring + Little extended right (5 digits)
+  const gyanPose =
+    '<path d="M18 196 L88 158 C108 148 132 156 150 170 L264 182 C278 184 278 202 262 202 L222 200 L256 208 C268 212 264 226 250 224 L208 214 L236 226 C248 230 242 242 228 238 C184 242 132 244 96 226 L18 248 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M176 202 L254 214 M172 218 L230 232 M86 164 L96 224 M42 212 L78 194 M48 224 L82 208" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>' +
+    '<path d="M254 184 L268 186 C272 190 271 196 265 198 L253 196 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+    '<path d="M244 210 L256 213 C260 216 258 221 252 222 L242 219 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+    '<path d="M226 227 L237 230 C240 233 238 238 232 238 L223 235 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+    '<path d="M150 172 C170 156 176 130 162 110 C156 102 142 106 146 118 C154 134 148 152 134 164 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M148 106 C154 104 160 110 158 117 L150 118 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+    '<path d="M72 172 C92 146 118 124 144 108 C152 104 156 118 146 126 C126 140 108 160 98 186" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M132 112 C138 106 148 106 150 113 L138 120 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+    '<path d="M104 184 C124 178 138 192 136 212" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>';
 
   let poseSvg = "";
   if (raw === "gyan") {
     poseSvg = gyanPose;
   } else if (raw === "chin") {
+    // Chin Mudra: Palm facing downward with thumb & index tip-to-tip circle
     poseSvg = '<g transform="translate(0, 316) scale(1, -1)">' + gyanPose + '</g>';
   } else if (raw === "prana") {
+    // 02_Prana_Mudra.jpg: Upright palm; Middle + Index straight UP; Ring + Little curved inward to meet Thumb tip (5 digits)
     poseSvg =
-      wristAndPalm +
-      fingerSpecs.middle +
-      fingerSpecs.index +
-      curledFinger(107, 130, 182) +
-      curledFinger(136, 124, 180) +
-      '<path d="M194 252 C222 234 234 200 222 174 C210 152 178 148 132 152 C114 154 108 164 116 174 C126 184 162 182 186 178 C196 194 198 214 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M116 163 C120 156 129 156 134 162 C134 169 128 173 121 172 C116 171 115 167 116 163 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
-      '<path d="M174 158 Q178 168 174 178 M194 184 C200 200 198 218 188 232" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>';
+      '<path d="M124 308 L124 248 C104 228 96 196 104 164 L142 148 L142 44 C142 30 164 30 166 44 L168 142 L170 54 C172 40 192 40 194 54 L196 154 C208 176 208 214 188 248 L188 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M167 148 L168 58 M144 108 Q154 105 166 108 M144 76 Q154 74 165 76 M170 112 Q182 109 193 112 M171 80 Q182 78 192 80 M124 250 Q156 260 188 250 M154 238 C144 216 146 186 164 166 M146 264 L146 296 M166 264 L166 296" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>' +
+      '<path d="M108 168 C110 144 128 134 142 146 C152 156 154 174 142 182 C132 188 122 180 124 168 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M134 167 C138 162 146 162 148 169 C146 175 138 176 134 167 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M100 188 C100 166 116 160 130 170 C140 178 142 194 130 198 C120 202 110 196 108 188 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M124 184 C128 180 135 180 137 186 C135 191 128 192 124 184 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M188 242 C204 222 204 196 186 180 C172 168 156 166 148 176 C142 184 150 196 162 202 C172 208 178 218 170 232" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M150 176 C156 171 164 173 166 180 C162 186 154 185 150 176 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
   } else if (raw === "apana") {
+    // 03_Apana_Mudra.jpg: Arm from upper-left; Thumb down meeting Middle + Ring tips; Index far right, Little bottom-right (5 digits)
     poseSvg =
-      wristAndPalm +
-      fingerSpecs.little +
-      fingerSpecs.index +
-      curledFinger(136, 128, 174) +
-      curledFinger(163, 124, 174) +
-      '<path d="M194 252 C222 234 234 196 222 170 C212 148 188 144 162 146 C144 148 136 158 142 170 C148 180 168 182 188 178 C196 192 198 212 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M144 158 C148 151 157 151 162 157 C162 164 157 169 150 168 C145 167 143 163 144 158 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
-      '<path d="M176 154 Q180 166 176 176" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>';
+      '<path d="M16 44 L86 124 C104 114 134 110 158 118 L184 160 L282 202 C294 208 288 226 274 220 L188 188 L178 214 L188 246 C194 258 178 266 170 254 L134 214 C104 208 76 184 68 152 L16 98 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M222 186 L232 198 M252 198 L260 208 M152 224 L164 236 M94 152 Q122 166 148 150 M38 78 L64 106 M46 92 L70 118" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>' +
+      '<path d="M150 208 C144 190 144 166 156 162 C166 160 172 174 170 196 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M168 206 C164 188 166 164 178 160 C188 158 194 172 188 196 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M153 166 C156 160 163 160 165 166 L164 176 L154 176 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M172 164 C175 158 183 158 185 164 L184 174 L173 174 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M104 120 C134 108 170 112 184 134 C190 146 182 162 168 162 C156 162 150 150 156 140 C150 132 132 132 114 140" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M162 146 C167 142 175 144 176 152 C171 157 164 156 162 146 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
   } else if (raw === "vayu") {
+    // 04_Vayu_Mudra.jpg: Upright palm; Middle + Ring straight UP; outer finger curled; Index tucked under Thumb (5 digits)
     poseSvg =
-      wristAndPalm +
-      fingerSpecs.little +
-      fingerSpecs.ring +
-      fingerSpecs.middle +
-      straightWebs +
-      curledFinger(194, 126, 188) +
-      '<path d="M194 252 C224 234 236 202 224 176 C214 156 192 154 172 158 C157 162 153 175 163 185 C171 193 184 192 194 186 C200 200 198 216 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M161 168 C165 162 174 162 178 168 C177 175 171 179 165 177 C161 175 160 172 161 168 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
-      '<path d="M188 162 Q192 174 188 184" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>';
+      '<path d="M118 308 L120 250 C102 232 96 202 102 166 L132 148 L134 46 C134 32 154 32 156 46 L158 140 L160 56 C162 42 182 42 184 56 L186 150 C206 168 214 202 198 246 L194 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M158 144 L159 58 M136 106 Q146 103 157 106 M136 74 Q146 72 156 74 M160 110 Q171 107 183 110 M162 78 Q172 76 182 78 M120 250 Q157 260 194 250 M144 264 L144 298 M168 264 L168 298" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>' +
+      curledFinger(107, 134, 200) +
+      '<path d="M174 166 L192 164 C198 182 188 216 170 226 C158 232 150 222 154 208 C160 194 170 180 174 166 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M156 212 C160 206 168 206 170 214 C166 221 159 221 156 212 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M198 238 C212 214 208 184 190 172 C172 160 144 164 134 176 C126 184 136 198 150 196 C166 194 178 196 180 212" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M168 172 C174 168 183 170 185 178 C180 184 171 183 168 172 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
   } else if (raw === "shunya") {
+    // 05_Shunya_Mudra.jpg: Upright left palm; Index, Ring, Little straight UP; Middle folded down onto palm & pressed by Thumb from left (5 digits)
     poseSvg =
-      wristAndPalm +
-      fingerSpecs.little +
-      fingerSpecs.ring +
-      fingerSpecs.index +
-      curledFinger(163, 126, 188) +
-      '<path d="M194 252 C222 234 234 202 220 178 C206 156 176 154 148 158 C132 160 128 172 136 182 C144 190 166 188 186 184 C194 198 194 214 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M137 168 C141 162 150 162 154 168 C153 175 147 178 141 176 C137 174 136 171 137 168 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
-      '<path d="M172 164 Q176 174 172 182" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>';
+      '<path d="M122 308 L122 252 C100 230 92 194 102 158 L112 146 L112 52 C112 38 134 38 136 52 L140 140 L156 140 L158 38 C160 24 182 24 182 38 L182 144 L184 62 C186 48 206 48 206 62 L206 162 C214 192 210 226 190 250 L190 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M182 146 L183 62 M114 108 Q125 105 137 108 M114 78 Q124 76 135 78 M158 102 Q170 99 181 102 M159 68 Q170 66 180 68 M184 114 Q194 111 204 114 M185 84 Q195 82 204 84 M122 252 Q156 262 190 252 M144 264 L144 298 M168 264 L168 298" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>' +
+      curledFinger(148, 128, 206) +
+      '<path d="M108 232 C94 206 94 166 112 144 C126 128 150 124 166 132 C174 136 170 150 156 154 C140 158 128 164 128 188 C128 204 134 218 144 230" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M148 134 C155 130 163 132 164 139 C159 144 150 143 148 134 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
   } else if (raw === "surya") {
+    // 06_Surya_Mudra.jpg: Horizontal open hand from left; Ring finger MODI hui (folded tightly into palm under thumb); Index, Middle, Little straight right (5 digits)
     poseSvg =
-      wristAndPalm +
-      fingerSpecs.little +
-      fingerSpecs.middle +
-      fingerSpecs.index +
-      curledFinger(136, 134, 188) +
-      '<path d="M194 252 C222 234 234 202 220 178 C206 156 176 150 144 154 C126 156 120 168 128 178 C136 188 162 188 184 182 C192 196 194 212 184 226" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M128 164 C132 158 141 158 145 164 C145 171 139 174 133 172 C128 170 127 167 128 164 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
-      '<path d="M168 160 Q172 170 168 180" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>';
+      '<path d="M12 162 L92 164 C112 142 146 134 182 140 L292 122 C304 120 306 138 292 142 L206 158 L286 146 C298 144 298 162 284 164 L204 176 L248 172 C262 172 262 190 248 192 L182 214 C144 226 106 226 84 214 L12 216 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M236 134 L240 148 M266 128 L268 142 M234 156 L236 168 M262 152 L264 164 M218 178 L220 192 M102 184 Q142 196 178 188 M34 182 L76 184 M38 196 L78 198" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>' +
+      '<path d="M204 166 C214 176 206 196 186 188 C166 180 144 164 134 152 C128 144 138 134 148 140 C166 150 186 158 204 166 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M136 144 C141 139 149 141 151 148 L142 154 C136 152 134 148 136 144 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M96 164 C112 132 134 114 162 118 C184 122 204 134 206 146 C206 156 190 160 176 152 C160 144 146 140 130 148" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M180 124 C188 124 198 130 200 137 L186 140 C180 135 178 128 180 124 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
+  } else if (raw === "prithvi") {
+    // 07_Prithvi_Mudra.jpg: Tilted palm from bottom-left; Ring finger TIP touches Thumb TIP forming tall open window; Index, Middle, Little straight right (5 digits, distinct from Surya!)
+    poseSvg =
+      '<path d="M14 252 L96 164 L196 166 L278 158 C292 158 292 176 278 176 L204 184 L274 198 C288 202 284 220 270 216 L196 206 L236 244 C248 256 234 270 222 258 L166 226 C138 232 108 236 86 254 L48 298 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M236 162 L236 178 M258 160 L258 176 M236 194 L234 210 M204 232 L212 246 M114 194 Q148 204 182 192 M44 260 L76 226 M58 272 L86 240" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>' +
+      '<path d="M196 194 C216 190 226 176 222 156 L216 102 C214 88 198 90 200 104 L204 162 C202 174 192 182 184 186 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M203 94 C208 92 214 96 215 104 L204 106 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M92 170 C118 142 158 118 196 92 C206 86 212 102 200 112 C172 134 146 154 128 184" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M184 100 C190 92 199 90 203 98 L190 108 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
   } else if (raw === "varun" || raw === "jal") {
+    // Varun / Jal Mudra: Anatomical palm facing viewer; Little finger smoothly arches inward to touch Thumb tip; Ring, Middle, Index straight UP (5 digits)
     const handSvg =
       wristAndPalm +
       fingerSpecs.ring +
       fingerSpecs.middle +
       fingerSpecs.index +
-      curledFinger(107, 128, 182) +
-      '<path d="M194 252 C224 234 234 200 220 176 C208 152 172 148 128 152 C110 154 106 164 114 174 C124 182 160 180 184 178 C196 192 196 212 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M114 162 C118 156 127 156 131 162 C130 169 123 172 117 169 C114 167 113 165 114 162 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
-      '<path d="M168 158 Q172 168 168 176" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>';
+      '<path d="M97 156 C92 132 100 118 114 122 C126 126 130 144 124 162 C118 174 104 172 102 158 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M112 156 C116 150 123 151 124 158 C122 165 115 165 112 156 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M194 252 C222 232 230 198 214 176 C200 156 168 152 126 154 C112 156 108 166 118 174 C132 182 164 178 186 180 C196 194 196 214 184 228" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M116 162 C120 156 128 156 131 162 C129 169 122 171 116 162 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
     poseSvg = raw === "jal" ? '<g transform="translate(320, 0) scale(-1, 1)">' + handSvg + '</g>' : handSvg;
-  } else if (raw === "prithvi") {
-    poseSvg =
-      wristAndPalm +
-      fingerSpecs.little +
-      fingerSpecs.middle +
-      fingerSpecs.index +
-      curledFinger(136, 126, 182) +
-      '<path d="M194 252 C222 234 234 200 222 174 C210 152 178 148 148 152 C132 154 128 164 136 174 C144 182 168 180 186 178 C196 192 196 212 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M136 162 C140 156 149 156 153 162 C151 169 144 171 138 168 C135 166 135 164 136 162 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
-      '<path d="M174 158 Q178 168 174 176" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>';
-  } else if (raw === "dhyana" || raw === "abhaya_dhyana" || raw === "bhairava" || raw === "bhairavi") {
-    const twoHands =
-      '<path d="M44 220 C40 184 56 148 82 134 C106 122 134 122 152 132 L156 146 L234 164 C248 168 250 182 238 188 L252 196 C260 202 256 216 242 218 L246 226 C250 234 240 244 224 244 C188 260 124 264 78 250 C52 242 46 232 44 220 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M46 220 C56 238 106 254 168 248 L156 222 C110 226 68 216 52 196 Z" fill="' + pHatch + '" opacity="0.6"/>' +
-      '<path d="M276 208 C280 174 264 142 238 130 C214 118 186 118 168 128 L164 142 L88 158 C74 162 72 176 84 182 L70 190 C62 196 66 210 80 212 L78 220 C74 228 84 238 100 238 C138 252 200 254 242 238 C266 230 274 220 276 208 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M118 130 C136 122 152 128 160 136 C168 128 184 122 202 130" fill="none" stroke="' + ink + '" stroke-width="1.25" stroke-linecap="round"/>' +
-      '<path d="M84 182 Q132 188 180 184 M80 212 Q128 216 176 210 M144 196 Q178 206 210 196" fill="none" stroke="' + sketch + '" stroke-width="0.8" stroke-linecap="round"/>';
-    poseSvg = raw === "bhairavi" ? '<g transform="translate(320, 0) scale(-1, 1)">' + twoHands + '</g>' : twoHands;
   } else if (raw === "rudra") {
+    // Rudra Mudra: Index + Ring bend smoothly inward to touch Thumb tip; Little + Middle straight UP (5 digits)
     poseSvg =
       wristAndPalm +
       fingerSpecs.little +
       fingerSpecs.middle +
-      curledFinger(136, 124, 180) +
-      curledFinger(192, 126, 180) +
-      '<path d="M194 252 C222 234 234 200 222 174 C212 152 182 148 152 152 C138 154 134 164 142 172 C152 180 174 178 190 178 C198 192 198 214 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M142 160 C146 154 155 154 159 160 C157 167 150 169 142 160 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
-      '<path d="M174 158 Q178 168 174 176" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>';
-  } else if (raw === "linga") {
-    poseSvg =
-      '<path d="M102 312 L102 256 C82 240 68 216 70 184 C72 148 94 124 130 120 L132 54 C132 36 158 36 158 54 L160 120 C196 124 234 148 238 188 C242 224 224 248 204 260 L204 312 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M74 192 C78 224 96 246 126 254 L148 206 C122 198 96 184 82 166 Z" fill="' + pHatch + '" opacity="0.55"/>' +
-      '<path d="M136 48 C140 41 149 41 153 48 L152 60 C146 64 140 64 136 58 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.85"/>' +
-      '<path d="M102 162 L148 154 C158 152 158 168 148 170 L102 178 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M214 170 L166 164 C156 162 156 178 166 180 L214 186 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M104 184 L152 178 C162 176 162 192 152 194 L104 200 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M214 192 L168 188 C158 186 158 202 168 204 L212 208 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M108 206 L154 202 C164 200 164 216 154 218 L112 222 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M208 214 L168 212 C158 210 158 226 168 228 L206 230 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M158 106 C178 104 192 118 186 136 C178 150 144 150 132 138" fill="none" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round"/>';
-  } else if (raw === "shankh") {
-    poseSvg =
-      '<path d="M108 312 L108 250 C78 232 62 198 72 156 C82 116 118 98 154 102 C188 106 216 124 232 152 C246 180 240 222 210 248 L210 312 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M74 166 C68 202 82 232 114 248 L142 204 C112 198 90 184 74 166 Z" fill="' + pHatch + '" opacity="0.55"/>' +
-      '<path d="M128 112 C128 70 150 58 164 78 L164 132" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M142 134 L206 134 C220 134 220 154 206 154 L142 154" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.3" stroke-linecap="round"/>' +
-      '<path d="M144 158 L210 158 C224 158 224 178 210 178 L144 178" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.3" stroke-linecap="round"/>' +
-      '<path d="M144 182 L204 182 C218 182 218 202 204 202 L144 202" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.3" stroke-linecap="round"/>' +
-      '<path d="M178 108 C200 108 214 122 204 136" fill="none" stroke="' + sketch + '" stroke-width="1.1" stroke-linecap="round"/>';
-  } else if (raw === "kuber") {
-    poseSvg =
-      wristAndPalm +
-      curledFinger(109, 144, 200) +
-      curledFinger(136, 138, 196) +
-      curledFinger(163, 122, 176) +
-      curledFinger(191, 124, 178) +
-      '<path d="M194 252 C224 234 236 198 224 170 C214 148 190 146 172 150 C160 152 156 164 164 172 C172 180 186 178 194 184 C200 200 196 216 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M164 159 C168 153 177 153 180 159 C178 166 170 167 164 159 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>';
-  } else if (raw === "hakini" || raw === "surabhi") {
-    poseSvg =
-      '<path d="M74 312 L80 242 C68 220 64 190 76 162 L96 96 C100 82 114 84 116 98 L112 152 L126 72 C128 56 144 56 146 72 L144 144 L156 66 C158 50 160 50 160 66 L160 220 L132 258 L128 312 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M246 312 L240 242 C252 220 256 190 244 162 L224 96 C220 82 206 84 204 98 L208 152 L194 72 C192 56 176 56 174 72 L176 144 L164 66 C162 50 160 50 160 66 L160 220 L188 258 L192 312 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M188 258 L240 242 C252 220 254 192 244 166 L208 178 C210 214 198 240 188 258 Z" fill="' + pHatch + '" opacity="0.55"/>' +
-      '<path d="M150 222 C154 194 156 170 160 154 C164 170 166 194 170 222" fill="none" stroke="' + sketch + '" stroke-width="1.1" stroke-linecap="round"/>' +
-      '<circle cx="160" cy="64" r="2.8" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>';
-  } else if (raw === "uttarabodhi" || raw === "matangi") {
-    const doubleTip = raw === "uttarabodhi" ? "44" : "36";
-    poseSvg =
-      '<path d="M106 312 L106 250 C76 232 64 198 78 164 C90 136 116 122 142 122 L146 ' + doubleTip + ' C146 24 174 24 174 ' + doubleTip + ' L178 122 C204 122 230 136 242 164 C256 198 244 232 214 250 L214 312 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M160 ' + doubleTip + ' L160 132" fill="none" stroke="' + sketch + '" stroke-width="1.0" stroke-linecap="round"/>' +
-      '<path d="M88 166 C112 154 132 162 142 178 M232 166 C208 154 188 162 178 178 M98 194 L138 184 M222 194 L182 184 M108 218 L146 212 M212 218 L174 212" fill="none" stroke="' + sketch + '" stroke-width="1.0" stroke-linecap="round"/>' +
-      '<path d="M128 242 Q160 264 192 242" fill="none" stroke="' + fine + '" stroke-width="0.8" stroke-linecap="round"/>';
-  } else if (raw === "anjali") {
-    poseSvg =
-      '<path d="M128 312 L128 248 C110 228 104 196 114 160 L140 52 C144 34 160 34 160 48 L160 250 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M192 312 L192 248 C210 228 216 196 206 160 L180 52 C176 34 160 34 160 48 L160 250 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M160 48 L160 250 L192 248 C208 228 214 196 204 160 L180 52 C176 38 164 38 160 48 Z" fill="' + pHatch + '" opacity="0.55"/>' +
-      '<path d="M160 46 L160 264 M124 250 Q160 264 196 250 M124 148 Q140 144 152 148 M168 148 Q180 144 196 148 M126 114 Q142 110 154 114 M166 114 Q178 110 192 114" fill="none" stroke="' + sketch + '" stroke-width="0.85" stroke-linecap="round"/>';
-  } else if (raw === "yoni") {
-    poseSvg =
-      '<path d="M116 312 L116 250 C84 230 68 196 78 154 C86 120 112 96 144 96 L158 72 C160 68 160 68 162 72 L176 96 C208 96 234 120 242 154 C252 196 236 230 204 250 L204 312 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M120 122 L200 122 L160 208 Z" fill="' + paper + '" stroke="' + ink + '" stroke-width="1.35" stroke-linejoin="round"/>' +
-      '<path d="M138 110 Q160 98 182 110 M112 226 Q160 242 208 226 M102 158 L128 170 M218 158 L192 170" fill="none" stroke="' + sketch + '" stroke-width="0.85" stroke-linecap="round"/>';
-  } else if (raw === "garuda") {
-    poseSvg =
-      '<path d="M128 312 L134 246 C94 230 54 206 38 172 C26 146 40 126 60 135 C78 143 98 158 118 166 C94 134 76 96 68 72 C64 56 82 50 92 64 L126 130 C118 98 116 62 120 46 C124 30 144 32 146 50 L158 140 L162 140 L174 50 C176 32 196 30 200 46 C204 62 202 98 194 130 L228 64 C238 50 256 56 252 72 C244 96 226 134 202 166 C222 158 242 143 260 135 C280 126 294 146 282 172 C266 206 226 230 186 246 L192 312 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M138 188 C148 172 172 172 182 188 C172 204 148 204 138 188 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.2"/>' +
-      '<path d="M72 166 Q94 182 120 192 M248 166 Q226 182 200 192" fill="none" stroke="' + sketch + '" stroke-width="0.75" stroke-linecap="round"/>';
-  } else if (raw === "mahasirs") {
+      '<path d="M121 150 C120 124 132 114 146 122 C156 128 156 150 144 166 C134 176 124 168 126 154 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M136 154 C140 148 147 149 149 156 C146 163 139 163 136 154 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M204 148 C206 124 194 114 180 122 C170 128 168 150 176 164 C184 174 196 166 196 152 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M174 154 C177 148 184 149 186 156 C183 163 176 163 174 154 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M194 252 C222 232 232 198 218 174 C206 152 178 148 152 152 C140 154 136 164 144 172 C156 180 176 178 190 178 C198 194 198 214 184 228" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M144 160 C148 154 156 154 160 160 C157 167 150 169 144 160 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
+  } else if (raw === "apana-vayu") {
+    // Apana Vayu Mudra: Little straight UP; Index folded cleanly to thumb base; Middle & Ring tips touch Thumb tip (5 digits)
     poseSvg =
       wristAndPalm +
       fingerSpecs.little +
-      curledFinger(136, 138, 196) +
-      curledFinger(163, 122, 176) +
-      curledFinger(191, 124, 178) +
-      '<path d="M194 252 C224 234 236 198 224 170 C214 148 190 146 172 150 C160 152 156 164 164 172 C172 180 186 178 194 184 C200 200 196 216 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M164 159 C168 153 177 153 180 159 C178 166 170 167 164 159 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>';
-  } else if (raw === "pushan") {
+      '<path d="M180 148 C194 144 206 154 204 172 C200 192 190 212 178 214 C168 214 166 198 172 182 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M172 200 C176 194 183 195 184 202 C180 209 174 208 172 200 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M122 150 C122 122 134 114 146 122 C152 132 150 154 142 164 C134 170 124 164 124 152 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M148 146 C150 120 164 114 174 124 C180 134 176 154 166 164 C156 170 148 162 150 150 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M134 154 C138 148 145 149 146 156 L136 160 Z M158 154 C162 148 169 149 170 156 L160 160 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M194 252 C222 232 230 196 218 172 C208 150 182 146 156 150 C142 152 138 164 146 174 C156 184 178 182 192 178 C198 194 196 214 184 228" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M146 160 C150 154 158 154 162 160 C159 167 152 169 146 160 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
+  } else if (raw === "dhyana" || raw === "abhaya_dhyana" || raw === "bhairava" || raw === "bhairavi") {
+    // Dhyana / Bhairava / Bhairavi: Anatomical cupped palms resting one inside the other in lap (5+5 digits clearly delineated)
+    const thumbJoin = raw === "dhyana" || raw === "abhaya_dhyana"
+      ? '<path d="M112 134 C134 120 154 128 160 144 C166 128 186 120 208 134 C198 148 176 150 160 146 C144 150 122 148 112 134 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>'
+      : '<path d="M104 142 C122 130 140 138 148 154 M216 142 C198 130 180 138 172 154" fill="none" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round"/>';
+    const twoHands =
+      '<path d="M36 226 C34 184 54 146 84 134 C108 124 134 128 150 144 L244 162 C258 166 258 180 244 184 L256 194 C264 200 258 214 244 214 L250 222 C254 232 242 242 226 242 L230 248 C232 256 218 264 202 260 C158 268 102 266 64 250 C44 242 38 234 36 226 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M284 214 C286 174 266 140 236 128 C212 118 186 122 170 138 L76 156 C62 160 62 174 76 178 L64 188 C56 194 62 208 76 208 L70 216 C66 226 78 236 94 236 L92 242 C90 250 104 258 120 254 C164 260 218 256 256 238 C276 230 282 222 284 214 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M76 178 L166 178 M68 208 L164 204 M82 234 L162 228 M174 186 L240 184 M174 214 L240 214 M156 196 Q188 214 222 198" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>' +
+      thumbJoin;
+    poseSvg = raw === "bhairavi" ? '<g transform="translate(320, 0) scale(-1, 1)">' + twoHands + '</g>' : twoHands;
+  } else if (raw === "linga") {
+    // 08_Linga_Mudra.jpg: Horizontal two-hand clasp — Left wrist from left with upright Thumb; interlocked fist in center; Right wrist from bottom-right cupping base & encircling Thumb
     poseSvg =
-      '<g transform="translate(-44, 24) scale(0.76)">' +
-        wristAndPalm + fingerSpecs.little + fingerSpecs.index + curledFinger(136, 126, 180) + curledFinger(163, 122, 180) +
-        '<path d="M194 252 C222 234 234 200 222 174 C212 152 188 148 162 150 C144 152 136 162 142 174 C148 184 168 184 188 180 C196 194 198 214 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-        '<path d="M144 162 C148 155 157 155 162 161 C162 168 157 173 150 172 C145 171 143 167 144 162 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
+      '<path d="M312 198 L226 226 C204 214 168 206 132 214 C102 220 74 222 52 228 C44 232 48 244 62 246 L140 256 C162 266 196 266 224 252 L312 244 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M8 144 L92 146 C112 128 128 110 144 90 C150 76 150 56 146 42 C146 32 162 32 166 44 C172 64 168 92 158 118 C184 118 202 132 204 156 C208 184 194 212 168 228 C144 236 114 230 92 216 L8 214 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M24 168 L74 170 M28 192 L78 194 M112 178 Q138 188 158 176" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.58"/>' +
+      '<path d="M148 40 C153 36 160 38 162 46 L154 52 C148 50 147 44 148 40 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M168 128 C186 126 196 136 192 150 C188 158 174 158 164 152 M172 150 C194 148 204 160 198 174 C192 182 176 180 166 174 M170 174 C192 174 200 186 192 198 C186 206 172 204 162 198 M164 198 C182 200 188 212 178 222 C170 228 156 226 148 220" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M224 238 C202 256 170 264 142 256 C132 252 134 236 148 236 C168 238 192 232 206 220" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M138 242 C143 237 152 238 154 246 C149 252 141 251 138 242 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
+  } else if (raw === "shankh") {
+    // 09_Shankh_Mudra.jpg: Two wrists from bottom; conical Shankh shape upright; 4 left fingers along left wall touching Right Thumb; 4 right fingers wrapped around Left Thumb in center (10 digits)
+    poseSvg =
+      '<path d="M74 308 L92 246 C78 218 76 184 94 152 L144 48 C150 36 164 40 160 54 L152 118 L174 238 L138 258 L126 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M104 162 L146 66 M118 164 L152 72 M132 162 L156 84 M96 264 L104 298 M114 268 L118 298" fill="none" stroke="' + ink + '" stroke-width="1.05" stroke-linecap="round" opacity="0.72"/>' +
+      '<path d="M244 308 L224 244 C228 214 218 176 202 142 L176 60 C172 46 156 48 158 62 L166 138 L156 246 L186 260 L196 308 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M114 218 C124 178 134 132 146 104 C154 92 170 98 166 116 L154 204 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M142 126 L184 146 C192 150 188 164 176 160 L138 144 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M142 146 L190 168 C198 172 194 186 182 182 L138 164 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M142 168 L188 190 C196 194 192 208 180 204 L138 186 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M144 190 L182 210 C188 214 184 226 174 222 L140 206 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M174 146 C180 144 186 148 184 155 L174 156 Z M178 168 C184 166 190 170 188 177 L178 178 Z M176 190 C182 188 188 192 186 199 L176 200 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M146 44 C152 40 158 43 158 50 L149 52 Z M160 50 C166 47 172 50 172 57 L162 59 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
+  } else if (raw === "surabhi") {
+    // 10_Surabhi_Mudra.jpg: Two tilted hands rising from bottom-left & bottom-right, BOTH thumbs free upright, opposite 4 fingertips paired across open center lattice (10 digits)
+    poseSvg =
+      '<path d="M12 308 L46 218 C46 188 46 148 34 106 C30 92 48 86 56 102 L72 152 L106 104 C122 86 142 84 154 90 C162 94 158 106 146 104 L118 118 L158 114 C170 114 170 128 156 128 L120 132 L152 138 C164 140 162 152 148 150 L114 152 L142 164 C152 170 146 182 136 176 L98 186 C94 210 82 232 68 250 L46 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M35 94 C41 88 49 90 50 98 L40 104 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M294 308 L244 226 C252 192 248 150 226 120 L180 94 C166 86 154 88 152 96 C152 104 164 108 178 112 L152 116 C140 118 142 130 156 128 L184 128 L150 138 C138 142 142 154 156 150 L188 148 L142 166 C132 172 138 184 150 176 L192 172 L208 228 L252 308 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M204 236 C194 214 190 184 192 156 C194 142 212 142 216 158 C220 182 228 206 240 224" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M194 150 C198 144 208 144 210 152 L206 162 L195 160 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M148 92 L158 94 M148 118 L158 118 M146 142 L156 142 M138 170 L148 170 M32 276 L52 246 M262 276 L242 244" fill="none" stroke="' + ink + '" stroke-width="1.0" stroke-linecap="round" opacity="0.68"/>';
+  } else if (raw === "kuber") {
+    // Kuber Mudra: Thumb + Index + Middle tips touching cleanly; Ring + Little curled neatly into palm (5 digits)
+    poseSvg =
+      wristAndPalm +
+      '<path d="M98 156 C94 176 98 202 112 204 C122 204 126 184 120 162 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M122 150 C120 174 124 202 138 202 C148 202 152 182 146 156 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M107 192 C110 187 117 188 118 194 L109 197 Z M133 190 C136 185 143 186 144 192 L135 195 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M148 146 C148 122 162 114 174 122 C180 132 178 154 166 164 C156 170 148 162 150 150 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M177 148 C182 122 196 116 206 126 C210 138 202 158 190 166 C180 172 174 162 177 148 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M159 154 C163 148 170 149 172 156 L161 159 Z M184 156 C188 150 195 151 196 158 L186 161 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M194 252 C222 232 232 196 218 172 C208 150 186 146 168 152 C158 156 156 166 164 174 C174 182 188 178 194 186 C200 202 196 216 184 228" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M164 160 C168 154 176 154 179 160 C177 167 169 168 164 160 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
+  } else if (raw === "hakini") {
+    // Hakini Mudra: Dome-shaped symmetrical touch of all 5 corresponding fingertips (Thumb + Index + Middle + Ring + Little per hand = 10 digits)
+    poseSvg =
+      // Left hand palm & 5 arched digits meeting centerline x=160
+      '<path d="M56 308 L74 244 C56 222 52 192 64 164 L78 134 C84 122 98 124 98 138 L94 162 L116 154 L156 138 C162 138 162 152 154 154 L118 172 L156 102 C160 94 162 106 156 116 L124 172 L156 66 C160 54 162 66 158 78 L138 174 L156 44 C158 34 160 46 158 58 L150 182 C136 188 122 198 114 214 L156 202 C162 202 162 216 154 216 L118 232 L110 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      // Right hand mirrored cleanly touching all 5 fingertips
+      '<path d="M264 308 L246 244 C264 222 268 192 256 164 L242 134 C236 122 222 124 222 138 L226 162 L204 154 L164 138 C158 138 158 152 166 154 L202 172 L164 102 C160 94 158 106 164 116 L196 172 L164 66 C160 54 158 66 162 78 L182 174 L164 44 C162 34 160 46 162 58 L170 182 C184 188 198 198 206 214 L164 202 C158 202 158 216 166 216 L202 232 L210 308 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M154 44 L166 44 M154 66 L166 66 M154 102 L166 102 M154 144 L166 144 M154 208 L166 208 M84 260 L96 298 M236 260 L224 298" fill="none" stroke="' + ink + '" stroke-width="1.0" stroke-linecap="round" opacity="0.65"/>';
+  } else if (raw === "uttarabodhi") {
+    // Uttarabodhi Mudra: Woven interlocked hands; BOTH Index fingers straight UP touching; BOTH Thumbs pointing DOWN touching (10 digits)
+    poseSvg =
+      '<path d="M98 268 L104 226 C78 210 68 180 82 148 C94 124 118 114 146 114 L147 40 C147 24 160 24 160 36 L160 118 L160 36 C160 24 173 24 173 40 L174 114 C202 114 226 124 238 148 C252 180 242 210 216 226 L222 268 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      // Woven middle, ring & little finger knuckles across center
+      '<path d="M108 140 L156 134 C162 134 162 148 156 148 L108 152 Z M212 144 L164 140 C158 140 158 154 164 154 L212 156 Z M106 164 L156 160 C162 160 162 174 156 174 L106 176 Z M214 168 L164 166 C158 166 158 180 164 180 L214 180 Z M112 188 L156 186 C162 186 162 200 156 200 L114 200 Z M208 192 L164 192 C158 192 158 206 164 206 L206 204 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+      // Both thumbs pointing straight DOWN touching at tips
+      '<path d="M146 224 L148 278 C148 292 160 292 160 278 L160 226 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M174 224 L172 278 C172 292 160 292 160 278 L160 226 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M149 276 C152 284 157 284 159 276 M161 276 C163 284 168 284 171 276 M149 42 Q154 38 159 42 M161 42 Q166 38 171 42 M160 36 L160 118" fill="none" stroke="' + ink + '" stroke-width="1.0" stroke-linecap="round"/>';
+  } else if (raw === "matangi") {
+    // Matangi Mudra: Hands interlocked in front of solar plexus; BOTH Middle fingers straight UP touching; thumbs crossed forward (10 digits)
+    poseSvg =
+      '<path d="M104 308 L108 244 C78 228 66 196 80 164 C92 138 118 124 146 124 L147 34 C147 18 160 18 160 30 L160 128 L160 30 C160 18 173 18 173 34 L174 124 C202 124 228 138 240 164 C254 196 242 228 212 244 L216 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M160 30 L160 128 M148 40 Q154 36 159 40 M161 40 Q166 36 172 40" fill="none" stroke="' + ink + '" stroke-width="1.0" stroke-linecap="round"/>' +
+      // Interlaced Index, Ring, Little knuckles + both crossed thumbs
+      '<path d="M106 164 L156 158 C162 158 162 172 156 172 L106 176 Z M214 168 L164 164 C158 164 158 178 164 178 L214 180 Z M108 188 L156 184 C162 184 162 198 156 198 L108 200 Z M212 192 L164 190 C158 190 158 204 164 204 L212 204 Z M112 212 L156 210 C162 210 162 224 156 224 L114 224 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+      '<path d="M118 148 C136 134 156 136 174 148 C180 152 174 162 162 158 C146 150 132 150 120 158 M202 148 C184 134 164 136 146 148" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round"/>';
+  } else if (raw === "anjali") {
+    // Anjali Mudra (Namaste): Anatomical 3/4 side-front prayer palms pressed cleanly together, thumbs along center-front, 4 vertical fingers stacked with creases & nails (10 digits)
+    poseSvg =
+      '<path d="M114 308 L124 246 C108 226 106 192 118 156 L142 52 C145 36 158 36 160 48 L160 250 L132 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M206 308 L196 246 C212 226 214 192 202 156 L178 52 C175 36 162 36 160 48 L160 250 L188 308 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      // Front-aligned resting thumbs & finger depth lines
+      '<path d="M138 228 L142 152 C142 138 156 138 158 152 L158 238 M182 228 L178 152 C178 138 164 138 162 152 L162 238" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M144 148 C147 142 153 142 156 148 L154 157 L145 157 Z M164 148 C167 142 173 142 176 148 L175 157 L165 157 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M160 48 L160 254 M124 248 Q160 262 196 248 M128 112 Q144 108 156 112 M164 112 Q176 108 192 112 M136 80 Q148 77 158 80 M162 80 Q172 77 184 80" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.68"/>';
+  } else if (raw === "yoni") {
+    // Yoni Mudra: Thumbs touch pointing inward/up at top, Index fingers point straight DOWN touching at bottom apex, Middle+Ring+Little interlocked cleanly across upper knuckles (10 digits)
+    poseSvg =
+      '<path d="M112 308 L114 252 C82 232 68 194 78 152 C88 118 114 96 148 92 L160 80 L172 92 C206 96 232 118 242 152 C252 194 238 232 206 252 L208 308 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      // Open downward Yoni diamond/triangle space showing background peach blob
+      '<path d="M118 120 Q160 112 202 120 L166 218 L160 228 L154 218 Z" fill="' + blob + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      // Top touching thumbs
+      '<path d="M98 118 C118 100 142 96 158 106 C162 110 158 120 146 120 C128 118 112 122 102 132 M222 118 C202 100 178 96 162 106 C158 110 162 120 174 120 C192 118 208 122 218 132" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      // Both downward-pointing Index fingers touching cleanly at apex
+      '<path d="M104 146 L146 232 C150 242 160 240 160 230 L122 138 M216 146 L174 232 C170 242 160 240 160 230 L198 138" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M148 228 C152 234 157 234 159 228 M161 228 C163 234 168 234 172 228 M88 176 L124 190 M232 176 L196 190 M96 204 L132 216 M224 204 L188 216" fill="none" stroke="' + ink + '" stroke-width="1.0" stroke-linecap="round"/>';
+  } else if (raw === "garuda") {
+    // Garuda Mudra: Crossed wrists at bottom; 2 hooked Thumbs interlocked in center; 4 distinct fanned wing fingers on left + 4 on right (10 digits)
+    poseSvg =
+      '<path d="M132 308 L136 244 C98 232 64 212 36 186 C26 176 38 162 52 172 L96 196 L34 140 C24 128 36 114 50 126 L108 172 L56 96 C48 82 64 72 76 86 L124 156 L96 66 C92 50 110 44 118 60 L148 148 L172 148 L202 60 C210 44 228 50 224 66 L196 156 L244 86 C256 72 272 82 264 96 L212 172 L270 126 C284 114 296 128 286 140 L224 196 L268 172 C282 162 294 176 284 186 C256 212 222 232 184 244 L188 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      // Wing finger creases + hooked thumbs in center
+      '<path d="M136 194 C146 174 174 174 184 194 C174 212 146 212 136 194 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5"/>' +
+      '<path d="M148 184 Q160 198 172 184 M148 202 Q160 190 172 202 M104 94 L116 90 M74 114 L86 106 M56 144 L66 134 M58 182 L66 172 M216 94 L204 90 M246 114 L234 106 M264 144 L254 134 M262 182 L254 172" fill="none" stroke="' + ink + '" stroke-width="1.0" stroke-linecap="round" opacity="0.68"/>';
+  } else if (raw === "mahasirs") {
+    // Mahasirs Mudra: Little straight UP; Ring folded down into palm; Thumb + Index + Middle fingertips meeting cleanly (5 digits)
+    poseSvg =
+      wristAndPalm +
+      fingerSpecs.little +
+      '<path d="M122 150 C120 174 124 202 138 202 C148 202 152 182 146 156 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M133 190 C136 185 143 186 144 192 L135 195 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M148 146 C148 122 162 114 174 122 C180 132 178 154 166 164 C156 170 148 162 150 150 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M177 148 C182 122 196 116 206 126 C210 138 202 158 190 166 C180 172 174 162 177 148 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M159 154 C163 148 170 149 172 156 L161 159 Z M184 156 C188 150 195 151 196 158 L186 161 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M194 252 C222 232 232 196 218 172 C208 150 186 146 168 152 C158 156 156 166 164 174 C174 182 188 178 194 186 C200 202 196 216 184 228" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M164 160 C168 154 176 154 179 160 C177 167 169 168 164 160 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
+  } else if (raw === "pushan") {
+    // Pushan Mudra: Symmetrical 2 upright hands centered (Left hand: Thumb+Middle+Ring tips touch; Right hand: Thumb+Index+Middle tips touch) (5+5 digits)
+    poseSvg =
+      '<g transform="translate(-8, 42) scale(0.66)">' +
+        wristAndPalm + fingerSpecs.little + fingerSpecs.index +
+        '<path d="M122 150 C122 122 134 114 146 122 C152 132 150 154 142 164 C134 170 124 164 124 152 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+        '<path d="M148 146 C150 120 164 114 174 124 C180 134 176 154 166 164 C156 170 148 162 150 150 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+        '<path d="M194 252 C222 232 230 196 218 172 C208 150 182 146 156 150 C142 152 138 164 146 174 C156 184 178 182 192 178 C198 194 196 214 184 228" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
       '</g>' +
-      '<g transform="translate(116, 24) scale(0.76)">' +
-        wristAndPalm + fingerSpecs.little + fingerSpecs.ring + curledFinger(163, 122, 180) + curledFinger(191, 124, 180) +
-        '<path d="M194 252 C224 234 236 200 224 174 C214 152 190 150 170 154 C156 158 154 168 162 176 C172 184 186 182 194 186 C200 200 198 216 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-        '<path d="M162 163 C166 156 175 156 179 162 C178 169 171 172 165 170 C161 168 161 165 162 163 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>' +
+      '<g transform="translate(120, 42) scale(0.66)">' +
+        wristAndPalm + fingerSpecs.little + fingerSpecs.ring +
+        '<path d="M148 146 C148 122 162 114 174 122 C180 132 178 154 166 164 C156 170 148 162 150 150 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+        '<path d="M177 148 C182 122 196 116 206 126 C210 138 202 158 190 166 C180 172 174 162 177 148 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+        '<path d="M194 252 C222 232 232 196 218 172 C208 150 186 146 168 152 C158 156 156 166 164 174 C174 182 188 178 194 186 C200 202 196 216 184 228" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
       '</g>';
   } else if (raw === "kalesvara") {
+    // Kalesvara Mudra: Middle fingers straight UP touching, Thumbs pointing DOWN touching, Index/Ring/Little bent at middle knuckles pressing together (5+5 digits)
     poseSvg =
-      '<path d="M147 114 L149 48 C149 36 160 36 160 46 L160 116 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35" stroke-linejoin="round"/>' +
-      '<path d="M173 114 L171 48 C171 36 160 36 160 46 L160 116 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.35" stroke-linejoin="round"/>' +
-      '<path d="M108 312 L112 246 C86 226 78 188 92 156 L116 120 L160 118 L160 250 L124 312 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35" stroke-linejoin="round"/>' +
-      '<path d="M212 312 L208 246 C234 226 242 188 228 156 L204 120 L160 118 L160 250 L196 312 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.35" stroke-linejoin="round"/>' +
-      '<path d="M114 122 L152 118 C160 118 160 138 152 138 L114 136 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M206 122 L168 118 C160 118 160 138 168 138 L206 136 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M110 144 L152 142 C160 142 160 162 152 162 L110 160 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M210 144 L168 142 C160 142 160 162 168 162 L210 160 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M114 166 L152 166 C160 166 160 186 152 186 L114 184 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M206 166 L168 166 C160 166 160 186 168 186 L206 184 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.25" stroke-linejoin="round"/>' +
-      '<path d="M132 198 C144 198 158 206 160 226 L160 250 C142 248 128 232 126 212 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/>' +
-      '<path d="M188 198 C176 198 162 206 160 226 L160 250 C178 248 192 232 194 212 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/>' +
-      '<path d="M134 128 Q144 128 150 128 M170 128 Q176 128 186 128 M132 152 Q142 152 150 152 M170 152 Q178 152 188 152 M134 176 Q142 176 150 176 M170 176 Q178 176 186 176" fill="none" stroke="' + sketch + '" stroke-width="0.8" stroke-linecap="round"/>';
-  } else if (raw === "ushas" || raw === "ganesha") {
+      '<path d="M148 114 L149 46 C149 34 160 34 160 44 L160 116 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M172 114 L171 46 C171 34 160 34 160 44 L160 116 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M106 308 L112 246 C86 226 76 188 90 154 L116 118 L160 116 L160 250 L124 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M214 308 L208 246 C234 226 244 188 230 154 L204 118 L160 116 L160 250 L196 308 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M112 126 C128 118 148 118 160 128 C172 118 192 118 208 126 C200 138 178 142 160 138 C142 142 120 138 112 126 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M108 148 C126 140 148 140 160 150 C172 140 194 140 212 148 C202 160 178 164 160 160 C142 164 118 160 108 148 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M112 170 C128 164 148 164 160 172 C172 164 192 164 208 170 C200 182 178 186 160 182 C142 186 120 182 112 170 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M130 200 C144 198 158 208 160 230 L160 262 C142 258 126 240 124 218 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M190 200 C176 198 162 208 160 230 L160 262 C178 258 194 240 196 218 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<line x1="160" y1="42" x2="160" y2="262" stroke="' + ink + '" stroke-width="1.1"/>';
+  } else if (raw === "ushas") {
+    // Ushas Mudra: Relaxed clasped hands; 4 interlaced fingers stacked horizontally across center + both Thumbs resting side-by-side on top (10 digits)
     poseSvg =
-      '<path d="M32 178 L112 168 C132 144 188 144 208 168 L288 178 L288 242 L202 232 C180 250 140 250 118 232 L32 242 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M126 172 L152 172 C160 172 160 188 152 188 L126 188 M194 188 L168 188 C160 188 160 204 168 204 L194 204 M126 206 L154 206 C162 206 162 222 154 222 L126 222" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M122 158 Q144 146 158 160 M198 158 Q176 146 162 160" fill="none" stroke="' + sketch + '" stroke-width="0.95" stroke-linecap="round"/>';
+      '<path d="M24 184 L104 170 C124 144 196 144 216 170 L296 184 L296 244 L208 232 C182 252 138 252 112 232 L24 244 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M122 164 L154 162 C162 162 162 176 154 176 L122 176 Z M198 174 L166 174 C158 174 158 188 166 188 L198 188 Z M122 188 L156 188 C164 188 164 202 156 202 L122 202 Z M198 200 L166 200 C158 200 158 214 166 214 L198 214 Z M126 214 L156 214 C164 214 164 226 156 226 L126 226 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+      '<path d="M114 156 C132 140 152 142 162 156 M206 156 C188 140 168 142 158 156 M46 196 L88 190 M274 196 L232 190" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>';
+  } else if (raw === "ganesha") {
+    // Ganesha Mudra: Left palm facing out, right palm facing in, 4 hooked fingers locked together horizontally + both thumbs visible (10 digits)
+    poseSvg =
+      '<path d="M24 186 L104 176 C118 152 144 148 164 156 L164 234 C144 242 118 238 104 222 L24 232 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M296 186 L216 176 C202 152 176 148 156 156 L156 234 C176 242 202 238 216 222 L296 232 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M136 164 C146 154 164 154 174 164 M136 180 C146 170 164 170 174 180 M136 196 C146 186 164 186 174 196 M136 212 C146 202 164 202 174 212" fill="none" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round"/>' +
+      '<path d="M112 174 C118 146 138 142 146 160 L132 174 M208 222 C202 250 182 254 174 236 L188 222" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>';
   } else if (raw === "dharma-chakra") {
+    // Dharma Chakra Mudra: Two hands forming thumb+index circles touching side by side (5+5 digits)
     poseSvg =
-      '<g transform="translate(-38, 22) scale(0.76)">' + gyanPose + '</g>' +
-      '<g transform="translate(292, 22) scale(-0.76, 0.76)">' + gyanPose + '</g>';
+      '<g transform="translate(-28, 32) scale(0.72)">' + uprightGyanPose + '</g>' +
+      '<g transform="translate(348, 32) scale(-0.72, 0.72)">' + uprightGyanPose + '</g>';
   } else if (raw === "lotus") {
+    // Lotus Mudra: Heels of palms + 2 thumbs + 2 little fingers touching, 6 middle petals open gracefully (10 digits total)
     poseSvg =
-      '<path d="M126 312 L126 252 C94 228 74 186 66 138 C62 122 80 118 88 134 L112 178 L102 96 C100 80 118 78 124 94 L138 166 L149 66 C151 50 169 50 171 66 L182 166 L196 94 C202 78 220 80 218 96 L208 178 L232 134 C240 118 258 122 254 138 C246 186 226 228 194 252 L194 312 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M126 252 Q160 268 194 252 M122 188 Q160 218 198 188 M100 182 C122 214 140 236 160 244 C180 236 198 214 220 182" fill="none" stroke="' + sketch + '" stroke-width="0.85" stroke-linecap="round"/>';
+      '<path d="M124 308 L124 252 C92 228 66 190 50 144 C46 128 62 122 72 136 L102 184 L82 100 C78 84 96 80 104 96 L126 170 L118 76 C118 60 136 58 140 74 L152 168 L160 202 L160 308 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M196 308 L196 252 C228 228 254 190 270 144 C274 128 258 122 248 136 L218 184 L238 100 C242 84 224 80 216 96 L194 170 L202 76 C202 60 184 58 180 74 L168 168 L160 202 L160 308 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M148 176 L150 86 C150 70 160 70 160 84 L160 186 M172 176 L170 86 C170 70 160 70 160 84 L160 186" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M138 206 C144 190 156 184 160 194 C164 184 176 190 182 206 C176 224 166 234 160 234 C154 234 144 224 138 206 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4"/>';
   } else if (raw === "vajra") {
+    // Vajra Mudra: Index finger straight UP; Middle + Ring + Little curled neatly into palm; Thumb pressing across middle/ring (5 digits)
     poseSvg =
       wristAndPalm +
       fingerSpecs.index +
-      curledFinger(109, 136, 194) +
-      curledFinger(136, 130, 190) +
-      curledFinger(163, 128, 188) +
-      '<path d="M194 252 C222 234 234 202 220 178 C206 156 176 152 148 156 C132 158 128 170 136 180 C144 188 166 186 186 182 C194 196 194 214 184 228" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>' +
-      '<path d="M137 166 C141 160 150 160 154 166 C153 173 147 176 141 174 C137 172 136 169 137 166 Z" fill="' + nail + '" stroke="' + sketch + '" stroke-width="0.8"/>';
+      '<path d="M98 156 C94 176 98 202 112 202 C122 202 126 182 120 160 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M122 150 C120 174 124 200 138 200 C148 200 152 180 146 154 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M148 148 C146 172 150 198 164 198 C174 198 178 178 172 152 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M107 190 C110 185 117 186 118 192 L109 195 Z M133 188 C136 183 143 184 144 190 L135 193 Z M159 186 C162 181 169 182 170 188 L161 191 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
+      '<path d="M194 252 C222 232 232 198 218 174 C204 152 172 150 144 156 C130 160 128 172 136 180 C146 188 168 184 186 182 C194 196 194 214 184 228" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M137 166 C141 160 150 160 154 166 C152 173 145 175 137 166 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
   } else if (raw === "yoga-mudra") {
+    // Kaya: Yoga Mudra — seated forward fold with hands clasped behind lower back
     poseSvg =
-      '<ellipse cx="160" cy="264" rx="106" ry="18" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.35"/>' +
-      '<ellipse cx="160" cy="264" rx="92" ry="12" fill="' + pHatch + '" opacity="0.5"/>' +
-      '<path d="M96 126 C94 102 114 96 130 104 C142 110 144 132 132 146 C118 156 98 148 96 126 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35"/>' +
-      '<path d="M95 124 C95 100 116 94 132 104 C122 104 108 112 95 124 Z" fill="' + gShade + '" stroke="' + sketch + '" stroke-width="1.0"/>' +
-      '<path d="M132 150 C170 144 218 172 224 222 C228 250 198 264 152 264 L98 264 C78 264 78 238 98 232 L138 224 C124 202 120 170 132 150 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
-      '<path d="M174 166 C198 158 220 168 214 190 M112 246 Q158 254 206 246" fill="none" stroke="' + sketch + '" stroke-width="0.85" stroke-linecap="round"/>';
+      '<line x1="34" y1="268" x2="286" y2="268" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<path d="M98 240 C86 244 82 266 106 266 L226 266 C248 266 250 244 232 238 C206 230 132 230 98 240 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M214 236 C214 190 190 156 144 152 C118 150 100 170 96 196 C94 214 106 232 134 236 L208 236 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M74 236 C68 214 82 198 100 202 C114 206 118 226 108 242 C96 254 78 250 74 236 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5"/>' +
+      '<path d="M73 232 C70 208 88 196 104 204 C92 208 82 218 73 232 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.2"/>' +
+      '<circle cx="90" cy="196" r="10" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.2"/>' +
+      '<path d="M168 164 C188 154 206 150 218 160 C226 168 214 182 194 180 C178 178 166 174 168 164 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M216 154 C224 148 234 154 232 166 C228 174 218 174 212 168" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.3" stroke-linecap="round"/>' +
+      '<path d="M120 176 Q152 174 186 190 M112 252 Q160 258 212 252" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round"/>';
   } else if (raw === "vipreet-karni") {
+    // Kaya: Vipreet Karni — supine legs-up-the-wall posture with arms relaxed palm-up
     poseSvg =
-      '<line x1="226" y1="36" x2="226" y2="284" stroke="' + accent + '" stroke-width="1.8" stroke-linecap="round" opacity="0.75"/>' +
-      '<line x1="36" y1="284" x2="284" y2="284" stroke="' + sketch + '" stroke-width="1.2" stroke-linecap="round"/>' +
-      '<circle cx="74" cy="252" r="22" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35"/>' +
-      '<path d="M96 252 L176 252 C196 252 208 240 208 220 L208 62 C208 46 226 46 226 62 L226 248 C226 274 206 282 178 282 L96 282 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
-      '<path d="M108 272 L206 272 C216 272 220 264 220 250 L220 120" fill="none" stroke="' + pHatch + '" stroke-width="6"/>';
-  } else if (raw === "ashwini" || raw === "tadagi" || raw === "manduki" || raw === "moola") {
-    const focusMark = raw === "tadagi"
-      ? '<path d="M136 184 Q160 198 184 184" fill="none" stroke="' + accent + '" stroke-width="1.8" stroke-linecap="round"/>'
-      : '<circle cx="160" cy="248" r="14" fill="none" stroke="' + accent + '" stroke-width="1.5" stroke-dasharray="4 3"/>';
+      '<line x1="234" y1="32" x2="234" y2="278" stroke="' + accent + '" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>' +
+      '<line x1="34" y1="278" x2="284" y2="278" stroke="' + ink + '" stroke-width="1.3" stroke-linecap="round"/>' +
+      '<path d="M56 254 C56 238 68 228 82 228 C96 228 106 238 106 252 C106 266 94 276 80 276 C66 276 56 266 56 254 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5"/>' +
+      '<path d="M56 252 C56 234 72 226 88 228 C76 234 66 244 56 252 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.2"/>' +
+      '<path d="M104 252 L176 252 C194 252 204 240 204 218 L206 66 C206 54 216 48 226 48 C232 48 234 54 230 62 L230 246 C230 268 212 276 184 276 L104 276 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M214 58 L202 44 C198 40 206 34 214 40 L232 54" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M118 264 L164 264 C172 264 176 268 176 272 C176 276 168 278 158 278 L118 278 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+      '<path d="M174 268 L186 267 M174 271 L188 271 M174 274 L186 275 M172 277 L182 278 M168 264 L176 260" fill="none" stroke="' + ink + '" stroke-width="1.1" stroke-linecap="round"/>';
+  } else if (raw === "ashwini") {
+    // Kaya: Ashwini Mudra — upright Padmasana with 5-digit hands on knees & pelvic rhythm ring
     poseSvg =
-      '<path d="M134 86 C134 62 146 52 160 52 C174 52 186 62 186 86 C186 104 174 114 160 114 C146 114 134 104 134 86 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35"/>' +
-      '<path d="M134 82 C134 58 148 50 160 50 C172 50 186 58 186 82 C174 68 146 68 134 82 Z" fill="' + gShade + '" stroke="' + sketch + '" stroke-width="1.1"/>' +
-      '<path d="M136 118 C114 128 106 164 114 214 L82 246 C64 258 70 278 96 278 L224 278 C250 278 256 258 238 246 L206 214 C214 164 206 128 184 118 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
-      '<path d="M114 246 L206 246 M140 136 L132 210 M180 136 L188 210 M146 84 Q152 87 156 84 M164 84 Q168 87 174 84" fill="none" stroke="' + sketch + '" stroke-width="0.85" stroke-linecap="round"/>' +
-      focusMark;
-  } else if (raw === "shambhavi" || raw === "nasikagra" || raw === "khechari") {
-    const focusDot = raw === "shambhavi"
-      ? '<circle cx="160" cy="124" r="5" fill="' + accent + '" stroke="#FFFFFF" stroke-width="1.4"/>'
-      : (raw === "nasikagra"
-        ? '<circle cx="160" cy="186" r="5" fill="' + accent + '" stroke="#FFFFFF" stroke-width="1.4"/>'
-        : '<path d="M144 206 Q160 198 176 206" fill="none" stroke="' + accent + '" stroke-width="1.8" stroke-linecap="round"/>');
+      '<path d="M136 80 C136 58 148 48 160 48 C172 48 184 58 184 80 C184 98 172 108 160 108 C148 108 136 98 136 80 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5"/>' +
+      '<path d="M136 76 C136 54 148 46 160 46 C172 46 184 54 184 76 C172 64 148 64 136 76 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.2"/>' +
+      '<path d="M136 112 C112 122 102 158 112 208 L80 238 C64 252 70 274 96 274 L224 274 C250 274 256 252 240 238 L208 208 C218 158 208 122 184 112 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M126 126 L98 186 L86 226 L104 228 L124 186 L138 142" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M194 126 L222 186 L234 226 L216 228 L196 186 L182 142" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M84 226 L74 238 M88 228 L80 242 M92 229 L88 244 M97 229 L96 242 M103 226 L108 234" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<path d="M236 226 L246 238 M232 228 L240 242 M228 229 L232 244 M223 229 L224 242 M217 226 L212 234" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<path d="M112 244 Q160 252 208 244 M148 78 Q153 81 157 78 M163 78 Q167 81 172 78 M154 92 Q160 95 166 92" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round"/>' +
+      '<ellipse cx="160" cy="236" rx="18" ry="10" fill="none" stroke="' + accent + '" stroke-width="1.6" stroke-dasharray="4 3"/>' +
+      '<path d="M160 246 L160 222 M155 228 L160 222 L165 228" fill="none" stroke="' + accent + '" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>';
+  } else if (raw === "tadagi") {
+    // Kaya: Tadagi Mudra — supine knees-bent reclined posture with hollow abdominal pond
     poseSvg =
-      '<path d="M126 248 L126 306 L194 306 L194 248 Z" fill="' + gShade + '" stroke="' + ink + '" stroke-width="1.35" stroke-linejoin="round"/>' +
-      '<path d="M90 122 C88 68 120 42 160 42 C200 42 232 68 230 122 C230 178 210 250 160 268 C110 250 90 178 90 122 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
-      '<path d="M88 118 C86 64 118 38 160 38 C202 38 234 64 232 118 C222 92 198 76 160 80 C122 76 98 92 88 118 Z" fill="' + gShade + '" stroke="' + sketch + '" stroke-width="1.1" stroke-linejoin="round"/>' +
-      '<path d="M88 118 C98 92 122 76 160 80 C198 76 222 92 232 118 C222 76 196 48 160 48 C124 48 98 76 88 118 Z" fill="' + pHatch + '" opacity="0.65"/>' +
-      '<path d="M112 132 Q130 120 148 130 M172 130 Q190 120 208 132 M116 150 Q132 158 146 150 M174 150 Q188 158 204 150 M160 142 L156 184 Q160 190 164 184 M144 214 Q160 222 176 214" fill="none" stroke="' + sketch + '" stroke-width="0.95" stroke-linecap="round"/>' +
-      focusDot;
+      '<line x1="32" y1="258" x2="288" y2="258" stroke="' + ink + '" stroke-width="1.3" stroke-linecap="round"/>' +
+      '<path d="M50 236 C50 220 62 210 76 210 C90 210 100 220 100 234 C100 248 88 256 74 256 C60 256 50 248 50 236 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5"/>' +
+      '<path d="M50 234 C50 216 66 208 82 210 C70 216 60 226 50 234 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.2"/>' +
+      '<path d="M98 232 C114 222 132 224 146 234 C160 242 174 236 186 226 L218 164 C224 152 238 152 244 166 L264 242 C268 252 262 256 248 256 L100 256 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M248 256 L278 256 C284 256 286 248 278 244 L262 238" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M114 242 L176 242 C184 242 188 246 188 250 C188 254 180 256 170 256 L114 256 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.3"/>' +
+      '<path d="M186 245 L198 244 M187 248 L200 248 M187 251 L199 252 M185 254 L195 255 M180 242 L188 238" fill="none" stroke="' + ink + '" stroke-width="1.1" stroke-linecap="round"/>' +
+      '<path d="M140 220 Q160 238 180 220" fill="none" stroke="' + accent + '" stroke-width="1.8" stroke-linecap="round"/>' +
+      '<path d="M160 206 L160 224 M155 218 L160 224 L165 218" fill="none" stroke="' + accent + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
+  } else if (raw === "manduki") {
+    // Kaya: Manduki Mudra — wide-knee frog seated pose with 5-digit palms resting on knees
+    poseSvg =
+      '<path d="M138 76 C138 54 148 44 160 44 C172 44 182 54 182 76 C182 94 172 104 160 104 C148 104 138 94 138 76 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5"/>' +
+      '<path d="M138 72 C138 50 148 42 160 42 C172 42 182 50 182 72 C170 60 150 60 138 72 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.2"/>' +
+      '<path d="M138 108 C120 116 116 154 122 204 L198 204 C204 154 200 116 182 108 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M122 198 L68 234 C50 246 58 274 88 274 L144 266 L160 246 L176 266 L232 274 C262 274 270 246 252 234 L198 198 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M126 122 L84 184 L68 232 L88 236 L108 188 L138 140" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M194 122 L236 184 L252 232 L232 236 L212 188 L182 140" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M68 233 L60 246 M73 235 L68 249 M78 236 L76 250 M83 236 L84 248 M88 233 L94 242" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<path d="M252 233 L260 246 M247 235 L252 249 M242 236 L244 250 M237 236 L236 248 M232 233 L226 242" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<path d="M148 74 Q153 77 157 74 M163 74 Q167 77 172 74 M154 88 Q160 91 166 88" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round"/>';
+  } else if (raw === "moola") {
+    // Bandha: Moola Bandha — Siddhasana heel-under-perineum root lock posture
+    poseSvg =
+      '<path d="M136 78 C136 56 148 46 160 46 C172 46 184 56 184 78 C184 96 172 106 160 106 C148 106 136 96 136 78 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5"/>' +
+      '<path d="M136 74 C136 52 148 44 160 44 C172 44 184 52 184 74 C172 62 148 62 136 74 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.2"/>' +
+      '<path d="M136 110 C114 120 108 158 114 206 L74 242 C60 256 68 276 96 276 L224 276 C252 276 260 256 246 242 L206 206 C212 158 206 120 184 110 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<ellipse cx="160" cy="252" rx="22" ry="11" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4"/>' +
+      '<path d="M126 124 L94 184 L82 224 L100 226 L118 184 L138 140" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M194 124 L226 184 L238 224 L220 226 L202 184 L182 140" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M80 224 L72 236 M85 226 L78 240 M90 227 L86 241 M95 226 L94 239 M100 224 L106 232" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<path d="M240 224 L248 236 M235 226 L242 240 M230 227 L234 241 M225 226 L226 239 M220 224 L214 232" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<path d="M142 260 Q160 242 178 260 M160 248 L160 224 M155 230 L160 224 L165 230" fill="none" stroke="' + accent + '" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>';
+  } else if (raw === "shambhavi") {
+    // Mana: Shambhavi Mudra — portrait face with eyes lifted toward eyebrow center (Ajna)
+    poseSvg =
+      '<path d="M124 246 L124 300 L196 300 L196 246 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M84 148 C78 148 76 168 84 176 L92 178 M236 148 C242 148 244 168 236 176 L228 178" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round"/>' +
+      '<path d="M90 122 C88 68 120 42 160 42 C200 42 232 68 230 122 C230 178 210 250 160 268 C110 250 90 178 90 122 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M88 118 C86 64 118 38 160 38 C202 38 234 64 232 118 C222 92 198 76 160 80 C122 76 98 92 88 118 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M110 132 Q128 118 148 130 M172 130 Q192 118 210 132" fill="none" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round"/>' +
+      '<path d="M114 148 Q131 138 147 148 Q131 156 114 148 Z M173 148 Q189 138 206 148 Q189 156 173 148 Z" fill="#FFFFFF" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+      '<circle cx="133" cy="144" r="3.6" fill="' + ink + '"/><circle cx="187" cy="144" r="3.6" fill="' + ink + '"/>' +
+      '<path d="M160 140 L156 184 Q160 190 164 184 M142 214 Q160 222 178 214 M152 224 Q160 227 168 224" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<circle cx="160" cy="122" r="5.5" fill="' + accent + '" stroke="#FFFFFF" stroke-width="1.4"/>' +
+      '<path d="M137 140 L153 127 M183 140 L167 127" fill="none" stroke="' + accent + '" stroke-width="1.1" stroke-dasharray="3 2" stroke-linecap="round"/>';
+  } else if (raw === "nasikagra") {
+    // Mana: Nasikagra Drishti — portrait face with eyes focused downward toward nose tip
+    poseSvg =
+      '<path d="M124 246 L124 300 L196 300 L196 246 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M84 148 C78 148 76 168 84 176 L92 178 M236 148 C242 148 244 168 236 176 L228 178" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linecap="round"/>' +
+      '<path d="M90 122 C88 68 120 42 160 42 C200 42 232 68 230 122 C230 178 210 250 160 268 C110 250 90 178 90 122 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M88 118 C86 64 118 38 160 38 C202 38 234 64 232 118 C222 92 198 76 160 80 C122 76 98 92 88 118 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M110 132 Q128 120 148 132 M172 132 Q192 120 210 132" fill="none" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round"/>' +
+      '<path d="M114 148 Q131 140 147 148 Q131 157 114 148 Z M173 148 Q189 140 206 148 Q189 157 173 148 Z" fill="#FFFFFF" stroke="' + ink + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+      '<circle cx="139" cy="151" r="3.6" fill="' + ink + '"/><circle cx="181" cy="151" r="3.6" fill="' + ink + '"/>' +
+      '<path d="M160 140 L156 184 Q160 190 164 184 M142 214 Q160 222 178 214 M152 224 Q160 227 168 224" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<circle cx="160" cy="187" r="5.5" fill="' + accent + '" stroke="#FFFFFF" stroke-width="1.4"/>' +
+      '<path d="M142 155 L155 180 M178 155 L165 180" fill="none" stroke="' + accent + '" stroke-width="1.1" stroke-dasharray="3 2" stroke-linecap="round"/>';
+  } else if (raw === "khechari") {
+    // Mana: Khechari Mudra — 3/4 side-profile head showing palate tongue-lock guide
+    poseSvg =
+      '<path d="M98 232 L98 298 L166 298 L166 244 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M96 128 C96 72 130 44 176 46 C208 48 222 72 220 106 L232 146 L216 154 L218 174 L212 184 L214 202 C210 224 192 240 164 244 C138 248 118 232 104 206 C96 186 96 156 96 128 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M94 134 C88 76 126 38 178 42 C202 44 218 60 218 82 C194 74 166 80 148 104 C134 124 128 152 106 172 C96 160 94 148 94 134 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M142 142 C136 142 134 158 140 168 C144 174 150 172 152 162" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.3" stroke-linecap="round"/>' +
+      '<path d="M194 114 Q204 110 212 114 M196 124 Q203 128 210 124 M200 184 L212 184" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<path d="M168 186 C168 172 182 162 198 164" fill="none" stroke="' + ink + '" stroke-width="1.1" stroke-dasharray="3 2" stroke-linecap="round"/>' +
+      '<path d="M196 186 C182 186 176 174 184 164" fill="none" stroke="' + accent + '" stroke-width="2.0" stroke-linecap="round"/>' +
+      '<circle cx="185" cy="164" r="3.5" fill="' + accent + '"/>';
+  } else if (raw === "jalandhar") {
+    // Bandha: Jalandhar Bandha — seated chin-lock with chin tucked onto sternal notch
+    poseSvg =
+      '<path d="M134 114 C134 90 146 80 160 80 C174 80 186 90 186 114 C186 132 174 142 160 142 C146 142 134 132 134 114 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5"/>' +
+      '<path d="M134 110 C134 86 146 78 160 78 C174 78 186 86 186 110 C174 96 146 96 134 110 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.3"/>' +
+      '<path d="M138 136 C106 140 88 158 84 192 L78 242 L68 274 L252 274 L242 242 L236 192 C232 158 214 140 182 136 Q160 156 138 136 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M108 164 L96 226 L88 254 L106 254 L118 220 L126 172" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M212 164 L224 226 L232 254 L214 254 L202 220 L194 172" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M88 254 L80 266 M93 255 L88 268 M98 255 L96 268 M103 255 L104 267 M107 253 L113 260" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<path d="M232 254 L240 266 M227 255 L232 268 M222 255 L224 268 M217 255 L216 267 M213 253 L207 260" fill="none" stroke="' + ink + '" stroke-width="1.2" stroke-linecap="round"/>' +
+      '<path d="M142 136 Q160 158 178 136" fill="none" stroke="' + accent + '" stroke-width="2.0" stroke-linecap="round"/>' +
+      '<path d="M160 132 L160 152 M155 146 L160 152 L165 146" fill="none" stroke="' + accent + '" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>';
   } else {
-    const lockGuide = raw === "jalandhar"
-      ? '<path d="M142 118 Q160 144 178 118" fill="none" stroke="' + accent + '" stroke-width="1.8" stroke-linecap="round"/>'
-      : '<path d="M132 214 Q160 194 188 214" fill="none" stroke="' + accent + '" stroke-width="1.8" stroke-linecap="round"/>';
+    // Bandha: Uddiyana Bandha — standing knees-bent lean with hands on thighs & hollow belly lift
     poseSvg =
-      '<path d="M132 86 C132 60 144 50 160 50 C176 50 188 60 188 86 C188 104 176 114 160 114 C144 114 132 104 132 86 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.35"/>' +
-      '<path d="M132 82 C132 58 146 50 160 50 C174 50 188 58 188 82 C176 68 144 68 132 82 Z" fill="' + gShade + '" stroke="' + sketch + '" stroke-width="1.1"/>' +
-      '<path d="M138 114 L138 136 C100 148 76 172 72 214 L72 302 L248 302 L248 214 C244 172 220 148 182 136 L182 114 Z" fill="' + gSkin + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
-      '<path d="M104 178 Q160 194 216 178 M102 218 L102 300 M218 218 L218 300" fill="none" stroke="' + sketch + '" stroke-width="0.85" stroke-linecap="round"/>' +
-      lockGuide;
+      '<path d="M140 66 C140 46 150 38 160 38 C170 38 180 46 180 66 C180 82 170 90 160 90 C150 90 140 82 140 66 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5"/>' +
+      '<path d="M140 64 C140 44 150 36 160 36 C170 36 180 44 180 64 C170 54 150 54 140 64 Z" fill="' + hair + '" stroke="' + ink + '" stroke-width="1.2"/>' +
+      '<path d="M140 94 C118 102 108 124 114 156 C118 176 124 188 124 204 L106 278 L128 278 L148 214 L172 214 L192 278 L214 278 L196 204 C196 188 202 176 206 156 C212 124 202 102 180 94 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M118 112 L96 168 L112 222 L126 220 L114 170 L128 128" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M202 112 L224 168 L208 222 L194 220 L206 170 L192 128" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+      '<path d="M114 222 L112 234 M118 222 L118 235 M122 222 L124 234 M126 221 L130 231 M128 218 L134 222" fill="none" stroke="' + ink + '" stroke-width="1.15" stroke-linecap="round"/>' +
+      '<path d="M206 222 L208 234 M202 222 L202 235 M198 222 L196 234 M194 221 L190 231 M192 218 L186 222" fill="none" stroke="' + ink + '" stroke-width="1.15" stroke-linecap="round"/>' +
+      '<path d="M130 156 Q160 138 190 156 M134 186 Q160 166 186 186" fill="none" stroke="' + accent + '" stroke-width="1.8" stroke-linecap="round"/>' +
+      '<path d="M160 192 L160 164 M154 170 L160 164 L166 170" fill="none" stroke="' + accent + '" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>';
   }
 
   return (
-    '<svg class="diagram-svg" width="320" height="320" viewBox="0 0 320 320" role="img" aria-label="' + esc(mudraName) + ' pencil sketch">' +
-      defs +
-      paperWash +
+    '<svg class="diagram-svg" data-uid="' + esc(uid) + '" width="320" height="320" viewBox="0 0 320 320" role="img" aria-label="' + esc(mudraName) + ' diagram">' +
+      peachBlob +
       poseSvg +
     '</svg>'
   );

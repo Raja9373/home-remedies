@@ -795,8 +795,7 @@
           const card = document.createElement('article');
           card.className = 'mudra-card';
 
-          const svgKey = m.mudraKey === 'apana-vayu' ? 'apana' : m.mudraKey;
-          const visualHtml = '<div class="card-diagram">' + (typeof window.buildMudraSvg === 'function' ? window.buildMudraSvg(svgKey, m.mudraName) : '') + '</div>';
+          const visualHtml = '<div class="card-diagram">' + (typeof window.buildMudraSvg === 'function' ? window.buildMudraSvg(m.mudraKey, m.mudraName) : '') + '</div>';
 
           card.innerHTML =
             '<div class="mudra-card-head">' +
