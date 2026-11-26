@@ -1726,6 +1726,12 @@
 <body>
   <!-- SECTION 1: TOP BAR -->
   <header class="topbar">
+    <div style="background-color: #E8F5EE; border-bottom: 1px solid rgba(26, 122, 76, 0.14); font-size: 12px; color: #0F5132; padding: 5px 0;">
+      <div class="container" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+        <span style="font-weight: 600;">Duniya Ki Parampara</span>
+        <a href="mailto:info@homeremediesworld.com" style="color: #0F5132; font-weight: 700; text-decoration: none;">✉️ info@homeremediesworld.com</a>
+      </div>
+    </div>
     <div class="container topbar-inner">
       <a href="#top" class="brand" aria-label="HomeRemediesWorld Home">
         <span class="brand-icon" aria-hidden="true">
@@ -1749,6 +1755,7 @@
         <a href="poocho.html" class="nav-link">Dadi Se Poocho</a>
         <a href="bhejo.html" class="nav-link">Dadi Ka Nuskha Bhejo</a>
         <a href="compare.html" class="nav-link">Compare</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </nav>
 
       <div class="topbar-controls">
@@ -2018,11 +2025,15 @@
         <a href="poocho.html" class="footer-link" style="text-decoration:none;">Dadi Se Poocho</a>
         <a href="bhejo.html" class="footer-link" style="text-decoration:none;">Dadi Ka Nuskha Bhejo</a>
         <a href="compare.html" class="footer-link" style="text-decoration:none;">Compare</a>
+        <a href="about.html" class="footer-link" style="text-decoration:none;">About</a>
         <button type="button" class="footer-link" data-footer="Disclaimer">Disclaimer</button>
         <button type="button" class="footer-link" data-footer="Privacy">Privacy</button>
-        <button type="button" class="footer-link" data-footer="Contact">Contact</button>
+        <a href="contact.html" class="footer-link" style="text-decoration:none;">Contact</a>
       </nav>
-      <p class="footer-copy">© 2026 HomeRemediesWorld.com - Duniya Ki Parampara</p>
+      <div>
+        <p class="footer-copy">© 2026 HomeRemediesWorld.com - Duniya Ki Parampara</p>
+        <p style="font-size: 0.9rem; color: #FFFFFF; margin-top: 4px;">Contact: <a href="mailto:info@homeremediesworld.com" style="color: #FFFFFF; font-weight: 700; text-decoration: underline;">info@homeremediesworld.com</a></p>
+      </div>
     </div>
   </footer>
 
@@ -2883,6 +2894,17 @@
         link.addEventListener('click', function () {
           const key = link.dataset.footer;
           showModal(FOOTER_INFO[key], key);
+          if (key === 'Disclaimer' || key === 'Privacy') {
+            modalBody.appendChild(document.createElement('br'));
+            modalBody.appendChild(document.createElement('br'));
+            modalBody.appendChild(document.createTextNode('Koi shikayat ya galat jaankari lage to humein batayein: '));
+            const mailLink = document.createElement('a');
+            mailLink.href = 'mailto:info@homeremediesworld.com';
+            mailLink.textContent = 'info@homeremediesworld.com';
+            mailLink.style.color = '#1A7A4C';
+            mailLink.style.fontWeight = '700';
+            modalBody.appendChild(mailLink);
+          }
         });
       });
 

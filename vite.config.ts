@@ -29,7 +29,8 @@ export default defineConfig(() => {
             'condition.html', 'remedies.js', 'remedies-part1.js', 'remedies-part2.js',
             'acupressure.html', 'acupressure.js', 'acupressure-part1.js', 'acupressure-part2.js', 'all-points.html',
             'mudra.html', 'mudra.js', 'mudra-part1.js', 'mudra-part2.js', 'all-mudras.html',
-            'aaj-ka-nuskha.js', 'poocho.html', 'bhejo.html', 'ingredients.html', 'compare.html'
+            'aaj-ka-nuskha.js', 'poocho.html', 'bhejo.html', 'ingredients.html', 'compare.html',
+            'contact.html', 'about.html'
           ]) {
             const srcFile = path.resolve(__dirname, file);
             if (fs.existsSync(distDir) && fs.existsSync(srcFile)) {

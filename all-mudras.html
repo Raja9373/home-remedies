@@ -645,6 +645,7 @@
         <a href="poocho.html" class="nav-link">Dadi Se Poocho</a>
         <a href="bhejo.html" class="nav-link">Dadi Ka Nuskha Bhejo</a>
         <a href="compare.html" class="nav-link">Compare</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </nav>
     </div>
   </header>
@@ -719,11 +720,15 @@
         <a href="poocho.html" class="footer-link">Dadi Se Poocho</a>
         <a href="bhejo.html" class="footer-link">Dadi Ka Nuskha Bhejo</a>
         <a href="compare.html" class="footer-link">Compare</a>
+        <a href="about.html" class="footer-link">About</a>
         <button type="button" class="footer-link" data-footer="Disclaimer">Disclaimer</button>
         <button type="button" class="footer-link" data-footer="Privacy">Privacy</button>
-        <button type="button" class="footer-link" data-footer="Contact">Contact</button>
+        <a href="contact.html" class="footer-link">Contact</a>
       </nav>
-      <p class="footer-copy">© 2026 HomeRemediesWorld.com - Duniya Ki Parampara</p>
+      <div>
+        <p class="footer-copy">© 2026 HomeRemediesWorld.com - Duniya Ki Parampara</p>
+        <p style="font-size: 0.9rem; color: #FFFFFF; margin-top: 4px;">Contact: <a href="mailto:info@homeremediesworld.com" style="color: #FFFFFF; font-weight: 700; text-decoration: underline;">info@homeremediesworld.com</a></p>
+      </div>
     </div>
   </footer>
 
@@ -790,37 +795,18 @@
           const card = document.createElement('article');
           card.className = 'mudra-card';
 
-          let badgeHtml = '';
-          if (m.tier === 'RED') {
-            badgeHtml = '<span class="tier-badge-red">Doctor Info Only</span>';
-          } else if (m.infoOnly) {
-            badgeHtml = '<span class="tier-badge-yellow">Teacher / Guru Only</span>';
-          } else if (m.tier === 'YELLOW') {
-            badgeHtml = '<span class="tier-badge-yellow">Supportive Info</span>';
-          }
-
-          const visualHtml = m.tier === 'RED'
-            ? '<div class="red-card-stage">' +
-                '<span style="font-size: 1.8rem;" aria-hidden="true">🏥</span>' +
-                '<span>RED TIER — NO HOW-TO</span>' +
-                '<span style="font-size: 0.82rem; font-weight: 600; color: var(--text-dark);">Turant doctor ke paas jayein</span>' +
-              '</div>'
-            : '<div class="card-diagram">' + (typeof window.buildMudraSvg === 'function' ? window.buildMudraSvg(m.mudraKey, m.mudraName) : '') + '</div>';
-
-          const noteLine = m.teacherNote
-            ? '<p class="mudra-note">⚠️ ' + escapeHtml(m.teacherNote) + '</p>'
-            : '<p class="mudra-note">Parampara me iske liye is mudra ka use hota aaya hai.</p>';
+          const svgKey = m.mudraKey === 'apana-vayu' ? 'apana' : m.mudraKey;
+          const visualHtml = '<div class="card-diagram">' + (typeof window.buildMudraSvg === 'function' ? window.buildMudraSvg(svgKey, m.mudraName) : '') + '</div>';
 
           card.innerHTML =
             '<div class="mudra-card-head">' +
               '<span class="type-badge">' + escapeHtml(typeLabel(m.type)) + '</span>' +
-              badgeHtml +
             '</div>' +
             visualHtml +
             '<h2 class="mudra-name">' + escapeHtml(m.hindi) + '</h2>' +
             '<p class="mudra-for">For: ' + escapeHtml(m.for) + '</p>' +
-            noteLine +
-            '<a href="mudra.html?id=' + encodeURIComponent(m.id) + '" class="card-cta' + (m.tier === 'RED' ? ' red-cta' : '') + '">Poora Dekhein →</a>';
+            '<p class="mudra-note">Parampara me iske liye is mudra ka use hota aaya hai.</p>' +
+            '<a href="mudra.html?id=' + encodeURIComponent(m.id) + '" class="card-cta">Poora Dekhein →</a>';
 
           frag.appendChild(card);
         });
@@ -885,6 +871,17 @@
         btn.addEventListener('click', function () {
           const key = btn.getAttribute('data-footer');
           showModal(FOOTER_INFO[key], key);
+          if (key === 'Disclaimer' || key === 'Privacy') {
+            modalBody.appendChild(document.createElement('br'));
+            modalBody.appendChild(document.createElement('br'));
+            modalBody.appendChild(document.createTextNode('Koi shikayat ya galat jaankari lage to humein batayein: '));
+            const mailLink = document.createElement('a');
+            mailLink.href = 'mailto:info@homeremediesworld.com';
+            mailLink.textContent = 'info@homeremediesworld.com';
+            mailLink.style.color = '#1A7A4C';
+            mailLink.style.fontWeight = '700';
+            modalBody.appendChild(mailLink);
+          }
         });
       });
 
