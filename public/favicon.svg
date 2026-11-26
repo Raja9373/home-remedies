@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <clipPath id="emblemClip">
+      <circle cx="512" cy="512" r="458" />
+    </clipPath>
+  </defs>
+
+  <!-- Soft round circle background in deep royal blue #0A1633 -->
+  <circle cx="512" cy="512" r="476" fill="#0A1633" />
+
+  <!-- Clipped emblem interior -->
+  <g clip-path="url(#emblemClip)">
+    <!-- Fresh Green Botanical Leaf cradled by hand -->
+    <path d="M 274 520
+             C 324 406, 444 358, 590 348
+             C 658 343, 718 324, 754 290
+             C 766 408, 722 512, 634 566
+             C 534 624, 404 600, 328 538
+             C 298 556, 266 578, 238 604
+             C 222 592, 220 572, 236 556
+             C 250 542, 264 530, 274 520 Z"
+          fill="#2CC374" />
+
+    <!-- Leaf central vein tapering cleanly into the stem -->
+    <path d="M 314 544
+             C 428 508, 574 446, 694 356
+             C 618 456, 496 524, 336 554
+             C 326 554, 318 550, 314 544 Z"
+          fill="#157A46" />
+
+    <!-- Subtle flat fresh highlight along upper leaf curve -->
+    <path d="M 346 450
+             C 418 394, 514 372, 622 364
+             C 520 388, 432 418, 346 450 Z"
+          fill="#5CE098" opacity="0.55" />
+
+    <!-- Healing Hand in warm skin tone (centered & cradling underneath) -->
+    <path d="M 108 756
+             L 250 618
+             C 302 568, 366 544, 438 552
+             L 570 568
+             C 604 572, 624 596, 620 622
+             C 616 648, 590 666, 556 664
+             L 432 654
+             C 420 653, 414 661, 420 670
+             C 426 678, 440 680, 462 680
+             L 606 676
+             C 656 672, 698 640, 744 576
+             C 764 548, 796 538, 820 554
+             C 838 568, 836 598, 814 630
+             L 736 732
+             C 684 800, 610 834, 518 834
+             L 354 828
+             C 304 826, 264 838, 226 870
+             L 164 924 Z"
+          fill="#F2B88D" />
+
+    <!-- Warm flat shading fold along lower palm & thumb crease -->
+    <path d="M 420 670
+             C 432 682, 456 684, 492 684
+             L 606 680
+             C 660 676, 704 642, 752 578
+             C 770 552, 792 546, 810 552
+             C 782 568, 756 602, 718 654
+             C 670 718, 618 744, 540 744
+             L 402 738
+             C 360 736, 330 720, 310 700
+             C 342 712, 384 714, 426 708
+             C 400 700, 396 676, 420 670 Z"
+          fill="#DE996B" opacity="0.72" />
+
+    <!-- Crisp Four-Point Golden Sparkle above leaf (bold enough for 16x16) -->
+    <path d="M 512 156
+             C 522 222, 540 240, 606 250
+             C 540 260, 522 278, 512 344
+             C 502 278, 484 260, 418 250
+             C 484 240, 502 222, 512 156 Z"
+          fill="#F4C95D" />
+  </g>
+
+  <!-- Crisp Golden Border Ring -->
+  <circle cx="512" cy="512" r="476" fill="none" stroke="#E7BC4C" stroke-width="38" />
+</svg>

@@ -12,7 +12,7 @@ const UNBUNDLED_STATIC_FILES = [
   'acupressure.html', 'acupressure.js', 'acupressure-part1.js', 'acupressure-part2.js', 'all-points.html',
   'mudra.html', 'mudra.js', 'mudra-part1.js', 'mudra-part2.js', 'all-mudras.html',
   'aaj-ka-nuskha.js', 'poocho.html', 'bhejo.html', 'ingredients.html', 'compare.html',
-  'contact.html', 'about.html',
+  'contact.html', 'about.html', 'privacy-policy.html', 'disclaimer.html', 'terms.html',
 ] as const;
 
 function copyRecursiveSync(src: string, dest: string): void {
