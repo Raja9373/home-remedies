@@ -1224,6 +1224,91 @@ window.buildAcupressureSvg = function (keyOrBodyPart, pointName) {
   }
 
   const raw = String(keyOrBodyPart || "he-gu").trim().toLowerCase().replace(/_/g, "-");
+
+  const photoMap = {
+    "bai-hui": "/assets/aistudio/Bai_Hui_Point_9444ba3c.jfif",
+    "chi-ze": "/assets/aistudio/Chi_Ze_Point_9f0467e3.jfif",
+    "da-chang-shu": "/assets/aistudio/Da_Chang_Shu_Point_53035fc4.jfif",
+    "da-ling": "/assets/aistudio/Da_Ling_Point_947c7e89.jfif",
+    "da-zhui": "/assets/aistudio/Da_Zhui_Point_c0b5f8d0.jfif",
+    "er-men": "/assets/aistudio/Er_Men_Point_ad904e21.jfif",
+    "fei-shu": "/assets/aistudio/Fei_Shu_Point_5b7163ea.jfif",
+    "feng-chi": "/assets/aistudio/Feng_Chi_Point_7d06912a.jfif",
+    "neck-back": "/assets/aistudio/Feng_Chi_Point_7d06912a.jfif",
+    "feng-fu": "/assets/aistudio/Feng_Fu_Point_41a63a57.jfif",
+    "gan-shu": "/assets/aistudio/Gan_Shu_Point_41f16210.jfif",
+    "guan-yuan": "/assets/aistudio/Guan_Yuan_Point_2d078b41.jfif",
+    "he-gu": "/assets/aistudio/He_Gu_Point_c37c971c.jfif",
+    "hand-back": "/assets/aistudio/He_Gu_Point_c37c971c.jfif",
+    "hou-xi": "/assets/aistudio/Hou_Xi_Point_0ce32e3a.jfif",
+    "jia-che": "/assets/aistudio/Jia_Che_Point_00a3c9db.jfif",
+    "jian-jing": "/assets/aistudio/Jian_Jing_Point_fd68af9b.jfif",
+    "shoulder": "/assets/aistudio/Jian_Jing_Point_fd68af9b.jfif",
+    "jian-yu": "/assets/aistudio/Jian_Yu_Point_e9ddff82.jfif",
+    "jie-xi": "/assets/aistudio/Jie_Xi_Point_cfe90be9.jfif",
+    "kong-zui": "/assets/aistudio/Kong_Zui_Point_0f9603bd.jfif",
+    "kun-lun": "/assets/aistudio/Kun_Lun_Point_1483c7d5.jfif",
+    "lao-gong": "/assets/aistudio/Lao_Gong_Point_2732f7a7.jfif",
+    "hand-palm": "/assets/aistudio/Lao_Gong_Point_2732f7a7.jfif",
+    "liang-qiu": "/assets/aistudio/Liang_Qiu_Point_06598b11.jfif",
+    "ming-men": "/assets/aistudio/Ming_Men_Point_3a8cf1c5.jfif",
+    "nei-guan": "/assets/aistudio/Nei_Guan_Point_cb458174.jpg",
+    "wrist": "/assets/aistudio/Nei_Guan_Point_cb458174.jpg",
+    "pi-shu": "/assets/aistudio/Pi_Shu_Point_e0b795ef.jfif",
+    "qi-hai": "/assets/aistudio/Qi_Hai_Point_32bf0d7e.jfif",
+    "qiu-xu": "/assets/aistudio/Qiu_Xu_Point_da743a1b.jfif",
+    "qu-chi": "/assets/aistudio/Qu_Chi_Point_bea07b55.jfif",
+    "elbow": "/assets/aistudio/Qu_Chi_Point_bea07b55.jfif",
+    "qu-yuan": "/assets/aistudio/Qu_Yuan_Point_9ed668dd.jfif",
+    "ran-gu": "/assets/aistudio/Ran_Gu_Point_bf1612a9.jfif",
+    "san-yin-jiao": "/assets/aistudio/San_Yin_Jiao_Point_a363759c.jfif",
+    "ankle-inner": "/assets/aistudio/San_Yin_Jiao_Point_a363759c.jfif",
+    "shao-fu": "/assets/aistudio/Shao_Fu_Point_00903f61.jfif",
+    "shao-shang": "/assets/aistudio/Shao_Shang_Point_f3b5f234.jfif",
+    "thumb": "/assets/aistudio/Shao_Shang_Point_f3b5f234.jfif",
+    "shao-ze": "/assets/aistudio/Shao_Ze_Point_d8104657.jfif",
+    "shen-mai": "/assets/aistudio/Shen_Mai_Point_8a8a3225.jfif",
+    "shen-men": "/assets/aistudio/Shen_Men_Point_4c9b8f6e.jfif",
+    "ear": "/assets/aistudio/Shen_Men_Point_4c9b8f6e.jfif",
+    "shen-shu": "/assets/aistudio/Shen_Shu_Point_607ffa93.jfif",
+    "back-waist": "/assets/aistudio/Shen_Shu_Point_607ffa93.jfif",
+    "si-shen-cong": "/assets/aistudio/Si_Shen_Cong_Point_5e483edb.jfif",
+    "tai-chong": "/assets/aistudio/Tai_Chong_Point_fe0f1462.jfif",
+    "foot-top": "/assets/aistudio/Tai_Chong_Point_fe0f1462.jfif",
+    "tai-xi": "/assets/aistudio/Tai_Xi_Point_bdd477ae.jfif",
+    "tai-yang": "/assets/aistudio/Tai_Yang_Point_9cb63f39.jfif",
+    "tian-jing": "/assets/aistudio/Tian_Jing_Point_8054a56d.jfif",
+    "tian-shu": "/assets/aistudio/Tian_Shu_Point_16a628b6.jfif",
+    "abdomen": "/assets/aistudio/Tian_Shu_Point_16a628b6.jfif",
+    "tian-tu": "/assets/aistudio/Tian_Tu_Point_40a2a8d2.jfif",
+    "ting-gong": "/assets/aistudio/Ting_Gong_Point_a8b6d3ed.jfif",
+    "wai-guan": "/assets/aistudio/Wai_Guan_Point_f9c4ccc5.jfif",
+    "wei-shu": "/assets/aistudio/Wei_Shu_Point_551ef3db.jfif",
+    "xin-shu": "/assets/aistudio/Xin_Shu_Point_150121b0.jfif",
+    "xing-jian": "/assets/aistudio/Xing_Jian_Point_642e8a4f.jfif",
+    "xue-hai": "/assets/aistudio/Xue_Hai_Point_025b1c2b.jfif",
+    "yang-gu": "/assets/aistudio/Yang_Gu_Point_e235eb33.jfif",
+    "yang-xi": "/assets/aistudio/Yang_Xi_Point_add6c6ce.jfif",
+    "yao-yang-guan": "/assets/aistudio/Yao_Yang_Guan_Point_70273106.jfif",
+    "yin-tang": "/assets/aistudio/Yin_Tang_Point_38719201.jfif",
+    "forehead": "/assets/aistudio/Yin_Tang_Point_38719201.jfif",
+    "ying-xiang": "/assets/aistudio/Ying_Xiang_Point_b7d37791.jfif",
+    "yong-quan": "/assets/aistudio/Yong_Quan_Point_fdc3cd33.jfif",
+    "foot-sole": "/assets/aistudio/Yong_Quan_Point_fdc3cd33.jfif",
+    "zhao-hai": "/assets/aistudio/Zhao_Hai_Point_a30521c0.jfif",
+    "zhi-yin": "/assets/aistudio/Zhi_Yin_Point_e7e2a10c.jfif",
+    "zhong-ji": "/assets/aistudio/Zhong_Ji_Point_3f735f7e.jfif",
+    "zhong-wan": "/assets/aistudio/Zhong_Wan_Point_11930b0b.jfif",
+    "zu-san-li": "/assets/aistudio/Zu_San_Li_Point_eb0d0a25.jfif",
+    "knee-leg": "/assets/aistudio/Zu_San_Li_Point_eb0d0a25.jfif"
+  };
+
+  if (Object.prototype.hasOwnProperty.call(photoMap, raw)) {
+    return (
+      '<img class="diagram-svg diagram-photo" src="' + esc(photoMap[raw]) + '" alt="' + esc(pointName) + ' acupressure diagram" loading="lazy" decoding="async" />'
+    );
+  }
+
   const skin = "#F2C39B";
   const shade = "#E2B086";
   const nail = "#FADCC2";
