@@ -3093,7 +3093,7 @@
         }
         try {
           const recognition = new SpeechRec();
-          recognition.lang = languageSelect.value === 'en' ? 'en-US' : 'hi-IN';
+          recognition.lang = languageSelect.value === 'hi' ? 'hi-IN' : (languageSelect.value || 'en-US');
           recognition.interimResults = false;
           recognition.maxAlternatives = 1;
           micBtn.classList.add('listening');
@@ -3226,23 +3226,20 @@
         });
       }
 
+      window.__HRW_REFRESH_DAILY__ = initAajKaNuskha;
+
       languageSelect.addEventListener('change', function () {
         const lang = languageSelect.value;
-        if (lang === 'en') {
-          heroTitle.textContent = HERO_COPY.en.title;
-          heroSubtitle.textContent = HERO_COPY.en.subtitle;
-          searchInput.placeholder = HERO_COPY.en.placeholder;
-          searchBtn.textContent = HERO_COPY.en.searchBtn;
-        } else if (lang === 'hi') {
+        if (lang === 'hi') {
           heroTitle.textContent = HERO_COPY.hi.title;
           heroSubtitle.textContent = HERO_COPY.hi.subtitle;
           searchInput.placeholder = HERO_COPY.hi.placeholder;
           searchBtn.textContent = HERO_COPY.hi.searchBtn;
         } else {
-          const selectedLabel = languageSelect.options[languageSelect.selectedIndex].text;
-          heroTitle.textContent = HERO_COPY.hi.title;
-          heroSubtitle.textContent = HERO_COPY.hi.subtitle;
-          showModal(selectedLabel + ' bhasha ka poora anuvaad aage ke update me aayega. Abhi Hindi aur English chalu hai.', 'Language Selector');
+          heroTitle.textContent = HERO_COPY.en.title;
+          heroSubtitle.textContent = HERO_COPY.en.subtitle;
+          searchInput.placeholder = HERO_COPY.en.placeholder;
+          searchBtn.textContent = HERO_COPY.en.searchBtn;
         }
       });
 
@@ -3453,5 +3450,6 @@
       console.log('PHASE 5 COMPLETE - SITE READY');
     })();
   </script>
+  <script src="site-core.js"></script>
 </body>
 </html>

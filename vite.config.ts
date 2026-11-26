@@ -11,7 +11,7 @@ const UNBUNDLED_STATIC_FILES = [
   'condition.html', 'remedies.js', 'remedies-part1.js', 'remedies-part2.js',
   'acupressure.html', 'acupressure.js', 'acupressure-part1.js', 'acupressure-part2.js', 'all-points.html',
   'mudra.html', 'mudra.js', 'mudra-part1.js', 'mudra-part2.js', 'all-mudras.html',
-  'aaj-ka-nuskha.js', 'poocho.html', 'bhejo.html', 'ingredients.html', 'compare.html',
+  'aaj-ka-nuskha.js', 'site-core.js', 'poocho.html', 'bhejo.html', 'ingredients.html', 'compare.html',
   'contact.html', 'about.html', 'privacy-policy.html', 'disclaimer.html', 'terms.html',
 ] as const;
 
@@ -50,7 +50,7 @@ export default defineConfig(() => {
       react(),
       tailwindcss(),
       // Copies src/assets and standalone static pages/scripts into dist/
-      // using Node built-in fs APIs (zero extra deps) so builds stay reliable.
+      // using Node built-in fs APIs (zero extra deps) and auto-updates build metadata.
       {
         name: 'copy-unbundled-src-assets',
         apply: 'build',
@@ -73,6 +73,34 @@ export default defineConfig(() => {
               path.resolve(rootDir, file),
               path.resolve(distDir, file),
             );
+          }
+
+          // Auto-stamp version.json, sw.js cache key, and sitemap.xml lastmod on every build
+          const now = new Date();
+          const version = now.toISOString().replace(/[-:T.Z]/g, '').slice(0, 14);
+          const todayIso = now.toISOString().slice(0, 10);
+
+          fs.writeFileSync(
+            path.resolve(distDir, 'version.json'),
+            JSON.stringify({version, builtAt: now.toISOString(), year: now.getFullYear()}, null, 2) + '\n',
+          );
+
+          const distSwPath = path.resolve(distDir, 'sw.js');
+          if (fs.existsSync(distSwPath)) {
+            const swContent = fs.readFileSync(distSwPath, 'utf8').replace(
+              /const CACHE_VERSION = '[^']+';/,
+              `const CACHE_VERSION = 'hrw-v${version}';`,
+            );
+            fs.writeFileSync(distSwPath, swContent);
+          }
+
+          const distSitemapPath = path.resolve(distDir, 'sitemap.xml');
+          if (fs.existsSync(distSitemapPath)) {
+            const smContent = fs.readFileSync(distSitemapPath, 'utf8').replace(
+              /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g,
+              `<lastmod>${todayIso}</lastmod>`,
+            );
+            fs.writeFileSync(distSitemapPath, smContent);
           }
         },
       },

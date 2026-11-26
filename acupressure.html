@@ -1326,15 +1326,18 @@
         }
       }
 
+      window.__HRW_SET_LANG__ = function (lang) {
+        const nextMode = lang === 'hi' ? 'hi' : 'en';
+        if (currentLang !== nextMode) {
+          currentLang = nextMode;
+          renderPage();
+        }
+      };
+
       languageSelect.addEventListener('change', function () {
         const val = languageSelect.value;
-        if (val === 'en' || val === 'hi') {
-          currentLang = val;
-          renderPage();
-        } else {
-          const selectedLabel = languageSelect.options[languageSelect.selectedIndex].text;
-          showModal(selectedLabel + ' bhasha ka poora anuvaad aage ke phase me aayega. Abhi Hindi aur English chalu hai.', 'Language Selector');
-        }
+        currentLang = val === 'hi' ? 'hi' : 'en';
+        renderPage();
       });
 
       const FOOTER_INFO = {
@@ -1363,5 +1366,6 @@
       renderPage();
     })();
   </script>
+  <script src="site-core.js"></script>
 </body>
 </html>
