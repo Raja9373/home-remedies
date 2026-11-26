@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9048615701580913"
+     crossorigin="anonymous"></script>
   <title>Parampara Detail — HomeRemediesWorld.com</title>
   <meta id="metaDescription" name="description" content="Duniya Ki Parampara, Duniya Ke Liye. Traditional home remedies from 10+ countries." />
   <meta id="ogTitle" property="og:title" content="Parampara Detail — HomeRemediesWorld.com" />
@@ -526,18 +528,41 @@
 
     .remedy-country {
       font-family: var(--font-display);
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       font-weight: 800;
       color: var(--text-dark);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .remedy-country span:first-child {
       font-size: 1.45rem;
       display: inline-block;
       filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.22));
+    }
+
+    .country-highlight {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      color: #78350F;
+      border: 1.5px solid #F59E0B;
+      border-radius: 10px;
+      padding: 4px 11px;
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      line-height: 1.25;
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.22);
+    }
+
+    .country-parampara {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-grey);
     }
 
     .card-for-pill {
@@ -1265,12 +1290,12 @@
               '<div class="remedy-card-top">' +
                 '<div class="remedy-country">' +
                   '<span aria-hidden="true">' + c.flag + '</span>' +
-                  '<span>' + escapeHtml(c.country) + ' • ' + escapeHtml(c.parampara) + '</span>' +
+                  '<span class="country-highlight">' + escapeHtml(c.country) + '</span>' +
+                  '<span class="country-parampara">• ' + escapeHtml(c.parampara) + '</span>' +
                 '</div>' +
                 '<span class="card-for-pill">' + escapeHtml(forLine) + '</span>' +
               '</div>' +
               '<div class="remedy-ingredients">' + escapeHtml(c.remedy) + '</div>' +
-              '<p class="remedy-tradition-note">Parampara me iske liye iska use hota aaya hai</p>' +
               '<p class="remedy-allergy">⚠️ Dhyaan Dein: ' + escapeHtml(c.allergy) + '</p>' +
               '<div class="remedy-actions">' +
                 '<button type="button" class="triangle-btn card-acu-btn">Acupressure Dekho</button>' +

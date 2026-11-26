@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9048615701580913"
+     crossorigin="anonymous"></script>
   <title>Duniya Ka Muqabla (Compare) — HomeRemediesWorld.com</title>
   <meta name="description" content="Do deshon ki parampara ki tulna karein — HomeRemediesWorld.com." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -280,9 +282,35 @@
 
     .compare-country-name {
       font-family: var(--font-display);
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 800;
       color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .country-highlight {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      color: #78350F;
+      border: 1.5px solid #F59E0B;
+      border-radius: 10px;
+      padding: 4px 11px;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      line-height: 1.25;
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.22);
+    }
+
+    .country-parampara {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-grey);
     }
 
     .for-pill {
@@ -663,11 +691,14 @@
         return (
           '<article class="compare-card">' +
             '<div class="compare-country-top">' +
-              '<span class="compare-country-name">' + escapeHtml(cEntry.flag) + ' ' + escapeHtml(cEntry.country) + ' • ' + escapeHtml(cEntry.parampara) + '</span>' +
+              '<span class="compare-country-name">' +
+                '<span aria-hidden="true">' + escapeHtml(cEntry.flag) + '</span>' +
+                '<span class="country-highlight">' + escapeHtml(cEntry.country) + '</span>' +
+                '<span class="country-parampara">• ' + escapeHtml(cEntry.parampara) + '</span>' +
+              '</span>' +
               '<span class="for-pill">For: ' + escapeHtml(item.for) + '</span>' +
             '</div>' +
             '<div class="remedy-box">' + escapeHtml(cEntry.remedy) + '</div>' +
-            '<p style="font-size: 0.9rem; color: var(--text-grey);">Parampara me iske liye iska use hota aaya hai</p>' +
             '<p class="allergy-note">⚠️ Dhyaan Dein: ' + escapeHtml(cEntry.allergy) + '</p>' +
           '</article>'
         );

@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9048615701580913"
+     crossorigin="anonymous"></script>
   <title>Dadi Se Poocho (Q&amp;A) — HomeRemediesWorld.com</title>
   <meta name="description" content="Apna sawal apni bhasha me poochein aur duniya ki parampara se milta-julta upay dekhein — HomeRemediesWorld.com." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -303,6 +305,22 @@
       padding: 11px 13px;
       font-weight: 700;
       font-size: 0.96rem;
+      line-height: 1.55;
+    }
+
+    .country-highlight {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      color: #78350F;
+      border: 1.5px solid #F59E0B;
+      border-radius: 8px;
+      padding: 2px 9px;
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 800;
+      margin-right: 4px;
+      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.18);
     }
 
     .allergy-note {
@@ -822,12 +840,12 @@
 
         const matches = findTopMatches(question);
         const cardsHtml = matches.map(function (m) {
-          const c0 = (m.countries && m.countries[0]) || { country: 'India', parampara: 'Ayurveda', remedy: 'Paramparik dekhbhal', allergy: 'Allergy wale savdhani rakhein' };
+          const c0 = (m.countries && m.countries[0]) || { country: 'India', flag: '🇮🇳', parampara: 'Ayurveda', remedy: 'Paramparik dekhbhal', allergy: 'Allergy wale savdhani rakhein' };
           return (
             '<article class="match-card">' +
               '<h3 class="match-title">' + escapeHtml(m.hindi) + ' (' + escapeHtml(m.english) + ')</h3>' +
               '<span class="for-pill">For: ' + escapeHtml(m.for) + '</span>' +
-              '<div class="remedy-snippet">' + escapeHtml(c0.country) + ' (' + escapeHtml(c0.parampara) + '): ' + escapeHtml(c0.remedy) + '</div>' +
+              '<div class="remedy-snippet">' + (c0.flag ? escapeHtml(c0.flag) + ' ' : '') + '<span class="country-highlight">' + escapeHtml(c0.country) + '</span> (' + escapeHtml(c0.parampara) + '): ' + escapeHtml(c0.remedy) + '</div>' +
               '<p class="allergy-note">⚠️ Dhyaan Dein: ' + escapeHtml(c0.allergy) + '</p>' +
               '<a class="page-btn" href="condition.html?id=' + encodeURIComponent(m.id) + '">Poora Page Dekho</a>' +
             '</article>'
