@@ -3336,8 +3336,8 @@ window.MUDRA_PART2 = [
     "whenToDo": "Parampara me isko subah-shaam kuch der kiya jata hai, jab shaant baithna ho tab karein",
     "dontDo": "Agar haath, ungliyon ya kalaai me chot hai, sujan hai, ya dard ho raha hai to bilkul mat karein. Kisi bhi gambhir samasya me pehle doctor se poochhein.",
     "for": "Tulsi Chai Se Taazgi, Adaptogen Tea Support ke paramparik aaram ke liye",
-    "secondaryMudraId": "bhairavi",
-    "secondaryMudraName": "Bhairavi Mudra"
+    "secondaryMudraId": "bhairava",
+    "secondaryMudraName": "Bhairava Mudra"
   },
   {
     "id": "dhyan-aur-ekagrata",
@@ -4953,8 +4953,8 @@ window.MUDRA_PART2 = [
     "whenToDo": "Parampara me isko subah-shaam kuch der kiya jata hai, jab shaant baithna ho tab karein",
     "dontDo": "Agar haath, ungliyon ya kalaai me chot hai, sujan hai, ya dard ho raha hai to bilkul mat karein. Kisi bhi gambhir samasya me pehle doctor se poochhein.",
     "for": "Basant Ritu (Spring) Allergy, Spring Pollen Allergy ke paramparik aaram ke liye",
-    "secondaryMudraId": "bhairavi",
-    "secondaryMudraName": "Bhairavi Mudra"
+    "secondaryMudraId": "bhairava",
+    "secondaryMudraName": "Bhairava Mudra"
   },
   {
     "id": "patjhad-autumn-twacha-rookhi",
@@ -5289,8 +5289,8 @@ window.MUDRA_PART2 = [
     "whenToDo": "Parampara me isko subah-shaam kuch der kiya jata hai, jab shaant baithna ho tab karein",
     "dontDo": "Agar haath, ungliyon ya kalaai me chot hai, sujan hai, ya dard ho raha hai to bilkul mat karein. Kisi bhi gambhir samasya me pehle doctor se poochhein.",
     "for": "Garmi Me Nariyal Pani, Summer Electrolyte Care ke paramparik aaram ke liye",
-    "secondaryMudraId": "bhairavi",
-    "secondaryMudraName": "Bhairavi Mudra"
+    "secondaryMudraId": "bhairava",
+    "secondaryMudraName": "Bhairava Mudra"
   },
   {
     "id": "pahadon-me-thand-se-bachav",
@@ -5625,8 +5625,8 @@ window.MUDRA_PART2 = [
     "whenToDo": "Parampara me isko subah-shaam kuch der kiya jata hai, jab shaant baithna ho tab karein",
     "dontDo": "Agar haath, ungliyon ya kalaai me chot hai, sujan hai, ya dard ho raha hai to bilkul mat karein. Kisi bhi gambhir samasya me pehle doctor se poochhein.",
     "for": "Garmi Me Hathon Me Jalan, Summer Burning Palms ke paramparik aaram ke liye",
-    "secondaryMudraId": "bhairavi",
-    "secondaryMudraName": "Bhairavi Mudra"
+    "secondaryMudraId": "bhairava",
+    "secondaryMudraName": "Bhairava Mudra"
   },
   {
     "id": "barish-me-chappal-se-khujli",
@@ -6675,8 +6675,8 @@ window.MUDRA_PART2 = [
     "whenToDo": "Parampara me isko subah-shaam kuch der kiya jata hai, jab shaant baithna ho tab karein",
     "dontDo": "Agar haath, ungliyon ya kalaai me chot hai, sujan hai, ya dard ho raha hai to bilkul mat karein. Kisi bhi gambhir samasya me pehle doctor se poochhein.",
     "for": "Bachhon Ki Haddiyan Majboot, Kids Growing Bones Diet ke paramparik aaram ke liye",
-    "secondaryMudraId": "bhairavi",
-    "secondaryMudraName": "Bhairavi Mudra"
+    "secondaryMudraId": "bhairava",
+    "secondaryMudraName": "Bhairava Mudra"
   },
   {
     "id": "bachhon-me-doodh-pachan",
@@ -6885,8 +6885,8 @@ window.MUDRA_PART2 = [
     "whenToDo": "Parampara me isko subah-shaam kuch der kiya jata hai, jab shaant baithna ho tab karein",
     "dontDo": "Agar haath, ungliyon ya kalaai me chot hai, sujan hai, ya dard ho raha hai to bilkul mat karein. Kisi bhi gambhir samasya me pehle doctor se poochhein.",
     "for": "Teenage Oily Scalp, Teen Oily Hair ke paramparik aaram ke liye",
-    "secondaryMudraId": "bhairavi",
-    "secondaryMudraName": "Bhairavi Mudra"
+    "secondaryMudraId": "bhairava",
+    "secondaryMudraName": "Bhairava Mudra"
   },
   {
     "id": "buzurgon-ki-pachan-shakti",
@@ -7095,8 +7095,8 @@ window.MUDRA_PART2 = [
     "whenToDo": "Parampara me isko subah-shaam kuch der kiya jata hai, jab shaant baithna ho tab karein",
     "dontDo": "Agar haath, ungliyon ya kalaai me chot hai, sujan hai, ya dard ho raha hai to bilkul mat karein. Kisi bhi gambhir samasya me pehle doctor se poochhein.",
     "for": "Buzurgon Ki Halka Malish, Senior Gentle Oil Massage ke paramparik aaram ke liye",
-    "secondaryMudraId": "bhairavi",
-    "secondaryMudraName": "Bhairavi Mudra"
+    "secondaryMudraId": "bhairava",
+    "secondaryMudraName": "Bhairava Mudra"
   },
   {
     "id": "buzurgon-me-sardi-se-bachav",
@@ -7305,8 +7305,8 @@ window.MUDRA_PART2 = [
     "whenToDo": "Parampara me isko subah-shaam kuch der kiya jata hai, jab shaant baithna ho tab karein",
     "dontDo": "Agar haath, ungliyon ya kalaai me chot hai, sujan hai, ya dard ho raha hai to bilkul mat karein. Kisi bhi gambhir samasya me pehle doctor se poochhein.",
     "for": "PCOD Weight Support, PCOD Lifestyle Support ke paramparik aaram ke liye",
-    "secondaryMudraId": "bhairavi",
-    "secondaryMudraName": "Bhairavi Mudra"
+    "secondaryMudraId": "bhairava",
+    "secondaryMudraName": "Bhairava Mudra"
   },
   {
     "id": "hormone-balance-diet",

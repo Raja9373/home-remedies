@@ -538,6 +538,15 @@
       display: block;
     }
 
+    .diagram-photo {
+      width: 100%;
+      max-width: 340px;
+      height: 290px;
+      aspect-ratio: auto;
+      object-fit: contain;
+      border-radius: 14px;
+    }
+
     .pic-caption {
       margin-top: 16px;
       font-family: var(--font-display);
@@ -958,9 +967,9 @@
           '<section class="main-section"><div class="container">' +
             '<div class="info-box">' +
               '<h1 class="condition-title" style="color: var(--text-dark); text-shadow: none;">Ye Mudra Page Nahi Mila</h1>' +
-              '<p class="info-box-text">Kripya Homepage par jakar apni problem search karein ya Saari 43 Mudrayein dekhein.</p>' +
+              '<p class="info-box-text">Kripya Homepage par jakar apni problem search karein ya Saari 42 Mudrayein dekhein.</p>' +
               '<div class="related-links-row">' +
-                '<a href="all-mudras.html" class="related-action-btn">🧘 Saari 43 Mudrayein Dekhein</a>' +
+                '<a href="all-mudras.html" class="related-action-btn">🧘 Saari 42 Mudrayein Dekhein</a>' +
                 '<a href="index.html" class="top-triangle-btn" style="border-color: rgba(26,122,76,0.28);">← Back to Home</a>' +
               '</div>' +
             '</div>' +
@@ -989,7 +998,7 @@
               '<div class="top-triangle-row">' +
                 '<a href="condition.html?id=' + encodeURIComponent(entry.id) + '" class="top-triangle-btn">🏠 Gharelu Nuskhe Dekho</a>' +
                 '<a href="acupressure.html?id=' + encodeURIComponent(entry.id) + '" class="top-triangle-btn">👆 Acupressure Dekho</a>' +
-                '<a href="all-mudras.html" class="top-triangle-btn">🧘 Saari 43 Mudrayein</a>' +
+                '<a href="all-mudras.html" class="top-triangle-btn">🧘 Saari 42 Mudrayein</a>' +
               '</div>' +
               '<div class="share-print-bar">' +
                 '<button type="button" id="printPageBtn" class="print-btn">🖨️ Print Karo</button>' +
@@ -1027,7 +1036,7 @@
                 '<p class="info-box-text" style="margin-top: 10px;">' + escapeHtml(entry.dontDo) + '</p>' +
               '</div>' +
               '<div class="top-triangle-row">' +
-                '<a href="all-mudras.html" class="top-triangle-btn">🧘 Saari 43 Mudrayein Dekhein</a>' +
+                '<a href="all-mudras.html" class="top-triangle-btn">🧘 Saari 42 Mudrayein Dekhein</a>' +
                 '<a href="index.html" class="top-triangle-btn">🏠 Back to Home</a>' +
               '</div>' +
               '<div class="share-print-bar">' +
@@ -1109,7 +1118,7 @@
                 '<span class="type-pill">' + escapeHtml(typeLabel) + (isTeacherInfoOnly ? ' • Info Only' : '') + '</span>' +
               '</div>' +
               '<div class="top-triangle-row">' +
-                '<a href="all-mudras.html" class="top-triangle-btn">🧘 Saari 43 Mudrayein Dekhein</a>' +
+                '<a href="all-mudras.html" class="top-triangle-btn">🧘 Saari 42 Mudrayein Dekhein</a>' +
                 (mappedConditions[0]
                   ? '<a href="condition.html?id=' + encodeURIComponent(mappedConditions[0].id) + '" class="top-triangle-btn">🏠 ' + escapeHtml(mappedConditions[0].hindi) + ' Nuskhe</a>'
                   : '') +
@@ -1150,7 +1159,6 @@
                   '<p class="info-box-text">' + escapeHtml(entry.dontDo) + '</p>' +
                 '</div>' +
               '</div>' +
-              '<p class="tradition-note-line">Parampara me iske liye is mudra ka use hota aaya hai.</p>' +
               '<div class="yellow-box">' +
                 '<div class="yellow-box-title">⚠️ Zaroori Savdhani</div>' +
                 '<p class="yellow-box-text">Ye parampara ki jaankari hai, ilaaj ka dawa nahi karti. Agar takleef 2-3 din se zyada hai to doctor ko dikhayein.</p>' +
@@ -1166,7 +1174,7 @@
               '<h2 style="font-size: 1.25rem; font-weight: 800;">Kin Samasyaon Se Judi Hai Ye Mudra?</h2>' +
               '<div class="related-links-row">' +
                 mappedChipsHtml +
-                '<a href="all-mudras.html" class="top-triangle-btn" style="border-color: rgba(26,122,76,0.28);">🧘 Saari 43 Mudrayein Dekhein</a>' +
+                '<a href="all-mudras.html" class="top-triangle-btn" style="border-color: rgba(26,122,76,0.28);">🧘 Saari 42 Mudrayein Dekhein</a>' +
               '</div>' +
               '<a href="index.html" class="back-home-link">← Back to Home</a>' +
             '</div>' +
@@ -1225,7 +1233,7 @@
               '<div class="top-triangle-row">' +
                 '<a href="condition.html?id=' + encodeURIComponent(entry.id) + '" class="top-triangle-btn">🏠 Iske Gharelu Nuskhe Dekho</a>' +
                 '<a href="acupressure.html?id=' + encodeURIComponent(entry.id) + '" class="top-triangle-btn">👆 Iska Acupressure Point Dekho</a>' +
-                '<a href="all-mudras.html" class="top-triangle-btn">🧘 Saari 43 Mudrayein</a>' +
+                '<a href="all-mudras.html" class="top-triangle-btn">🧘 Saari 42 Mudrayein</a>' +
               '</div>' +
               yellowBoxHtml +
             '</div>' +
@@ -1261,7 +1269,6 @@
                 '</div>' +
               '</div>' +
               secondaryBannerHtml +
-              '<p class="tradition-note-line">Parampara me iske liye is mudra ka use hota aaya hai.</p>' +
               '<div class="yellow-box">' +
                 '<div class="yellow-box-title">⚠️ Zaroori Savdhani</div>' +
                 '<p class="yellow-box-text">Ye parampara ki jaankari hai, ilaaj ka dawa nahi karti. Agar takleef 2-3 din se zyada hai to doctor ko dikhayein.' + safetyExtra + '</p>' +

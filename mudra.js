@@ -1,4 +1,4 @@
-// TOTAL MUDRA = 43 | TOTAL PROBLEMS = 720
+// TOTAL MUDRA = 42 | TOTAL PROBLEMS = 720
 window.MUDRA_CATALOG = [
   // PART A - HAST MUDRA (HAATH KI) - 32 MUDRA
   {
@@ -586,27 +586,6 @@ window.MUDRA_CATALOG = [
     relatedProblemIds: ["mardon-me-thakan-aur-stress", "stress-tanav", "insomnia-neend-na-aana", "sir-malish-se-shanti", "back-pain"]
   },
   {
-    id: "bhairavi",
-    hindi: "Bhairavi Mudra",
-    english: "Bhairavi Mudra",
-    type: "Hast",
-    mudraKey: "bhairavi",
-    mudraName: "Bhairavi Mudra",
-    tier: "GREEN",
-    infoOnly: false,
-    for: "Dhyaan, Shaanti",
-    howToHold: "Daayein haath ki hatheli upar karke god me rakhein aur uske upar baayein haath ki hatheli upar ki taraf karke aaram se rakhein.",
-    howToHoldExtra: "Kandhe, gardan aur haath bilkul dheele rakhein.",
-    steps: [
-      "Aaram se baithkar aankhein band kar lein.",
-      "Daayein haath ke upar baayaan haath god me rakhein.",
-      "Dheemi aur shaant saans lete hue dhyaan me baithein."
-    ],
-    whenToDo: "Parampara me isko man ki shaanti aur dhyaan ke samay kiya jata hai.",
-    dontDo: "Haath ya kalaai me dard ho to haathon ko takiye par rakh sakte hain.",
-    relatedProblemIds: ["stress-tanav", "insomnia-neend-na-aana", "mahilaon-me-thakan", "depression", "parivar-swasthya-dinacharya"]
-  },
-  {
     id: "ganesha",
     hindi: "Ganesha Mudra",
     english: "Ganesha Mudra",
@@ -920,6 +899,59 @@ window.buildMudraSvg = function (mudraKey, mudraName) {
       .replace(/"/g, "&quot;");
   }
 
+  const photoMap = {
+    "gyan": "/assets/aistudio/gyan_mudra_1_8f83cc6b.jpg",
+    "prana": "/assets/aistudio/prana_mudra_2_74b93a04.jpg",
+    "apana": "/assets/aistudio/apana_mudra_3_4c9a0abc.jpg",
+    "vayu": "/assets/aistudio/vayu_mudra_4_df5b2f8b.jpg",
+    "shunya": "/assets/aistudio/shunya_mudra_5_169c5f7c.jpg",
+    "surya": "/assets/aistudio/surya_mudra_6_9413fa58.jpg",
+    "prithvi": "/assets/aistudio/prithvi_mudra_7_cb98aca1.jpg",
+    "linga": "/assets/aistudio/linga_mudra_8_1257d487.jpg",
+    "shankh": "/assets/aistudio/shankh_mudra_9_d9ee68f5.jpg",
+    "surabhi": "/assets/aistudio/surabhi_mudra_10_ddfb2db0.jpg",
+    "chin": "/assets/aistudio/chin_mudra_11_235d9b07.jpg",
+    "varun": "/assets/aistudio/Varun_Mudra_12_79e140b7.jpg",
+    "jal": "/assets/aistudio/Varun_Mudra_12_79e140b7.jpg",
+    "dhyana": "/assets/aistudio/Dhyana_Mudra_13_cc17d6c6.jpg",
+    "abhaya_dhyana": "/assets/aistudio/Dhyana_Mudra_13_cc17d6c6.jpg",
+    "rudra": "/assets/aistudio/Rudra_Mudra_14_a6b4fa0c.jpg",
+    "apana-vayu": "/assets/aistudio/Apana_Vayu_Mudra_15_4966c08a.jpg",
+    "kuber": "/assets/aistudio/Kuber_Mudra_16_14259bab.jpg",
+    "hakini": "/assets/aistudio/Hakini_Mudra_17_148e86e2.jpg",
+    "uttarabodhi": "/assets/aistudio/Uttarabodhi_Mudra_18_66ec1dc0.jpg",
+    "anjali": "/assets/aistudio/Anjali_Mudra__Namaste__19_91d53561.jpg",
+    "yoni": "/assets/aistudio/Yoni_Mudra_20_e3ff26a2.jpg",
+    "garuda": "/assets/aistudio/Garuda_Mudra_f73ab3a4.jpg",
+    "mahasirs": "/assets/aistudio/Mahasirs_Mudra_ca9afbdd.jpg",
+    "pushan": "/assets/aistudio/Pushan_Mudra_46481c26.jpg",
+    "matangi": "/assets/aistudio/Matangi_Mudra_7f1721bc.jpg",
+    "kalesvara": "/assets/aistudio/Kalesvara_Mudra_0dfa1b4d.jpg",
+    "ushas": "/assets/aistudio/Ushas_Mudra_29add7e4.jpg",
+    "dharma-chakra": "/assets/aistudio/Dharma_Chakra_Mudra_333d60c6.jpg",
+    "bhairava": "/assets/aistudio/Bhairava_Mudra_2de70069.jpg",
+    "ganesha": "/assets/aistudio/Ganesha_Mudra_5c308578.jpg",
+    "lotus": "/assets/aistudio/Lotus_Mudra__Padma_Mudra__ac26b9d0.jpg",
+    "vajra": "/assets/aistudio/Vajra_Mudra_97a6daec.jpg",
+    "yoga-mudra": "/assets/aistudio/Yoga_Mudra_058f0a37.jpg",
+    "vipreet-karni": "/assets/aistudio/Vipreet_Karni_Mudra_323e08a3.jpg",
+    "ashwini": "/assets/aistudio/Ashwini_Mudra_db39117e.jpg",
+    "tadagi": "/assets/aistudio/Tadagi_Mudra_5eaaff16.jpg",
+    "manduki": "/assets/aistudio/Manduki_Mudra_9c63e8c0.jpg",
+    "shambhavi": "/assets/aistudio/Shambhavi_Mudra_e066d877.jpg",
+    "nasikagra": "/assets/aistudio/Nasikagra_Mudra_d4a62731.jpg",
+    "khechari": "/assets/aistudio/Khechari_Mudra_5a6fc9e1.jpg",
+    "jalandhar": "/assets/aistudio/Jalandhar_Bandha_a88e5e55.jpg",
+    "uddiyana": "/assets/aistudio/Uddiyana_Bandha_325f3204.jpg",
+    "moola": "/assets/aistudio/Moola_Bandha_c34d7424.jpg"
+  };
+
+  if (Object.prototype.hasOwnProperty.call(photoMap, raw)) {
+    return (
+      '<img class="diagram-svg diagram-photo" data-uid="' + esc(uid) + '" src="' + esc(photoMap[raw]) + '" alt="' + esc(mudraName) + ' pencil sketch" loading="lazy" decoding="async" />'
+    );
+  }
+
   // Organic soft peach blob behind drawing (#FFD9A0)
   const peachBlob =
     '<path d="M48 158 C38 94 86 42 158 36 C226 32 278 80 282 152 C286 224 234 280 160 284 C90 288 58 220 48 158 Z" fill="' + blob + '" opacity="0.62"/>';
@@ -1089,17 +1121,16 @@ window.buildMudraSvg = function (mudraKey, mudraName) {
       '<path d="M134 154 C138 148 145 149 146 156 L136 160 Z M158 154 C162 148 169 149 170 156 L160 160 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>' +
       '<path d="M194 252 C222 232 230 196 218 172 C208 150 182 146 156 150 C142 152 138 164 146 174 C156 184 178 182 192 178 C198 194 196 214 184 228" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
       '<path d="M146 160 C150 154 158 154 162 160 C159 167 152 169 146 160 Z" fill="' + nail + '" stroke="' + ink + '" stroke-width="1.0"/>';
-  } else if (raw === "dhyana" || raw === "abhaya_dhyana" || raw === "bhairava" || raw === "bhairavi") {
-    // Dhyana / Bhairava / Bhairavi: Anatomical cupped palms resting one inside the other in lap (5+5 digits clearly delineated)
+  } else if (raw === "dhyana" || raw === "abhaya_dhyana" || raw === "bhairava") {
+    // Dhyana / Bhairava: Anatomical cupped palms resting one inside the other in lap (5+5 digits clearly delineated).
     const thumbJoin = raw === "dhyana" || raw === "abhaya_dhyana"
       ? '<path d="M112 134 C134 120 154 128 160 144 C166 128 186 120 208 134 C198 148 176 150 160 146 C144 150 122 148 112 134 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linejoin="round"/>'
       : '<path d="M104 142 C122 130 140 138 148 154 M216 142 C198 130 180 138 172 154" fill="none" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round"/>';
-    const twoHands =
+    poseSvg =
       '<path d="M36 226 C34 184 54 146 84 134 C108 124 134 128 150 144 L244 162 C258 166 258 180 244 184 L256 194 C264 200 258 214 244 214 L250 222 C254 232 242 242 226 242 L230 248 C232 256 218 264 202 260 C158 268 102 266 64 250 C44 242 38 234 36 226 Z" fill="' + shade + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
       '<path d="M284 214 C286 174 266 140 236 128 C212 118 186 122 170 138 L76 156 C62 160 62 174 76 178 L64 188 C56 194 62 208 76 208 L70 216 C66 226 78 236 94 236 L92 242 C90 250 104 258 120 254 C164 260 218 256 256 238 C276 230 282 222 284 214 Z" fill="' + skin + '" stroke="' + ink + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
       '<path d="M76 178 L166 178 M68 208 L164 204 M82 234 L162 228 M174 186 L240 184 M174 214 L240 214 M156 196 Q188 214 222 198" fill="none" stroke="' + ink + '" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>' +
       thumbJoin;
-    poseSvg = raw === "bhairavi" ? '<g transform="translate(320, 0) scale(-1, 1)">' + twoHands + '</g>' : twoHands;
   } else if (raw === "linga") {
     // 08_Linga_Mudra.jpg: Horizontal two-hand clasp — Left wrist from left with upright Thumb; interlocked fist in center; Right wrist from bottom-right cupping base & encircling Thumb
     poseSvg =

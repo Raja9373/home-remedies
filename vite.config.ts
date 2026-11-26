@@ -1,17 +1,56 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {defineConfig} from 'vite';
+
+const rootDir = path.dirname(fileURLToPath(import.meta.url));
+
+const UNBUNDLED_STATIC_FILES = [
+  'condition.html', 'remedies.js', 'remedies-part1.js', 'remedies-part2.js',
+  'acupressure.html', 'acupressure.js', 'acupressure-part1.js', 'acupressure-part2.js', 'all-points.html',
+  'mudra.html', 'mudra.js', 'mudra-part1.js', 'mudra-part2.js', 'all-mudras.html',
+  'aaj-ka-nuskha.js', 'poocho.html', 'bhejo.html', 'ingredients.html', 'compare.html',
+  'contact.html', 'about.html',
+] as const;
+
+function copyRecursiveSync(src: string, dest: string): void {
+  if (!fs.existsSync(src)) {
+    return;
+  }
+
+  const stat = fs.statSync(src);
+  if (stat.isDirectory()) {
+    fs.mkdirSync(dest, {recursive: true});
+    if (typeof fs.cpSync === 'function') {
+      fs.cpSync(src, dest, {recursive: true, force: true});
+      return;
+    }
+    for (const entry of fs.readdirSync(src, {withFileTypes: true})) {
+      const srcPath = path.join(src, entry.name);
+      const destPath = path.join(dest, entry.name);
+      if (entry.isDirectory()) {
+        copyRecursiveSync(srcPath, destPath);
+      } else {
+        fs.mkdirSync(path.dirname(destPath), {recursive: true});
+        fs.copyFileSync(srcPath, destPath);
+      }
+    }
+    return;
+  }
+
+  fs.mkdirSync(path.dirname(dest), {recursive: true});
+  fs.copyFileSync(src, dest);
+}
 
 export default defineConfig(() => {
   return {
     plugins: [
       react(),
       tailwindcss(),
-      // Copies src/assets into dist/ so root-relative URLs like
-      // "/src/assets/images/..." (e.g. generate_image output) still resolve
-      // in production builds. Do not remove.
+      // Copies src/assets and standalone static pages/scripts into dist/
+      // using Node built-in fs APIs (zero extra deps) so builds stay reliable.
       {
         name: 'copy-unbundled-src-assets',
         apply: 'build',
@@ -19,30 +58,28 @@ export default defineConfig(() => {
           if (error) {
             return;
           }
-          const distDir = path.resolve(__dirname, 'dist');
-          const srcAssets = path.resolve(__dirname, 'src/assets');
-          const distAssets = path.resolve(distDir, 'src/assets');
-          if (fs.existsSync(distDir) && fs.existsSync(srcAssets)) {
-            fs.cpSync(srcAssets, distAssets, {recursive: true, force: true});
+          const distDir = path.resolve(rootDir, 'dist');
+          if (!fs.existsSync(distDir)) {
+            return;
           }
-          for (const file of [
-            'condition.html', 'remedies.js', 'remedies-part1.js', 'remedies-part2.js',
-            'acupressure.html', 'acupressure.js', 'acupressure-part1.js', 'acupressure-part2.js', 'all-points.html',
-            'mudra.html', 'mudra.js', 'mudra-part1.js', 'mudra-part2.js', 'all-mudras.html',
-            'aaj-ka-nuskha.js', 'poocho.html', 'bhejo.html', 'ingredients.html', 'compare.html',
-            'contact.html', 'about.html'
-          ]) {
-            const srcFile = path.resolve(__dirname, file);
-            if (fs.existsSync(distDir) && fs.existsSync(srcFile)) {
-              fs.copyFileSync(srcFile, path.resolve(distDir, file));
-            }
+
+          copyRecursiveSync(
+            path.resolve(rootDir, 'src/assets'),
+            path.resolve(distDir, 'src/assets'),
+          );
+
+          for (const file of UNBUNDLED_STATIC_FILES) {
+            copyRecursiveSync(
+              path.resolve(rootDir, file),
+              path.resolve(distDir, file),
+            );
           }
         },
       },
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': rootDir,
       },
     },
     server: {
