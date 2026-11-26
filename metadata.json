@@ -1,0 +1,6 @@
+{
+  "name": "HomeRemediesWorld.com",
+  "description": "Duniya Ki Parampara, Duniya Ke Liye. Global traditional home remedies in your language.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

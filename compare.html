@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Duniya Ka Muqabla (Compare) — HomeRemediesWorld.com</title>
+  <meta name="description" content="Do deshon ki parampara ki tulna karein — HomeRemediesWorld.com." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    window.addEventListener('error', function (e) {
+      if (e && typeof e.filename === 'string' && e.filename.indexOf('chrome-extension://') === 0) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+  </script>
+  <style>
+    :root {
+      --primary-green: #1A7A4C;
+      --primary-green-hover: #14633D;
+      --light-green-bg: #E8F5EE;
+      --pure-white: #FFFFFF;
+      --soft-cream: #FAF8F3;
+      --warning-yellow: #FFF8E1;
+      --warning-border: #F2DF9F;
+      --danger-red: #B91C1C;
+      --danger-bg: #FEF2F2;
+      --text-dark: #1A1A1A;
+      --text-grey: #666666;
+      --border-subtle: rgba(26, 26, 26, 0.08);
+      --radius-card: 16px;
+      --shadow-card: 0 4px 20px rgba(26, 26, 26, 0.05);
+      --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--soft-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      letter-spacing: -0.02em;
+    }
+
+    button, select {
+      font-family: inherit;
+    }
+
+    button:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--primary-green);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background-color: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 70px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-dark);
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background-color: var(--light-green-bg);
+      color: var(--primary-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--primary-green);
+      white-space: nowrap;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-grey);
+      white-space: nowrap;
+      padding: 6px 2px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--primary-green);
+      text-decoration: underline;
+    }
+
+    .page-header {
+      background: linear-gradient(180deg, var(--light-green-bg) 0%, var(--soft-cream) 100%);
+      padding: 36px 0 28px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text-grey);
+      margin-bottom: 10px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary-green);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .page-title {
+      font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-dark);
+      text-wrap: balance;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      color: var(--text-grey);
+      font-size: 0.98rem;
+    }
+
+    .controls-card {
+      background-color: var(--pure-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 22px;
+      box-shadow: var(--shadow-card);
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .controls-card {
+        grid-template-columns: 1fr 1fr 1.4fr;
+        align-items: end;
+      }
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .field-select {
+      width: 100%;
+      min-height: 44px;
+      border: 1.5px solid rgba(26, 26, 26, 0.16);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background-color: var(--pure-white);
+      color: var(--text-dark);
+    }
+
+    .section {
+      padding: 32px 0 48px;
+    }
+
+    .compare-heading {
+      font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 18px;
+      text-wrap: balance;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 720px) {
+      .compare-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .compare-card {
+      background-color: var(--pure-white);
+      border: 1.5px solid rgba(26, 122, 76, 0.22);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .compare-country-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .compare-country-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .for-pill {
+      display: inline-flex;
+      align-items: center;
+      background-color: var(--light-green-bg);
+      color: var(--primary-green);
+      border: 1px solid rgba(26, 122, 76, 0.2);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .remedy-box {
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      font-weight: 700;
+      background-color: var(--soft-cream);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--text-dark);
+    }
+
+    .allergy-note {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--danger-red);
+      background-color: var(--danger-bg);
+      border-radius: 8px;
+      padding: 9px 12px;
+    }
+
+    .actions-row {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn {
+      background-color: var(--primary-green);
+      color: var(--pure-white);
+      border: none;
+      border-radius: 12px;
+      padding: 12px 22px;
+      min-height: 46px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .primary-btn:hover {
+      background-color: var(--primary-green-hover);
+    }
+
+    .secondary-btn {
+      background-color: var(--pure-white);
+      color: var(--primary-green);
+      border: 1.5px solid rgba(26, 122, 76, 0.35);
+      border-radius: 12px;
+      padding: 12px 20px;
+      min-height: 46px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .secondary-btn:hover {
+      background-color: var(--light-green-bg);
+    }
+
+    .safety-box {
+      margin-top: 26px;
+      background-color: var(--warning-yellow);
+      border: 1px solid var(--warning-border);
+      border-radius: var(--radius-card);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .safety-box h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .site-footer {
+      background-color: var(--pure-white);
+      border-top: 1px solid var(--border-subtle);
+      padding: 28px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      background: none;
+      border: none;
+      padding: 4px 2px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-grey);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .footer-link:hover {
+      color: var(--primary-green);
+      text-decoration: underline;
+    }
+
+    .footer-copy {
+      font-size: 0.88rem;
+      color: var(--text-grey);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background-color: rgba(26, 26, 26, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background-color: var(--pure-white);
+      border-radius: var(--radius-card);
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .modal-body {
+      font-size: 0.95rem;
+      color: var(--text-grey);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .modal-close-btn {
+      background-color: var(--primary-green);
+      color: var(--pure-white);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 22px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      min-height: 42px;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand" aria-label="HomeRemediesWorld Home">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-title">HomeRemediesWorld</span>
+          <span class="brand-sub">Duniya Ki Parampara</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#azSection" class="nav-link">A-Z</a>
+        <a href="ingredients.html" class="nav-link">Ingredients</a>
+        <a href="poocho.html" class="nav-link">Dadi Se Poocho</a>
+        <a href="bhejo.html" class="nav-link">Dadi Ka Nuskha Bhejo</a>
+        <a href="compare.html" class="nav-link active">Compare</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a> <span aria-hidden="true">&gt;</span>
+          <span>Compare</span>
+        </nav>
+        <h1 class="page-title">Duniya Ka Muqabla — Do Deshon Ki Parampara Dekhein</h1>
+        <p class="page-subtitle">2 desh aur 1 problem chunein aur dekhein alag-alag deshon me parampara se kya liya jata hai.</p>
+
+        <div class="controls-card">
+          <div class="field-group">
+            <label for="country1Select" class="field-label">Pehla Desh</label>
+            <select id="country1Select" class="field-select"></select>
+          </div>
+          <div class="field-group">
+            <label for="country2Select" class="field-label">Dusra Desh</label>
+            <select id="country2Select" class="field-select"></select>
+          </div>
+          <div class="field-group">
+            <label for="problemSelect" class="field-label">Problem Chunein</label>
+            <select id="problemSelect" class="field-select"></select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 id="compareHeading" class="compare-heading"></h2>
+        <div id="compareGrid" class="compare-grid"></div>
+
+        <div class="actions-row">
+          <button type="button" id="shareScreenshotBtn" class="primary-btn">📸 Share / Screenshot Karein</button>
+          <a id="whatsappCompareBtn" class="secondary-btn" href="#" target="_blank" rel="noopener noreferrer">💬 WhatsApp Pe Bhejo</a>
+          <a id="fullConditionLink" class="secondary-btn" href="condition.html?id=khansi">🏠 Poora 10+ Desh Page Dekho</a>
+        </div>
+
+        <div class="safety-box">
+          <h3>⚠️ Zaroori Savdhani</h3>
+          <p>Ye site dawa nahi bechti, ilaaj ka dawa nahi karti. Ye keval paramparik jaankari ki tulna hai. Gambhir bimari me turant doctor se milein.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="index.html#azSection" class="footer-link">A-Z</a>
+        <a href="ingredients.html" class="footer-link">Ingredients</a>
+        <a href="poocho.html" class="footer-link">Dadi Se Poocho</a>
+        <a href="bhejo.html" class="footer-link">Dadi Ka Nuskha Bhejo</a>
+        <a href="compare.html" class="footer-link">Compare</a>
+        <button type="button" class="footer-link" data-footer="Disclaimer">Disclaimer</button>
+        <button type="button" class="footer-link" data-footer="Privacy">Privacy</button>
+        <button type="button" class="footer-link" data-footer="Contact">Contact</button>
+      </nav>
+      <p class="footer-copy">© 2026 HomeRemediesWorld.com - Duniya Ki Parampara</p>
+    </div>
+  </footer>
+
+  <div id="alertModal" class="modal-backdrop" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalBody">
+    <div class="modal-card">
+      <h3 id="modalTitle" class="modal-title">Jaankari</h3>
+      <p id="modalBody" class="modal-body"></p>
+      <button type="button" id="modalCloseBtn" class="modal-close-btn">Thik Hai</button>
+    </div>
+  </div>
+
+  <script src="remedies-part1.js"></script>
+  <script src="remedies-part2.js"></script>
+  <script src="remedies.js"></script>
+  <script>
+    (function () {
+      const COUNTRIES = ['India', 'Japan', 'Germany', 'USA', 'Nepal', 'Australia', 'UK', 'Pakistan', 'Bangladesh', 'Brazil'];
+      const FEATURED_IDS = ['khansi', 'headache-sir-dard', 'constipation-kabz', 'acidity-and-gas', 'insomnia', 'hair-fall', 'common-cold-and-cough', 'sore-throat', 'joint-pain', 'dry-skin'];
+
+      const safeRemedies = (window.REMEDIES || []).filter(function (r) {
+        return r.tier !== 'RED' && Array.isArray(r.countries) && r.countries.length > 0;
+      });
+
+      const country1Select = document.getElementById('country1Select');
+      const country2Select = document.getElementById('country2Select');
+      const problemSelect = document.getElementById('problemSelect');
+      const compareHeading = document.getElementById('compareHeading');
+      const compareGrid = document.getElementById('compareGrid');
+      const shareScreenshotBtn = document.getElementById('shareScreenshotBtn');
+      const whatsappCompareBtn = document.getElementById('whatsappCompareBtn');
+      const fullConditionLink = document.getElementById('fullConditionLink');
+
+      const alertModal = document.getElementById('alertModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+      function showModal(msg, title) {
+        modalTitle.textContent = title || 'Jaankari';
+        modalBody.textContent = msg;
+        alertModal.classList.add('open');
+        modalCloseBtn.focus();
+      }
+      function closeModal() {
+        alertModal.classList.remove('open');
+      }
+      modalCloseBtn.addEventListener('click', closeModal);
+      alertModal.addEventListener('click', function (e) { if (e.target === alertModal) closeModal(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      COUNTRIES.forEach(function (c) {
+        const o1 = document.createElement('option');
+        o1.value = c;
+        o1.textContent = c;
+        if (c === 'India') o1.selected = true;
+        country1Select.appendChild(o1);
+
+        const o2 = document.createElement('option');
+        o2.value = c;
+        o2.textContent = c;
+        if (c === 'Japan') o2.selected = true;
+        country2Select.appendChild(o2);
+      });
+
+      const orderedRemedies = [];
+      const seen = new Set();
+      FEATURED_IDS.forEach(function (fid) {
+        const found = safeRemedies.find(function (r) { return r.id === fid; });
+        if (found) {
+          orderedRemedies.push(found);
+          seen.add(found.id);
+        }
+      });
+      safeRemedies.forEach(function (r) {
+        if (!seen.has(r.id)) orderedRemedies.push(r);
+      });
+
+      orderedRemedies.forEach(function (r) {
+        const opt = document.createElement('option');
+        opt.value = r.id;
+        opt.textContent = r.hindi + ' (' + r.english + ')';
+        if (r.id === 'khansi') opt.selected = true;
+        problemSelect.appendChild(opt);
+      });
+
+      function buildCard(countryName, item) {
+        const cEntry = item.countries.find(function (c) { return c.country === countryName; }) || item.countries[0];
+        return (
+          '<article class="compare-card">' +
+            '<div class="compare-country-top">' +
+              '<span class="compare-country-name">' + escapeHtml(cEntry.flag) + ' ' + escapeHtml(cEntry.country) + ' • ' + escapeHtml(cEntry.parampara) + '</span>' +
+              '<span class="for-pill">For: ' + escapeHtml(item.for) + '</span>' +
+            '</div>' +
+            '<div class="remedy-box">' + escapeHtml(cEntry.remedy) + '</div>' +
+            '<p style="font-size: 0.9rem; color: var(--text-grey);">Parampara me iske liye iska use hota aaya hai</p>' +
+            '<p class="allergy-note">⚠️ Dhyaan Dein: ' + escapeHtml(cEntry.allergy) + '</p>' +
+          '</article>'
+        );
+      }
+
+      function renderComparison() {
+        const c1 = country1Select.value || 'India';
+        const c2 = country2Select.value || 'Japan';
+        const pid = problemSelect.value || 'khansi';
+        const item = safeRemedies.find(function (r) { return r.id === pid; }) || safeRemedies[0];
+        if (!item) return;
+
+        const headingText = 'Duniya Ka Muqabla - ' + c1 + ' VS ' + c2 + ' - ' + item.hindi + ' Me Kaun Kya Leta Hai?';
+        compareHeading.textContent = headingText;
+        document.title = c1 + ' vs ' + c2 + ' (' + item.hindi + ') — HomeRemediesWorld.com';
+
+        compareGrid.innerHTML = buildCard(c1, item) + buildCard(c2, item);
+        fullConditionLink.href = 'condition.html?id=' + encodeURIComponent(item.id);
+
+        const e1 = item.countries.find(function (c) { return c.country === c1; }) || item.countries[0];
+        const e2 = item.countries.find(function (c) { return c.country === c2; }) || item.countries[1] || item.countries[0];
+        const shareSummary = headingText + ' ' + c1 + ': ' + e1.remedy + ' | ' + c2 + ': ' + e2.remedy + ' - HomeRemediesWorld.com ' + window.location.href;
+        whatsappCompareBtn.href = 'https://wa.me/?text=' + encodeURIComponent(shareSummary);
+      }
+
+      shareScreenshotBtn.addEventListener('click', function () {
+        const summary = compareHeading.textContent + ' — ' + window.location.href;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(summary).then(function () {
+            showModal('Comparison link aur summary copy ho gayi! Aap screenshot lekar ya paste karke share kar sakte hain.', 'Share / Screenshot');
+          }).catch(function () {
+            showModal('Aap is page ka seedha screenshot lekar share kar sakte hain.', 'Share / Screenshot');
+          });
+        } else {
+          showModal('Aap is page ka seedha screenshot lekar share kar sakte hain.', 'Share / Screenshot');
+        }
+      });
+
+      country1Select.addEventListener('change', renderComparison);
+      country2Select.addEventListener('change', renderComparison);
+      problemSelect.addEventListener('change', renderComparison);
+
+      const FOOTER_INFO = {
+        Disclaimer: 'Ye site keval paramparik jaankari ke liye hai. Ye site dawa nahi bechti, ilaaj ka dawa nahi karti.',
+        Privacy: 'Aapka koi bhi personal data server par save nahi hota hai.',
+        Contact: 'Sampark ke liye: info@homeremediesworld.com'
+      };
+      document.querySelectorAll('button[data-footer]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const key = btn.getAttribute('data-footer');
+          showModal(FOOTER_INFO[key], key);
+        });
+      });
+
+      renderComparison();
+      console.log('PHASE 4 COMPLETE - SITE READY');
+    })();
+  </script>
+</body>
+</html>

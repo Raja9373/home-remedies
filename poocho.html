@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dadi Se Poocho (Q&amp;A) — HomeRemediesWorld.com</title>
+  <meta name="description" content="Apna sawal apni bhasha me poochein aur duniya ki parampara se milta-julta upay dekhein — HomeRemediesWorld.com." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    window.addEventListener('error', function (e) {
+      if (e && typeof e.filename === 'string' && e.filename.indexOf('chrome-extension://') === 0) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+  </script>
+  <style>
+    :root {
+      --primary-green: #1A7A4C;
+      --primary-green-hover: #14633D;
+      --light-green-bg: #E8F5EE;
+      --pure-white: #FFFFFF;
+      --soft-cream: #FAF8F3;
+      --warning-yellow: #FFF8E1;
+      --warning-border: #F2DF9F;
+      --danger-red: #B91C1C;
+      --danger-bg: #FEF2F2;
+      --danger-border: #FECACA;
+      --text-dark: #1A1A1A;
+      --text-grey: #666666;
+      --border-subtle: rgba(26, 26, 26, 0.08);
+      --radius-card: 16px;
+      --shadow-card: 0 4px 20px rgba(26, 26, 26, 0.05);
+      --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--soft-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      letter-spacing: -0.02em;
+    }
+
+    button, input {
+      font-family: inherit;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--primary-green);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background-color: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 70px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-dark);
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background-color: var(--light-green-bg);
+      color: var(--primary-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--primary-green);
+      white-space: nowrap;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-grey);
+      white-space: nowrap;
+      padding: 6px 2px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--primary-green);
+      text-decoration: underline;
+    }
+
+    .page-header {
+      background: linear-gradient(180deg, var(--light-green-bg) 0%, var(--soft-cream) 100%);
+      padding: 36px 0 32px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text-grey);
+      margin-bottom: 10px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary-green);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .page-title {
+      font-size: clamp(1.75rem, 3.8vw, 2.6rem);
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .ask-box {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--pure-white);
+      border: 2px solid rgba(26, 122, 76, 0.25);
+      border-radius: 16px;
+      padding: 8px 8px 8px 16px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .ask-input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      color: var(--text-dark);
+      padding: 10px 6px;
+      outline: none;
+    }
+
+    .ask-btn {
+      background-color: var(--primary-green);
+      color: var(--pure-white);
+      border: none;
+      border-radius: 12px;
+      padding: 12px 24px;
+      min-height: 46px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .ask-btn:hover {
+      background-color: var(--primary-green-hover);
+    }
+
+    .form-disclaimer {
+      margin-top: 10px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-grey);
+    }
+
+    .section {
+      padding: 34px 0 48px;
+    }
+
+    .answer-panel {
+      display: none;
+      margin-bottom: 34px;
+    }
+
+    .answer-panel.visible {
+      display: block;
+    }
+
+    .answer-heading {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .matches-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .matches-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .match-card {
+      background-color: var(--pure-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .match-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .for-pill {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      background-color: var(--light-green-bg);
+      color: var(--primary-green);
+      border: 1px solid rgba(26, 122, 76, 0.2);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .remedy-snippet {
+      background-color: var(--soft-cream);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 11px 13px;
+      font-weight: 700;
+      font-size: 0.96rem;
+    }
+
+    .allergy-note {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--danger-red);
+      background-color: var(--danger-bg);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+
+    .page-btn {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary-green);
+      color: var(--pure-white);
+      border-radius: 10px;
+      padding: 10px 16px;
+      min-height: 42px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .page-btn:hover {
+      background-color: var(--primary-green-hover);
+    }
+
+    .red-box {
+      background-color: var(--danger-bg);
+      border: 1.5px solid var(--danger-border);
+      border-radius: var(--radius-card);
+      padding: 24px;
+    }
+
+    .red-box-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--danger-red);
+      margin-bottom: 8px;
+    }
+
+    .safety-box {
+      margin-top: 20px;
+      background-color: var(--warning-yellow);
+      border: 1px solid var(--warning-border);
+      border-radius: var(--radius-card);
+      padding: 18px 22px;
+    }
+
+    .qa-section-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .qa-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 720px) {
+      .qa-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .qa-card {
+      background-color: var(--pure-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .qa-q {
+      font-family: var(--font-display);
+      font-size: 1.04rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .qa-a {
+      font-size: 0.93rem;
+      color: var(--text-grey);
+    }
+
+    .qa-link {
+      align-self: flex-start;
+      margin-top: auto;
+      color: var(--primary-green);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+    }
+
+    .qa-link:hover {
+      text-decoration: underline;
+    }
+
+    .site-footer {
+      background-color: var(--pure-white);
+      border-top: 1px solid var(--border-subtle);
+      padding: 28px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      background: none;
+      border: none;
+      padding: 4px 2px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-grey);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .footer-link:hover {
+      color: var(--primary-green);
+      text-decoration: underline;
+    }
+
+    .footer-copy {
+      font-size: 0.88rem;
+      color: var(--text-grey);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background-color: rgba(26, 26, 26, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background-color: var(--pure-white);
+      border-radius: var(--radius-card);
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .modal-body {
+      font-size: 0.95rem;
+      color: var(--text-grey);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .modal-close-btn {
+      background-color: var(--primary-green);
+      color: var(--pure-white);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 22px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      min-height: 42px;
+    }
+
+    @media (max-width: 600px) {
+      .ask-box {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+      }
+      .ask-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand" aria-label="HomeRemediesWorld Home">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-title">HomeRemediesWorld</span>
+          <span class="brand-sub">Duniya Ki Parampara</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#azSection" class="nav-link">A-Z</a>
+        <a href="ingredients.html" class="nav-link">Ingredients</a>
+        <a href="poocho.html" class="nav-link active">Dadi Se Poocho</a>
+        <a href="bhejo.html" class="nav-link">Dadi Ka Nuskha Bhejo</a>
+        <a href="compare.html" class="nav-link">Compare</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a> <span aria-hidden="true">&gt;</span>
+          <span>Dadi Se Poocho</span>
+        </nav>
+        <h1 class="page-title">Dadi Se Poocho — Apna Sawal Likho</h1>
+        <p style="color: var(--text-grey); max-width: 720px;">Apni rozmarra ki chhoti-moti samasya apni bhasha me likhein aur dekhein parampara me kya use hota aaya hai.</p>
+
+        <form id="poochoForm" class="ask-box">
+          <input
+            id="questionInput"
+            class="ask-input"
+            type="text"
+            autocomplete="off"
+            placeholder="Apna sawal apni bhasha me likho... jaise Mere bete ko raat me khansi aati hai"
+            aria-label="Apna sawal likho"
+          />
+          <button type="submit" class="ask-btn">Poocho</button>
+        </form>
+        <p class="form-disclaimer">⚠️ Note: Ye site dawa nahi bechti, ilaaj ka dawa nahi karti.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="answerPanel" class="answer-panel" aria-live="polite"></div>
+
+        <div id="userSavedSection" style="display: none; margin-bottom: 36px;">
+          <h2 class="qa-section-title">Aapke Poochhe Hue Sawal</h2>
+          <div id="userSavedGrid" class="qa-grid"></div>
+        </div>
+
+        <h2 class="qa-section-title">Logon Ke 10 Aam Sawal (Examples)</h2>
+        <div id="examplesGrid" class="qa-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="index.html#azSection" class="footer-link">A-Z</a>
+        <a href="ingredients.html" class="footer-link">Ingredients</a>
+        <a href="poocho.html" class="footer-link">Dadi Se Poocho</a>
+        <a href="bhejo.html" class="footer-link">Dadi Ka Nuskha Bhejo</a>
+        <a href="compare.html" class="footer-link">Compare</a>
+        <button type="button" class="footer-link" data-footer="Disclaimer">Disclaimer</button>
+        <button type="button" class="footer-link" data-footer="Privacy">Privacy</button>
+        <button type="button" class="footer-link" data-footer="Contact">Contact</button>
+      </nav>
+      <p class="footer-copy">© 2026 HomeRemediesWorld.com - Duniya Ki Parampara</p>
+    </div>
+  </footer>
+
+  <div id="alertModal" class="modal-backdrop" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalBody">
+    <div class="modal-card">
+      <h3 id="modalTitle" class="modal-title">Jaankari</h3>
+      <p id="modalBody" class="modal-body"></p>
+      <button type="button" id="modalCloseBtn" class="modal-close-btn">Thik Hai</button>
+    </div>
+  </div>
+
+  <script src="remedies-part1.js"></script>
+  <script src="remedies-part2.js"></script>
+  <script src="remedies.js"></script>
+  <script>
+    (function () {
+      const STORAGE_KEY = 'hrw_poocho_saved_v1';
+      const ALL_REMEDIES = window.REMEDIES || [];
+      const SAFE_REMEDIES = ALL_REMEDIES.filter(function (r) { return r.tier !== 'RED'; });
+      const RED_REMEDIES = ALL_REMEDIES.filter(function (r) { return r.tier === 'RED'; });
+
+      const RED_KEYWORDS = [
+        'cancer', 'heart attack', 'stroke', 'ganthe', 'saap', 'snake', 'tb', 'tuberculosis',
+        'pneumonia', 'chest pain', 'seene me dard', 'seene mein dard', 'khoon ki ulti',
+        'behosh', 'mirgi', 'epilepsy', 'fracture', 'haddi toot', 'dengue', 'typhoid',
+        'jaundice', 'piliya', 'kidney', 'liver', 'paralysis', 'lakwa', 'brain stroke',
+        'zahar', 'poison', 'hiv', 'aids', 'appendicitis', 'tumor', 'seizure', 'asthma attack',
+        'saans band', 'severe bleeding', 'tez khoon', 'heart', 'dil ka dard'
+      ];
+
+      const SYNONYM_MAP = {
+        raat: ['khansi', 'neend', 'insomnia'],
+        khansi: ['khansi', 'cough', 'sardi'],
+        cough: ['khansi', 'cough'],
+        sar: ['headache', 'sir dard', 'sinus'],
+        sir: ['headache', 'sir dard'],
+        headache: ['headache', 'sir dard'],
+        kabz: ['kabz', 'constipation'],
+        pet: ['apach', 'gas', 'acidity', 'kabz', 'pet'],
+        gas: ['gas', 'acidity', 'gastritis'],
+        acidity: ['acidity', 'gas'],
+        neend: ['insomnia', 'neend', 'thakan'],
+        baal: ['hair', 'baal', 'dandruff'],
+        hair: ['hair', 'baal'],
+        gala: ['gala', 'throat', 'khansi'],
+        sardi: ['cold', 'sardi', 'zukam', 'jukam'],
+        zukam: ['cold', 'sardi', 'zukam'],
+        jukam: ['cold', 'sardi', 'zukam'],
+        skin: ['skin', 'acne', 'dry'],
+        daant: ['toothache', 'daant'],
+        ghutna: ['ghutna', 'joint'],
+        joint: ['joint', 'ghutna'],
+        thakan: ['thakan', 'fatigue', 'weakness'],
+        chakkar: ['chakkar', 'vertigo'],
+        aankh: ['aankh', 'roshni'],
+        hichki: ['hichki', 'hiccups'],
+        bukhar: ['bukhar', 'fever'],
+        pimple: ['acne', 'pimple']
+      };
+
+      const STATIC_EXAMPLES = [
+        { q: 'Raat me khansi aati hai kya karu?', a: 'Parampara me iske liye Adrak, Tulsi aur gunguna Shahad pani ya bhap ka upyog hota aaya hai.', id: 'khansi', label: 'Khansi Page Dekho' },
+        { q: 'Subah pet saaf nahi hota, kabz rehta hai?', a: 'Parampara me iske liye gunguna pani aur raat me bheegi kishmish ya isabgol liya jata aaya hai.', id: 'constipation-kabz', label: 'Kabz Page Dekho' },
+        { q: 'Khana khane ke baad pet me gas aur jalan hoti hai?', a: 'Parampara me iske liye Saunf, Jeera aur Ajwain ka gunguna pani liya jata aaya hai.', id: 'acidity-and-gas', label: 'Acidity & Gas Page Dekho' },
+        { q: 'Kaam ke baad sar me bharipan aur dard rehta hai?', a: 'Parampara me iske liye shant aaram, gehri saans aur halka tel malish kiya jata aaya hai.', id: 'headache-sir-dard', label: 'Sar Dard Page Dekho' },
+        { q: 'Raat ko der tak neend nahi aati?', a: 'Parampara me iske liye sone se pehle gungune pani me pair rakhna aur gunguna doodh apnaya jata aaya hai.', id: 'insomnia', label: 'Neend Page Dekho' },
+        { q: 'Mausam badalne par baal zyada jhad rahe hai?', a: 'Parampara me iske liye Amla aur Nariyal Tel se halki malish ki jati aayi hai.', id: 'hair-fall', label: 'Baal Jhadna Page Dekho' },
+        { q: 'Gale me kharash aur bolne me dikkat ho rahi hai?', a: 'Parampara me iske liye gungune namak pani ke garare kiye jate aaye hai.', id: 'sore-throat', label: 'Gala Kharab Page Dekho' },
+        { q: 'Sardi me hoth bahut phat rahe hai?', a: 'Parampara me iske liye halka Desi Ghee ya Nariyal Tel lagaya jata aaya hai.', id: 'sardi-me-hoth-sukhna', label: 'Phate Hoth Page Dekho' },
+        { q: 'Thand me ghutno me jakdan lagti hai?', a: 'Parampara me iske liye gungune Til ke tel ki halki malish aur sek kiya jata aaya hai.', id: 'sardi-me-jodon-ki-jakdan', label: 'Jodon Ki Jakdan Page Dekho' },
+        { q: 'Din bhar thakan aur kamzori mehsoos hoti hai?', a: 'Parampara me iske liye poshak ghar ka aahar, bheege badam aur samay par aaram liya jata aaya hai.', id: 'thakan-kamzori', label: 'Thakan Kamzori Page Dekho' }
+      ];
+
+      const poochoForm = document.getElementById('poochoForm');
+      const questionInput = document.getElementById('questionInput');
+      const answerPanel = document.getElementById('answerPanel');
+      const userSavedSection = document.getElementById('userSavedSection');
+      const userSavedGrid = document.getElementById('userSavedGrid');
+      const examplesGrid = document.getElementById('examplesGrid');
+
+      const alertModal = document.getElementById('alertModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+      function showModal(msg, title) {
+        modalTitle.textContent = title || 'Jaankari';
+        modalBody.textContent = msg;
+        alertModal.classList.add('open');
+        modalCloseBtn.focus();
+      }
+      function closeModal() {
+        alertModal.classList.remove('open');
+      }
+      modalCloseBtn.addEventListener('click', closeModal);
+      alertModal.addEventListener('click', function (e) { if (e.target === alertModal) closeModal(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function isRedQuestion(qLower) {
+        for (let i = 0; i < RED_KEYWORDS.length; i++) {
+          if (qLower.includes(RED_KEYWORDS[i])) return true;
+        }
+        for (let j = 0; j < RED_REMEDIES.length; j++) {
+          const r = RED_REMEDIES[j];
+          const h = r.hindi.toLowerCase();
+          const e = r.english.toLowerCase();
+          if ((h.length >= 4 && qLower.includes(h)) || (e.length >= 4 && qLower.includes(e))) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function findTopMatches(question) {
+        const clean = question.toLowerCase().replace(/[^a-z0-9\s]/g, ' ');
+        const rawTokens = clean.split(/\s+/).filter(function (t) { return t.length >= 3; });
+        const stopWords = new Set(['mere', 'meri', 'mera', 'bete', 'beti', 'ko', 'kya', 'karu', 'kare', 'kaise', 'hai', 'hain', 'mein', 'aati', 'aata', 'bahut', 'raha', 'rahi', 'rahe', 'liye', 'kuch', 'batao', 'dadi', 'please', 'problem', 'with']);
+        const tokens = [];
+        rawTokens.forEach(function (t) {
+          if (!stopWords.has(t)) {
+            tokens.push(t);
+            if (SYNONYM_MAP[t]) {
+              SYNONYM_MAP[t].forEach(function (s) { tokens.push(s); });
+            }
+          }
+        });
+
+        const scored = SAFE_REMEDIES.map(function (item) {
+          let score = 0;
+          const hayHindi = item.hindi.toLowerCase();
+          const hayEng = item.english.toLowerCase();
+          const hayFor = (item.for || '').toLowerCase();
+          const hayCat = (item.category || '').toLowerCase();
+          const hayId = item.id.toLowerCase();
+
+          tokens.forEach(function (tok) {
+            if (hayHindi === tok || hayEng === tok) score += 12;
+            if (hayHindi.includes(tok)) score += 6;
+            if (hayEng.includes(tok)) score += 5;
+            if (hayId.includes(tok)) score += 4;
+            if (hayFor.includes(tok)) score += 3;
+            if (hayCat.includes(tok)) score += 1;
+          });
+          return { item: item, score: score };
+        });
+
+        scored.sort(function (a, b) { return b.score - a.score; });
+        const hits = scored.filter(function (s) { return s.score > 0; }).slice(0, 3).map(function (s) { return s.item; });
+        if (hits.length > 0) return hits;
+
+        return ['khansi', 'headache-sir-dard', 'constipation-kabz'].map(function (id) {
+          return SAFE_REMEDIES.find(function (r) { return r.id === id; });
+        }).filter(Boolean);
+      }
+
+      function saveQuestion(question, isRed, topId) {
+        try {
+          const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+          const entry = {
+            q: question,
+            isRed: isRed,
+            topId: topId || '',
+            ts: new Date().toLocaleDateString()
+          };
+          const updated = [entry].concat(existing.filter(function (x) { return x.q !== question; })).slice(0, 10);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+        } catch (err) {
+          // ignore storage quota errors
+        }
+      }
+
+      function renderUserSaved() {
+        let saved = [];
+        try {
+          saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        } catch (err) {
+          saved = [];
+        }
+        if (!saved.length) {
+          userSavedSection.style.display = 'none';
+          return;
+        }
+        userSavedSection.style.display = 'block';
+        userSavedGrid.innerHTML = '';
+        saved.forEach(function (entry) {
+          const card = document.createElement('article');
+          card.className = 'qa-card';
+          const actionHtml = entry.isRed
+            ? '<span style="color: var(--danger-red); font-weight: 700; font-size: 0.86rem;">⚠️ Gambhir - Turant Doctor Ke Paas Jayein</span>'
+            : '<a class="qa-link" href="condition.html?id=' + encodeURIComponent(entry.topId || 'khansi') + '">Poora Page Dekho →</a>';
+          card.innerHTML =
+            '<h3 class="qa-q">' + escapeHtml(entry.q) + '</h3>' +
+            '<p class="qa-a">Browser me save kiya gaya sawal (' + escapeHtml(entry.ts || 'Aaj') + ')</p>' +
+            actionHtml;
+          userSavedGrid.appendChild(card);
+        });
+      }
+
+      function renderAnswer(question) {
+        const qLower = question.toLowerCase();
+        answerPanel.classList.add('visible');
+
+        if (isRedQuestion(qLower)) {
+          answerPanel.innerHTML =
+            '<div class="red-box">' +
+              '<div class="red-box-title">⚠️ Gambhir - Turant Doctor Ke Paas Jayein</div>' +
+              '<p style="font-weight: 600; color: var(--text-dark);">Aapke sawal me gambhir sthiti ke shabd hain. Iske liye koi gharelu nuskha nahi dikhaya ja sakta. Kripya bina deri kiye doctor ya nazdeeki hospital se sampark karein.</p>' +
+            '</div>';
+          saveQuestion(question, true, '');
+          renderUserSaved();
+          return;
+        }
+
+        const matches = findTopMatches(question);
+        const cardsHtml = matches.map(function (m) {
+          const c0 = (m.countries && m.countries[0]) || { country: 'India', parampara: 'Ayurveda', remedy: 'Paramparik dekhbhal', allergy: 'Allergy wale savdhani rakhein' };
+          return (
+            '<article class="match-card">' +
+              '<h3 class="match-title">' + escapeHtml(m.hindi) + ' (' + escapeHtml(m.english) + ')</h3>' +
+              '<span class="for-pill">For: ' + escapeHtml(m.for) + '</span>' +
+              '<div class="remedy-snippet">' + escapeHtml(c0.country) + ' (' + escapeHtml(c0.parampara) + '): ' + escapeHtml(c0.remedy) + '</div>' +
+              '<p class="allergy-note">⚠️ Dhyaan Dein: ' + escapeHtml(c0.allergy) + '</p>' +
+              '<a class="page-btn" href="condition.html?id=' + encodeURIComponent(m.id) + '">Poora Page Dekho</a>' +
+            '</article>'
+          );
+        }).join('');
+
+        answerPanel.innerHTML =
+          '<h2 class="answer-heading">Parampara me iske liye ye use hota aaya hai</h2>' +
+          '<div class="matches-grid">' + cardsHtml + '</div>' +
+          '<div class="safety-box">' +
+            '<strong>⚠️ Zaroori Savdhani:</strong> Ye site dawa nahi bechti, ilaaj ka dawa nahi karti. Agar takleef 2-3 din se zyada ho, ya chhote bachhe/pregnant mahila/buzurg ko dikkat ho, to doctor ko dikhayein.' +
+          '</div>';
+
+        saveQuestion(question, false, matches[0] ? matches[0].id : 'khansi');
+        renderUserSaved();
+      }
+
+      poochoForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const q = questionInput.value.trim();
+        if (!q) {
+          showModal('Kripya pehle apna sawal box me likhein.', 'Dadi Se Poocho');
+          return;
+        }
+        renderAnswer(q);
+      });
+
+      STATIC_EXAMPLES.forEach(function (ex) {
+        const card = document.createElement('article');
+        card.className = 'qa-card';
+        card.innerHTML =
+          '<h3 class="qa-q">' + escapeHtml(ex.q) + '</h3>' +
+          '<p class="qa-a">' + escapeHtml(ex.a) + '</p>' +
+          '<a class="qa-link" href="condition.html?id=' + encodeURIComponent(ex.id) + '">' + escapeHtml(ex.label) + ' →</a>';
+        examplesGrid.appendChild(card);
+      });
+
+      const FOOTER_INFO = {
+        Disclaimer: 'Ye site keval paramparik jaankari ke liye hai. Ye site dawa nahi bechti, ilaaj ka dawa nahi karti.',
+        Privacy: 'Aapke poochhe gaye sawal keval aapke browser ke localStorage me save hote hai, server par nahi.',
+        Contact: 'Sampark ke liye: info@homeremediesworld.com'
+      };
+      document.querySelectorAll('button[data-footer]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const key = btn.getAttribute('data-footer');
+          showModal(FOOTER_INFO[key], key);
+        });
+      });
+
+      renderUserSaved();
+      console.log('PHASE 4 COMPLETE - SITE READY');
+    })();
+  </script>
+</body>
+</html>

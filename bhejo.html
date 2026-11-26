@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dadi Ka Nuskha Bhejo — HomeRemediesWorld.com</title>
+  <meta name="description" content="Apne gaon ya parivar ka paramparik nuskha bhejein — HomeRemediesWorld.com." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    window.addEventListener('error', function (e) {
+      if (e && typeof e.filename === 'string' && e.filename.indexOf('chrome-extension://') === 0) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, true);
+  </script>
+  <style>
+    :root {
+      --primary-green: #1A7A4C;
+      --primary-green-hover: #14633D;
+      --light-green-bg: #E8F5EE;
+      --pure-white: #FFFFFF;
+      --soft-cream: #FAF8F3;
+      --warning-yellow: #FFF8E1;
+      --warning-border: #F2DF9F;
+      --text-dark: #1A1A1A;
+      --text-grey: #666666;
+      --border-subtle: rgba(26, 26, 26, 0.08);
+      --radius-card: 16px;
+      --shadow-card: 0 4px 20px rgba(26, 26, 26, 0.05);
+      --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--soft-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      letter-spacing: -0.02em;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--primary-green);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background-color: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 70px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-dark);
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background-color: var(--light-green-bg);
+      color: var(--primary-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--primary-green);
+      white-space: nowrap;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-grey);
+      white-space: nowrap;
+      padding: 6px 2px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--primary-green);
+      text-decoration: underline;
+    }
+
+    .page-header {
+      background: linear-gradient(180deg, var(--light-green-bg) 0%, var(--soft-cream) 100%);
+      padding: 36px 0 28px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--text-grey);
+      margin-bottom: 10px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary-green);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .page-title {
+      font-size: clamp(1.75rem, 3.8vw, 2.6rem);
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .section {
+      padding: 34px 0 52px;
+    }
+
+    .form-card {
+      background-color: var(--pure-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 26px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 34px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 720px) {
+      .form-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .field-input,
+    .field-select,
+    .field-textarea {
+      width: 100%;
+      border: 1.5px solid rgba(26, 26, 26, 0.16);
+      border-radius: 10px;
+      padding: 11px 13px;
+      font-size: 0.96rem;
+      background-color: var(--pure-white);
+      color: var(--text-dark);
+    }
+
+    .field-textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .photo-preview-wrap {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .photo-preview-wrap.visible {
+      display: block;
+    }
+
+    .photo-preview-img {
+      max-width: 220px;
+      max-height: 150px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      object-fit: cover;
+    }
+
+    .submit-btn {
+      background-color: var(--primary-green);
+      color: var(--pure-white);
+      border: none;
+      border-radius: 12px;
+      padding: 13px 26px;
+      min-height: 48px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-green-hover);
+    }
+
+    .success-banner {
+      display: none;
+      background-color: var(--light-green-bg);
+      border: 1.5px solid rgba(26, 122, 76, 0.35);
+      border-radius: 14px;
+      padding: 16px 20px;
+      font-weight: 700;
+      color: var(--primary-green);
+      margin-bottom: 18px;
+    }
+
+    .success-banner.visible {
+      display: block;
+    }
+
+    .review-note {
+      background-color: var(--warning-yellow);
+      border: 1px solid var(--warning-border);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .section-heading {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .community-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 34px;
+    }
+
+    @media (min-width: 720px) {
+      .community-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .community-card {
+      background-color: var(--pure-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .community-place {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary-green);
+    }
+
+    .community-title {
+      font-size: 1.06rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .community-text {
+      font-size: 0.94rem;
+      color: var(--text-grey);
+    }
+
+    .site-footer {
+      background-color: var(--pure-white);
+      border-top: 1px solid var(--border-subtle);
+      padding: 28px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      background: none;
+      border: none;
+      padding: 4px 2px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-grey);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .footer-link:hover {
+      color: var(--primary-green);
+      text-decoration: underline;
+    }
+
+    .footer-copy {
+      font-size: 0.88rem;
+      color: var(--text-grey);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background-color: rgba(26, 26, 26, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background-color: var(--pure-white);
+      border-radius: var(--radius-card);
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .modal-body {
+      font-size: 0.95rem;
+      color: var(--text-grey);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .modal-close-btn {
+      background-color: var(--primary-green);
+      color: var(--pure-white);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 22px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      min-height: 42px;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand" aria-label="HomeRemediesWorld Home">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-title">HomeRemediesWorld</span>
+          <span class="brand-sub">Duniya Ki Parampara</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#azSection" class="nav-link">A-Z</a>
+        <a href="ingredients.html" class="nav-link">Ingredients</a>
+        <a href="poocho.html" class="nav-link">Dadi Se Poocho</a>
+        <a href="bhejo.html" class="nav-link active">Dadi Ka Nuskha Bhejo</a>
+        <a href="compare.html" class="nav-link">Compare</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a> <span aria-hidden="true">&gt;</span>
+          <span>Dadi Ka Nuskha Bhejo</span>
+        </nav>
+        <h1 class="page-title">Dadi Ka Nuskha Bhejo — Apne Gaon Ki Parampara Share Karein</h1>
+        <p style="color: var(--text-grey); max-width: 740px;">Agar aapke ghar, gaon ya desh me koi purana aur surakshit paramparik upay chalta aaya hai, to neeche form me likh kar bhejein.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="successBanner" class="success-banner" role="status">
+          Dhanyavaad! Aapka nuskha check karke site pe lagaya jayega.
+        </div>
+
+        <form id="bhejoForm" class="form-card">
+          <div class="form-grid">
+            <div class="form-grid-2">
+              <div class="field-group">
+                <label for="senderName" class="field-label">Naam (Optional)</label>
+                <input id="senderName" class="field-input" type="text" placeholder="Jaise: Kamala Devi (na likhna chahein to chhod dein)" />
+              </div>
+              <div class="field-group">
+                <label for="senderPlace" class="field-label">Gaon / Desh *</label>
+                <input id="senderPlace" class="field-input" type="text" required placeholder="Jaise: Sikar, Rajasthan / India" />
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label for="problemSelect" class="field-label">Problem (720 Conditions me se chunein) *</label>
+              <select id="problemSelect" class="field-select" required></select>
+            </div>
+
+            <div class="field-group">
+              <label for="nuskhaText" class="field-label">Apna Nuskha *</label>
+              <textarea id="nuskhaText" class="field-textarea" required placeholder="Parampara me iske liye kya aur kaise use hota aaya hai, saaf shabdon me likhein..."></textarea>
+            </div>
+
+            <div class="field-group">
+              <label for="photoInput" class="field-label">Photo (Optional — Sirf Preview Ke Liye)</label>
+              <input id="photoInput" class="field-input" type="file" accept="image/*" />
+              <div id="photoPreviewWrap" class="photo-preview-wrap">
+                <img id="photoPreviewImg" class="photo-preview-img" alt="Chuni hui photo ka preview" />
+              </div>
+            </div>
+
+            <div class="review-note">
+              Hum har nuskha check karenge, safe hoga to hi site pe lagayenge. Ye site dawa nahi bechti, ilaaj ka dawa nahi karti.
+            </div>
+
+            <button type="submit" class="submit-btn">Nuskha Bhejo</button>
+          </div>
+        </form>
+
+        <div id="mySubmissionsSection" style="display: none;">
+          <h2 class="section-heading">Mere Bheje Nuskhe</h2>
+          <div id="mySubmissionsGrid" class="community-grid"></div>
+        </div>
+
+        <h2 class="section-heading">Community Ke Bheje Hue Kuch Paramparik Nuskhe (Examples)</h2>
+        <div id="examplesGrid" class="community-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="index.html#azSection" class="footer-link">A-Z</a>
+        <a href="ingredients.html" class="footer-link">Ingredients</a>
+        <a href="poocho.html" class="footer-link">Dadi Se Poocho</a>
+        <a href="bhejo.html" class="footer-link">Dadi Ka Nuskha Bhejo</a>
+        <a href="compare.html" class="footer-link">Compare</a>
+        <button type="button" class="footer-link" data-footer="Disclaimer">Disclaimer</button>
+        <button type="button" class="footer-link" data-footer="Privacy">Privacy</button>
+        <button type="button" class="footer-link" data-footer="Contact">Contact</button>
+      </nav>
+      <p class="footer-copy">© 2026 HomeRemediesWorld.com - Duniya Ki Parampara</p>
+    </div>
+  </footer>
+
+  <div id="alertModal" class="modal-backdrop" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalBody">
+    <div class="modal-card">
+      <h3 id="modalTitle" class="modal-title">Jaankari</h3>
+      <p id="modalBody" class="modal-body"></p>
+      <button type="button" id="modalCloseBtn" class="modal-close-btn">Thik Hai</button>
+    </div>
+  </div>
+
+  <script src="remedies-part1.js"></script>
+  <script src="remedies-part2.js"></script>
+  <script src="remedies.js"></script>
+  <script>
+    (function () {
+      const STORAGE_KEY = 'hrw_bhejo_nuskhe_v1';
+      const ALL_REMEDIES = window.REMEDIES || [];
+
+      const STATIC_COMMUNITY_EXAMPLES = [
+        {
+          place: 'Rajasthan ke gaon se',
+          problem: 'Sardi me Phate Hoth',
+          text: 'Parampara me raat ko sone se pehle nabi aur hothon par shuddh desi ghee lagane ka rivaaj raha hai.'
+        },
+        {
+          place: 'Himachal ke pahadi gaon se',
+          problem: 'Khansi aur Gala Kharab',
+          text: 'Thand ke dino me tulsi ki patti aur adrak ke saath gunguna paani piya jata aaya hai.'
+        },
+        {
+          place: 'Bihar ke gaon se',
+          problem: 'Garmi me Loo se Bachav',
+          text: 'Dhoop me nikalne se pehle kacche aam ka panna aur bhuna jeera lena parampara me shamil hai.'
+        },
+        {
+          place: 'Kerala ke gaon se',
+          problem: 'Baal Jhadna aur Dekhbhal',
+          text: 'Nariyal tel me curry patta aur amla ubal kar thanda karke halki malish ki jati aayi hai.'
+        },
+        {
+          place: 'Punjab ke gaon se',
+          problem: 'Pet me Gas aur Apach',
+          text: 'Khane ke baad ajwain aur saunf chabana ghar ki purani parampara rahi hai.'
+        },
+        {
+          place: 'Nepal ke gaon se',
+          problem: 'Thakan aur Neend',
+          text: 'Din bhar ke kaam ke baad gungune pani se pair dhokar sukoon se aaram kiya jata aaya hai.'
+        }
+      ];
+
+      const problemSelect = document.getElementById('problemSelect');
+      const bhejoForm = document.getElementById('bhejoForm');
+      const senderName = document.getElementById('senderName');
+      const senderPlace = document.getElementById('senderPlace');
+      const nuskhaText = document.getElementById('nuskhaText');
+      const photoInput = document.getElementById('photoInput');
+      const photoPreviewWrap = document.getElementById('photoPreviewWrap');
+      const photoPreviewImg = document.getElementById('photoPreviewImg');
+      const successBanner = document.getElementById('successBanner');
+      const mySubmissionsSection = document.getElementById('mySubmissionsSection');
+      const mySubmissionsGrid = document.getElementById('mySubmissionsGrid');
+      const examplesGrid = document.getElementById('examplesGrid');
+
+      const alertModal = document.getElementById('alertModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+      function showModal(msg, title) {
+        modalTitle.textContent = title || 'Jaankari';
+        modalBody.textContent = msg;
+        alertModal.classList.add('open');
+        modalCloseBtn.focus();
+      }
+      function closeModal() {
+        alertModal.classList.remove('open');
+      }
+      modalCloseBtn.addEventListener('click', closeModal);
+      alertModal.addEventListener('click', function (e) { if (e.target === alertModal) closeModal(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      ALL_REMEDIES.forEach(function (r) {
+        const opt = document.createElement('option');
+        opt.value = r.hindi + ' (' + r.english + ')';
+        opt.textContent = r.hindi + ' — ' + r.english;
+        if (r.id === 'khansi') opt.selected = true;
+        problemSelect.appendChild(opt);
+      });
+
+      photoInput.addEventListener('change', function () {
+        const file = photoInput.files && photoInput.files[0];
+        if (!file) {
+          photoPreviewWrap.classList.remove('visible');
+          photoPreviewImg.removeAttribute('src');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+          photoPreviewImg.src = ev.target.result;
+          photoPreviewWrap.classList.add('visible');
+        };
+        reader.readAsDataURL(file);
+      });
+
+      function renderMySubmissions() {
+        let list = [];
+        try {
+          list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        } catch (err) {
+          list = [];
+        }
+        if (!list.length) {
+          mySubmissionsSection.style.display = 'none';
+          return;
+        }
+        mySubmissionsSection.style.display = 'block';
+        mySubmissionsGrid.innerHTML = '';
+        list.forEach(function (item) {
+          const card = document.createElement('article');
+          card.className = 'community-card';
+          card.innerHTML =
+            '<span class="community-place">' + escapeHtml(item.place) + (item.name ? ' · ' + escapeHtml(item.name) : '') + '</span>' +
+            '<h3 class="community-title">' + escapeHtml(item.problem) + '</h3>' +
+            '<p class="community-text">' + escapeHtml(item.text) + '</p>' +
+            '<span style="font-size: 0.8rem; font-weight: 700; color: var(--text-grey);">Status: Review ke liye save kiya gaya</span>';
+          mySubmissionsGrid.appendChild(card);
+        });
+      }
+
+      bhejoForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const placeVal = senderPlace.value.trim();
+        const textVal = nuskhaText.value.trim();
+        const problemVal = problemSelect.value;
+        const nameVal = senderName.value.trim();
+
+        if (!placeVal || !textVal) {
+          showModal('Kripya Gaon / Desh aur Apna Nuskha zaroor bharein.', 'Form Adhura Hai');
+          return;
+        }
+
+        try {
+          const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+          existing.unshift({
+            name: nameVal,
+            place: placeVal,
+            problem: problemVal,
+            text: textVal
+          });
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(existing.slice(0, 20)));
+        } catch (err) {
+          // ignore storage quota errors
+        }
+
+        successBanner.classList.add('visible');
+        bhejoForm.reset();
+        photoPreviewWrap.classList.remove('visible');
+        photoPreviewImg.removeAttribute('src');
+        renderMySubmissions();
+        successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+
+      STATIC_COMMUNITY_EXAMPLES.forEach(function (ex) {
+        const card = document.createElement('article');
+        card.className = 'community-card';
+        card.innerHTML =
+          '<span class="community-place">' + escapeHtml(ex.place) + '</span>' +
+          '<h3 class="community-title">' + escapeHtml(ex.problem) + '</h3>' +
+          '<p class="community-text">' + escapeHtml(ex.text) + '</p>';
+        examplesGrid.appendChild(card);
+      });
+
+      const FOOTER_INFO = {
+        Disclaimer: 'Ye site keval paramparik jaankari ke liye hai. Ye site dawa nahi bechti, ilaaj ka dawa nahi karti.',
+        Privacy: 'Aapka bheja hua nuskha abhi keval aapke browser ke localStorage me save hota hai. Koi photo upload nahi hoti.',
+        Contact: 'Sampark ke liye: info@homeremediesworld.com'
+      };
+      document.querySelectorAll('button[data-footer]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const key = btn.getAttribute('data-footer');
+          showModal(FOOTER_INFO[key], key);
+        });
+      });
+
+      renderMySubmissions();
+      console.log('PHASE 4 COMPLETE - SITE READY');
+    })();
+  </script>
+</body>
+</html>
