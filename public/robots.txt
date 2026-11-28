@@ -7,4 +7,4 @@ Allow: /
 User-agent: Mediapartners-Google
 Allow: /
 
-Sitemap: https://homeremediesworld.com/sitemap.xml
+Sitemap: https://www.homeremediesworld.com/sitemap.xml
